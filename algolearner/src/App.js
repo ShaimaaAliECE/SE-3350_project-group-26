@@ -1,5 +1,5 @@
 import './App.css';
-import tree from "./tree"
+import Tree from "./tree"
 import styled from "@emotion/styled";
 
 
@@ -8,7 +8,7 @@ function App() {
 
     <div style={{ textAlign: "center" }}>
       <div>Basic tree</div>
-      <tree />
+      <Tree/>
   
     </div>
   );
