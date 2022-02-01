@@ -1,4 +1,6 @@
 import './App.css';
+import LevelOne from './Level1/Level1Page';
+
 
 function App() {
   var array = [ 146,639,327,948,676,213];
@@ -10,7 +12,9 @@ function App() {
   console.log(eachMerge)
 
   return (
-    <div>This is the app!</div>
+    <div>
+    <LevelOne/>
+    </div>
     
   );
 
