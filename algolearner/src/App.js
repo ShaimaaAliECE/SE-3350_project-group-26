@@ -1,10 +1,14 @@
 import './App.css';
 
 function App() {
-  var array = [ 12, 11, 13, 6, 9, 7 ];
+  var array = [ 146,639,327,948,676,213];
 
   console.log(MergeSort(array))
   console.log("test")
+  console.log(steps1Left)
+  console.log(steps1Right)
+  console.log(eachMerge)
+
   return (
     <div>This is the app!</div>
     
@@ -13,13 +17,13 @@ function App() {
 
 
 }
-
-
-
+var steps1Left=[]
+var steps1Right=[]
+var eachMerge=[]
 
 function MergeSort(array)
 {
-  if(array.length<2)
+  if(array.length<2 )
   {
     return array
   }
@@ -28,8 +32,12 @@ function MergeSort(array)
   var left=array.slice(0,mid)
   var right=array.slice(mid,array.length)
 
+  steps1Left.push(left)
+  steps1Right.push(right)
+
   var leftSorted=MergeSort(left)
   var rightSorted=MergeSort(right)
+
   return Merge(leftSorted,rightSorted)
 }
 
@@ -60,6 +68,7 @@ function Merge(leftArray,rightArray)
   {
     array[num3++]=rightArray[num2++]
   }
+  eachMerge.push(array)
   return array
   
 }
