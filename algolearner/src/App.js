@@ -1,6 +1,7 @@
 import './App.css';
 import LevelOne from './Level1/Level1Page';
-
+import Boxes from './components/Boxes/Boxes';
+import Header from './components/Header'
 
 function App() {
   var array = [5,4,6,8,9,2,1,3,0,7]
@@ -14,12 +15,12 @@ function App() {
   
 
   return (
-    <div>
-
-     
-
+    <div className='Main'>
+    
+    
     <LevelOne/>
-    main
+    <Boxes/>
+    
     </div>
     
   );
