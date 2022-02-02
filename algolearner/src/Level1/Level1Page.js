@@ -36,7 +36,7 @@ function LevelOne(props){
             <Header level = "Level One"/>
             <Box
             sx = {{
-                height: '92vh',
+                height: '60vh',
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
