@@ -3,17 +3,23 @@ import LevelOne from './Level1/Level1Page';
 
 
 function App() {
-  var array = [ 146,639,327,948,676,213];
-
+  var array = [5,4,6,8,9,2,1,3,0,7]
+  console.log("Step#:",depth)
+  
+  
   console.log(MergeSort(array))
-  console.log("test")
-  console.log(steps1Left)
-  console.log(steps1Right)
-  console.log(eachMerge)
+  
+  console.log("Breakdown",breakdown)
+  console.log("Sorting",sorting)
+  
 
   return (
     <div>
+
+     
+
     <LevelOne/>
+    main
     </div>
     
   );
@@ -21,28 +27,55 @@ function App() {
 
 
 }
-var steps1Left=[]
-var steps1Right=[]
-var eachMerge=[]
+
+function arrayPrint(breakdown)
+  {
+    var line=""
+    
+    for (var i=0; i < breakdown.length; i++)
+     {  
+         line+= breakdown[i]+", "
+     }
+    return line
+  }
+
+
+
+var count=0
+var count2=0
+var depth=1
+var sorting=[]
+var breakdown=[]
 
 function MergeSort(array)
 {
-  if(array.length<2 )
+  if( depth > 0)
   {
-    return array
+    if(array.length<2 )
+    {
+      return array
+    }
+   
+  
+    var mid=array.length/2
+    var left=array.slice(0,mid)
+    var right=array.slice(mid,array.length)
+  
+    depth--
+    var leftSorted=MergeSort(left)
+    var rightSorted=MergeSort(right)
+  
+    //console.log(array,"Line23",count++)
+    return Merge(leftSorted,rightSorted)
   }
-
-  var mid=array.length/2
-  var left=array.slice(0,mid)
-  var right=array.slice(mid,array.length)
-
-  steps1Left.push(left)
-  steps1Right.push(right)
-
-  var leftSorted=MergeSort(left)
-  var rightSorted=MergeSort(right)
-
-  return Merge(leftSorted,rightSorted)
+  else
+  {
+    //  console.log("line29")
+    breakdown.push(array)
+   // console.log("l29",array)
+      return array
+  }
+  
 }
 
 
@@ -72,10 +105,14 @@ function Merge(leftArray,rightArray)
   {
     array[num3++]=rightArray[num2++]
   }
-  eachMerge.push(array)
+  //console.log(array,"Line54",count2++)
+  sorting.push(array)
+
   return array
   
 }
+
+
 
 
 export default App;
