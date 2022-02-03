@@ -32,12 +32,15 @@ function stringToArr(stringVal){ //This converts a string into an array
 function LevelOne(props){
     const [numberString, setNumString] = useState('');
     const [numArr, setNumArr] = useState([]);
-    const data = {
-        "depth": 8,
-        "arr": numArr
-    }
+    const [testing11, setTesting] = useState([]);
+    const [count, setCount] = useState(0);
+
 
     const check = () =>{
+        var data = {
+            "depth": count,
+            "arr": numArr
+        }
         fetch('http://localhost:3001/api/getStep', {  //connect to backend
         method: 'POST', //post
         credentials: 'include', 
@@ -49,7 +52,7 @@ function LevelOne(props){
         .then(response => (response.json()))
 
         .then(data => {
-            console.log(data);
+            setTesting(data.break);
      
 
         })
@@ -105,6 +108,26 @@ function LevelOne(props){
 
                 <Stack direction={'row'}
                 marginLeft = '2vw'>
+                    <Button
+                        onClick = {()=>{
+                            setCount(count -1);
+                        }}>
+                        Prev
+                    </Button>
+                    <Button
+                        onClick = {()=>{
+                            
+                            setCount(count +1);
+                            console.log(count);
+                        }}>
+                        
+                        Next
+                    </Button>
+
+                </Stack>
+
+                <Stack direction={'row'}
+                marginLeft = '2vw'>
                     {numArr.map((v) =>{
                         return(
                             <Box 
@@ -115,6 +138,33 @@ function LevelOne(props){
                                 {v}
                             </Box>
                            
+                        );
+                    })}
+                </Stack>
+
+                <Stack direction={'row'}
+                marginLeft = '2vw'>
+                    {testing11.map((v) =>{
+                        return (
+                            <Box 
+                                sx = {{
+                                    border: '2px solid Black',
+                                    width: "100px"
+                                }}>{
+
+                            v.map((e)=>{
+                                return(
+                                    <Box 
+                                    sx = {{
+                                        border: '2px solid Black',
+                                        width: "100px"
+                                    }}>
+                                        {e}
+                                    </Box>
+                            
+                                );
+                            })}
+                            </Box>
                         );
                     })}
                 </Stack>
