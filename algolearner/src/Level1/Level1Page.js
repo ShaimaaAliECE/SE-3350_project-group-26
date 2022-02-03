@@ -71,6 +71,7 @@ function LevelOne(props){
                 <Stack width = '100vw' alignItems={'center'} justifyItems={'center'}>
                     <Box 
                     sx= {{
+                        marginTop: '5vw',
                         marginLeft: '2vw',
                         width: '20vw'
 
@@ -86,6 +87,7 @@ function LevelOne(props){
                             }}/>
                     </Box>
                 </Stack>
+
                 <Button
                 onClick = {()=>{
                     setNumArr(stringToArr(numberString));
