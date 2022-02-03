@@ -3,6 +3,7 @@ import {Stack,Item,TextField,Button} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState} from 'react';
 
+
 function stringToArr(stringVal){ //This converts a string into an array
     var arr = []; 
     let comma = ',';
@@ -31,6 +32,32 @@ function stringToArr(stringVal){ //This converts a string into an array
 function LevelOne(props){
     const [numberString, setNumString] = useState('');
     const [numArr, setNumArr] = useState([]);
+    const data = {
+        "depth": 8,
+        "arr": numArr
+    }
+
+    const check = () =>{
+        fetch('http://localhost:3001/api/getStep', {  //connect to backend
+        method: 'POST', //post
+        credentials: 'include', 
+        headers: {
+            'Content-Type': 'application/json',
+    },
+        body: JSON.stringify(data), //body is the set data from earlier
+    })
+        .then(response => (response.json()))
+
+        .then(data => {
+            console.log(data);
+     
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+    });
+
+    }
     return(
         <>
             <Header level = "Level One"/>
@@ -65,6 +92,13 @@ function LevelOne(props){
                     console.log(numArr);
                 }}>
                     Click me convert to arr
+                </Button>
+
+                <Button
+                    onClick = {()=>{
+                        check();
+                    }}>
+                    TESTING
                 </Button>
 
                 <Stack direction={'row'}
