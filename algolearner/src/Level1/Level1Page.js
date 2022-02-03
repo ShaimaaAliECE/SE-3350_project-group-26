@@ -1,30 +1,16 @@
 import Box from '@mui/material/Box';
-import {Stack,Item,TextField,Button} from '@mui/material';
+import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState} from 'react';
 
 
 function stringToArr(stringVal){ //This converts a string into an array
-    var arr = []; 
-    let comma = ',';
 
-    while(stringVal != ""){
-
-        let indexOfComma = stringVal.indexOf(comma);
-
-        if(indexOfComma == -1){
-            arr.push(stringVal);
-            stringVal = "";
-        }
-        else{
-            arr.push(stringVal.substring(0,indexOfComma));
-            stringVal = stringVal.substring(indexOfComma+1, stringVal.length);
-        }
-
-    }
+    var arr = stringVal.split(',').map(function(item) {
+        return parseInt(item, 10);
+    });
 
     return arr;
-
 
 }
 
@@ -34,10 +20,11 @@ function LevelOne(props){
     const [numArr, setNumArr] = useState([]);
     const [testing11, setTesting] = useState([]);
     const [count, setCount] = useState(0);
+    const [fullArr, setFull] = useState([]);
 
 
     const check = () =>{
-        var data = {
+        var send = {
             "depth": count,
             "arr": numArr
         }
@@ -47,13 +34,14 @@ function LevelOne(props){
         headers: {
             'Content-Type': 'application/json',
     },
-        body: JSON.stringify(data), //body is the set data from earlier
+        body: JSON.stringify(send), //body is the set data from earlier
     })
         .then(response => (response.json()))
 
         .then(data => {
             setTesting(data.break);
-     
+            setFull(data.full);     
+            console.log(fullArr);
 
         })
         .catch((error) => {
@@ -168,6 +156,22 @@ function LevelOne(props){
                         );
                     })}
                 </Stack>
+                <Typography>Full Array</Typography>
+                <Stack direction={'row'}>
+                    {fullArr.map((v) =>{
+                        return(
+                            <Box 
+                            sx = {{
+                                marginTop: '10px',
+                                border: '2px solid Black',
+                                width: "50px"
+                            }}>
+                                {v}
+                            </Box>  
+                        );
+                    })}
+                </Stack>
+
             
             
             </Box>
