@@ -53,14 +53,11 @@ app.post('/api/getStep', (req,res) =>{
         var leftSorted=MergeSort(left)
         var rightSorted=MergeSort(right)
     
-        //console.log(array,"Line23",count++)
         return Merge(leftSorted,rightSorted)
     }
     else
     {
-        //  console.log("line29")
         breakdown.push(array)
-    // console.log("l29",array)
         return array
     }
     
@@ -93,7 +90,6 @@ app.post('/api/getStep', (req,res) =>{
     {
         array[num3++]=rightArray[num2++]
     }
-    //console.log(array,"Line54",count2++)
     sorting.push(array)
 
     return array

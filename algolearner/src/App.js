@@ -4,16 +4,11 @@ import Boxes from './components/Boxes/Boxes';
 import Header from './components/Header'
 
 function App() {
-  var array = [5,4,6,8,9,2,1,3,0,7]
+  /*var array = [5,4,6,8,9,2,1,3,0,7]
   console.log("Step#:",depth)
-  
-  
   console.log(MergeSort(array))
-  
   console.log("Breakdown",breakdown)
-  console.log("Sorting",sorting)
-  
-
+  console.log("Sorting",sorting)*/
   return (
     <div className='Main'>
     
@@ -28,7 +23,7 @@ function App() {
 
 
 }
-
+/*
 function arrayPrint(breakdown)
   {
     var line=""
@@ -111,7 +106,7 @@ function Merge(leftArray,rightArray)
 
   return array
   
-}
+}*/
 
 
 
