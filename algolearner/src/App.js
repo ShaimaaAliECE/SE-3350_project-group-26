@@ -1,21 +1,31 @@
 import './App.css';
+
+import styled from "@emotion/styled";
+
 import LevelOne from './Level1/Level1Page';
 import Boxes from './components/Boxes/Boxes';
 import Header from './components/Header'
+import VisNetwork from './tree.js'
 
 function App() {
-  /*var array = [5,4,6,8,9,2,1,3,0,7]
+  var array = [5,4,6,8,9,2,1,3,0,7]
   console.log("Step#:",depth)
+  
+  
   console.log(MergeSort(array))
+  
   console.log("Breakdown",breakdown)
-  console.log("Sorting",sorting)*/
+  console.log("Sorting",sorting)
+  
+
   return (
     <div className='Main'>
-    
+  
     
     <LevelOne/>
     <Boxes/>
-    
+    <VisNetwork/>
+
     </div>
     
   );
@@ -23,7 +33,7 @@ function App() {
 
 
 }
-/*
+
 function arrayPrint(breakdown)
   {
     var line=""
@@ -106,7 +116,18 @@ function Merge(leftArray,rightArray)
 
   return array
   
-}*/
+}
+var nodes = null;
+var edges = null;
+var network = null;
+var directionInput = document.getElementById("direction");
+
+function destroy() {
+  if (network !== null) {
+    network.destroy();
+    network = null;
+  }
+}
 
 
 
