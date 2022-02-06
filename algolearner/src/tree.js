@@ -16,7 +16,8 @@ const VisNetwork = () => {
     { id: 4, label: 'Node 4' },
     { id: 5, label: 'Node 5' },
     
-  ]);
+  ]);// it doesnt accept input but what we could do is that after each step we'd add our own textbox asking them to enter the next step and check if theyre right
+    // if they are we display the next step in the tree otherwise tell them to try again
 
   // An array of edges
   const edges = new DataSet([
