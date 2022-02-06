@@ -14,17 +14,17 @@ const VisNetwork = () => {
     { id: 2, label: 'Node 2' },
     { id: 3, label: 'Node 3' },
     { id: 4, label: 'Node 4' },
-    { id: 5, label: 'Node 5' }
+    { id: 5, label: 'Node 5' },
+    
   ]);
 
   // An array of edges
   const edges = new DataSet([
-    { from: 1, to: 3 },
     { from: 1, to: 2 },
-    { from: 2, to: 4 },
-    { from: 2, to: 5 }
+    { from: 1, to: 3 },
+    
   ]);
-
+  
   const data = {
     nodes,
     edges
@@ -36,8 +36,9 @@ const VisNetwork = () => {
     edges: {
       smooth: {
         enabled: true,
-        type: "dynamic",
-        roundness: 0.5
+        type: "cubicBezier",
+        roundness: 0.4,
+        forceDirection:"vertical"
       },
       color: {
         color:'#a80000',
@@ -50,12 +51,19 @@ const VisNetwork = () => {
       font:
       {
         color: '#4bde31',
-
       },
 
     },
     layout: {
+      improvedLayout:true,
       hierarchical: {
+        direction: 'UD', 
+        parentCentralization: true,
+        nodeSpacing: 200,
+        blockShifting: true,
+        sortMethod: 'directed',
+        shakeTowards: 'roots'
+
       },
     },
     physics: false,
@@ -102,6 +110,7 @@ const VisNetwork = () => {
   
   useEffect(
     () => {
+      
       network.current = new Network(domNode.current, data, options);
     },
     [domNode, network, data, options]
