@@ -14,7 +14,7 @@ function Boxes() {
 
     <Box display={'flex'}>
     
-
+{/*     
     <Grid container alignItems={'center'} marginY={5} rowSpacing={8}>
         <Grid item xs={12}>
             <Typography variant='h6'>[1,2,3,5]</Typography>
@@ -58,7 +58,7 @@ function Boxes() {
             
         </Grid>
         
-    </Grid>
+    </Grid> */}
 
     <Box alignItems={'center'}>
 
