@@ -62,7 +62,7 @@ function Boxes() {
 
     <Box alignItems={'center'}>
 
-        <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>Description goes here.. this step does this and that xxxxxxxxx xxxxxxxxxxxx</Typography>
+        <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>The first step is to split up the array in half or as evenly as possible.</Typography>
 
         <Button variant='contained'>Next</Button>
         <Button variant='contained'>Previous</Button>
