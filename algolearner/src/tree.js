@@ -53,7 +53,7 @@ const VisNetwork = (props) => {
       smooth: {
         enabled: true,
         type: "cubicBezier",
-        roundness: 0.4,
+        roundness: 0.5,
         forceDirection:"vertical"
       },
       color: {
@@ -108,8 +108,12 @@ const VisNetwork = (props) => {
       zoomView: false
     },
     nodes:{
-      size:50,
+      size:100,
       borderWidth: 1,
+      shape:'box',
+      shapeProperties:{
+
+      },
 
       color: {
         border: '#4309b0',

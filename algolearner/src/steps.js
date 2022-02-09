@@ -116,22 +116,22 @@ var allNodes=[
 
 ]
 var array = [5,4,6,8,9,2,1,3,0,7]
-const break_array = [];
-const full_array = [];
+
 function step1(count)
 {
-
+    const break_array = [];
+    const full_array = [];
     let arr = [];
     if(count==0)
     {
-        getStep(1,array)
+        getStep(0,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
-          .then(console.log(break_array))
+          .then()
           .then(()=>{
 
-                console.log(break_array[0][1])
-                nodes1[0]['label']=break_array[0]
+              //  console.log(break_array[0])
+                nodes1[0]['label']=break_array[0].toString()
             }
           )
     }
@@ -146,14 +146,56 @@ function step1(count)
 }
 
 
-function step2()
+function step2(count)
 {
+    const break_array = [];
+const full_array = [];
+    if(count==1)
+    {
+        getStep(1,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(console.log(break_array))
+          .then(()=>{
+
+                console.log(break_array[0][0])
+                //nodes2[0]['label']=break_array[0][0].toString()
+                nodes2[0]['label']=nodes1[0]['label']
+                nodes2[1]['label']=break_array[0][0].toString()
+                nodes2[2]['label']=break_array[0][1].toString()
+                console.log('Done')
+
+            }
+          )
+    }
+
     return nodes2
 }
 
 
-function step3()
+function step3(count)
 {
+    const break_array = [];
+const full_array = [];
+    if(count==2)
+    {
+        getStep(2,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(console.log(break_array))
+          .then(()=>{
+
+                //console.log(break_array[2][0])
+                nodes3[0]['label']=nodes1[0]['label']
+                nodes3[1]['label']=nodes2[1]['label']
+                nodes3[2]['label']=nodes2[2]['label']
+                nodes3[3]['label']=break_array[0][0].toString()
+                nodes3[4]['label']=break_array[0][1].toString()
+
+            }
+          )
+    }
+
     return nodes3
 }
 
