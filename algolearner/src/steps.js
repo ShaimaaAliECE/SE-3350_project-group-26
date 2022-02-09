@@ -1,3 +1,5 @@
+import {getStep} from './components/api/index'
+
 var nodes1=[
     { id: 1, label: 'Node 1' }
 ]
@@ -113,12 +115,20 @@ var allNodes=[
 { id: 19, label: 'Node 19' }
 
 ]
-
+var array = [5,4,6,8,9,2,1,3,0,7]
+const break_array = [];
+const full_array = [];
 function step1(count)
 {
     if(count==0)
     {
-        nodes1[0]['label']='4,7'
+        getStep(1,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(console.log(break_array))
+
+        console.log(break_array[0])
+              nodes1[0]['label']=break_array[0]
     }
     else if(count==18)
     {

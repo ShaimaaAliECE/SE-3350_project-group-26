@@ -11,7 +11,7 @@ import {getStep} from './components/api/index'
 function App() {
   var array = [5,4,6,8,9,2,1,3,0,7]
   //Api Query To Backend
-  const break_array = [];
+  /*const break_array = [];
   const full_array = [];
 
   //First parameter is depth, second is the array
@@ -20,9 +20,9 @@ function App() {
   getStep(1,array)
     .then((data) => { break_array.push(data.break)
       full_array.push(data.full)  })
-    .then(console.log(break_array,full_array))
+      //.then(console.log(break_array,full_array))
 
-  
+  //console.log(break_array)*/
 
   return (
     <div className='Main'>

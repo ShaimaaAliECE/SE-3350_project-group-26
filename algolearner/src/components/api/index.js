@@ -12,7 +12,6 @@ export const getStep = async (depth,arr) => {
           }, body: JSON.stringify(body_data) })
            
         const data = await response.json();
-
         //console.log(data);
         return data;
     }
