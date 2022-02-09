@@ -120,15 +120,20 @@ const break_array = [];
 const full_array = [];
 function step1(count)
 {
+
+    let arr = [];
     if(count==0)
     {
         getStep(1,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
           .then(console.log(break_array))
+          .then(()=>{
 
-        console.log(break_array[0])
-              nodes1[0]['label']=break_array[0]
+                console.log(break_array[0][1])
+                nodes1[0]['label']=break_array[0]
+            }
+          )
     }
     else if(count==18)
     {
