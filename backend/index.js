@@ -21,9 +21,6 @@ app.use(bodyParser.urlencoded({
 }))
 
 
-
-
-
 app.post('/api/getStep', (req,res) =>{
     const d = req.body.depth;  //receive step
     const arr = req.body.arr;  //receive array

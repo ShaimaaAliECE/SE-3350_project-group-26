@@ -114,9 +114,18 @@ var allNodes=[
 
 ]
 
-function step1()
+function step1(count)
 {
-    nodes1[0]['label']='4,7'// to change label of node
+    if(count==0)
+    {
+        nodes1[0]['label']='4,7'
+    }
+    else if(count==18)
+    {
+        nodes1[0]['label']='Changed'
+
+    }
+    // to change label of node
 
     return nodes1
 }

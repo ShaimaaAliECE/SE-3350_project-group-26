@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState} from 'react';
+import VisNetwork from '../tree.js'
 
 
 function stringToArr(stringVal){ //This converts a string into an array
@@ -13,7 +14,7 @@ function stringToArr(stringVal){ //This converts a string into an array
     return arr;
 
 }
-
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
 
 function LevelOne(props){
     const [numberString, setNumString] = useState('');
@@ -84,7 +85,7 @@ function LevelOne(props){
                     setNumArr(stringToArr(numberString));
                     console.log(numArr);
                 }}>
-                    Click me convert to arr
+                    Click me convert to Array
                 </Button>
 
                 <Button
@@ -94,27 +95,49 @@ function LevelOne(props){
                     TESTING
                 </Button>
 
+
+
                 <Stack direction={'row'}
                 marginLeft = '2vw'>
                     <Button
                         onClick = {()=>{
+
                             setCount(count -1);
                         }}>
                         Prev
                     </Button>
+
                     <Button
                         onClick = {()=>{
                             
                             setCount(count +1);
-                            console.log(count);
+                         //   console.log(count);
                         }}>
                         
                         Next
                     </Button>
 
+
                 </Stack>
 
-                <Stack direction={'row'}
+                    {console.log(count)}
+                <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               {/* <Stack direction={'row'}
                 marginLeft = '2vw'>
                     {numArr.map((v) =>{
                         return(
@@ -129,11 +152,28 @@ function LevelOne(props){
                         );
                     })}
                 </Stack>
-
+*/}
 
                 
                 {/* What ever is below here is for testing purposes */}
-                <Stack direction={'row'}
+                
+
+            
+            
+            </Box>
+
+        </>
+
+    );
+
+}
+
+export default LevelOne;
+
+
+
+/* Goes after Line 158
+<Stack direction={'row'}
                 marginLeft = '2vw'>
                     {testing11.map((v) =>{
                         return (
@@ -173,14 +213,4 @@ function LevelOne(props){
                             </Box>  
                         );
                     })}
-                </Stack>
-
-            
-            
-            </Box>
-        </>
-    );
-
-}
-
-export default LevelOne;
+                </Stack>*/

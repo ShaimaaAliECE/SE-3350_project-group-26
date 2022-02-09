@@ -2,15 +2,15 @@ import React, { useEffect, useRef } from 'react';
 import { DataSet, Network} from 'vis-network/standalone/esm/vis-network';
 import {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10} from './steps';
 
-const VisNetwork = () => {
+const VisNetwork = (props) => {
   // A reference to the div rendered by this component
   const rootNode = useRef(null);
   // A reference to the vis network instance
   const network = useRef(null);
 
-  const stepsList=[step1(),step2(),step3(),step4(),step5(),step6(),step7(),step8(),step9(),step10()]// step list(of each change)
+  const stepsList=[step1(props.count),step2(props.count),step3(props.count),step4(props.count),step5(props.count),step6(props.count),step7(props.count),step8(props.count),step9(props.count),step10(props.count)]// step list(of each change)
   // An array of nodes
-  const nodes = new DataSet(stepsList[0])
+  const nodes = new DataSet(stepsList[props.treeForm])
   // it doesnt accept input but what we could do is that after each step we'd add our own textbox asking them to enter the next step and check if theyre right
     // if they are we display the next step in the tree otherwise tell them to try again
 
@@ -45,7 +45,11 @@ const VisNetwork = () => {
   const options = 
   {
     autoResize: true,
+  height: '500px',
+  width: '100%',
     edges: {
+      length:50,
+      physics:false,
       smooth: {
         enabled: true,
         type: "cubicBezier",
@@ -71,22 +75,23 @@ const VisNetwork = () => {
       hierarchical: {
         direction: 'UD', 
         parentCentralization: true,
-        nodeSpacing: 200,
+        nodeSpacing: 400,
+        treeSpacing: 700,
         blockShifting: true,
+        edgeMinimization: true,
         sortMethod: 'directed',
         shakeTowards: 'roots'
 
       },
     },
     physics: false,
-
     interaction:{
       dragNodes:false,
       dragView: false,
       hideEdgesOnDrag: false,
       hideEdgesOnZoom: false,
       hideNodesOnDrag: false,
-      hover: false,
+      hover: true,
       hoverConnectedEdges: false,
       keyboard: {
         enabled: false,
@@ -96,13 +101,16 @@ const VisNetwork = () => {
       },
       multiselect: false,
       navigationButtons: false,
-      selectable: false,
-      selectConnectedEdges: false,
+      selectable: true,
+      selectConnectedEdges: true,
       tooltipDelay: 300,
       zoomSpeed: 1,
-      zoomView: true
+      zoomView: false
     },
     nodes:{
+      size:50,
+      borderWidth: 1,
+
       color: {
         border: '#4309b0',
         background: '#395596',
@@ -113,7 +121,7 @@ const VisNetwork = () => {
       },
       font:{
       color: '#ed6b6b',
-      size: 20, // px
+      size: 35, // px
       face: 'arial',
       },
 
