@@ -139,7 +139,7 @@ function LevelOne(props){
 
 
                     {console.log(count)}
-                <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+                <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
 
 
