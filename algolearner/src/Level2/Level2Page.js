@@ -160,6 +160,7 @@ function LevelTwo(props){
                         </Box>
                     </DndProvider>
                     
+                    <Box display={'flex'} textAlign={'center'} alignContent='center' justifyContent={'center'}>
                     <Button onClick={() => {
                         if(doTwo == true) {
                             
@@ -202,7 +203,7 @@ function LevelTwo(props){
                                 
                             }
                         }
-                    }}>Check Solution</Button>
+                    }}>Check Solution</Button></Box>
 
                 </Box>
 
