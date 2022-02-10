@@ -11,6 +11,8 @@ const VisNetwork = (props) => {
   const stepsList=[step1(props.count),step2(props.count),step3(props.count),step4(props.count),step5(props.count),step6(props.count),step7(props.count),step8(props.count),step9(props.count),step10(props.count)]// step list(of each change)
   // An array of nodes
   const nodes = new DataSet(stepsList[props.treeForm])
+  const nArray = props.numberArray;
+  
   // it doesnt accept input but what we could do is that after each step we'd add our own textbox asking them to enter the next step and check if theyre right
     // if they are we display the next step in the tree otherwise tell them to try again
 
@@ -42,6 +44,7 @@ const VisNetwork = (props) => {
     edges
   };
 
+ 
   const options = 
   {
     autoResize: true,
@@ -132,16 +135,19 @@ const VisNetwork = (props) => {
     },
   };
   
+  
   useEffect(() =>
    {
       network.current = new Network(rootNode.current, data, options);
    },
     [rootNode, network, data, options]
   );
+  
+ 
 
   return (
     <div ref = { rootNode } />
   );
 };
 
-export default VisNetwork;
+export default VisNetwork ;
