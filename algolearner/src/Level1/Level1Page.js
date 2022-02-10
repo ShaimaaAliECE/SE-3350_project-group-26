@@ -1,19 +1,22 @@
 import Box from '@mui/material/Box';
 import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
-import {useState, UseState} from 'react';
+import {useState,useEffect, UseState} from 'react';
 import VisNetwork from '../tree.js'
 import Timer from '../components/Timer';
 
 
-function stringToArr(stringVal){ //This converts a string into an array
 
-    var arr = stringVal.split(',').map(function(item) {
-        return parseInt(item, 10);
-    });
 
+function generateArray(){
+    let arr = [];
+    var num;
+    for(let i =0; i< 10; i++){
+        num = Math.floor(Math.random() * 20) + 1;
+        arr.push(num);
+        
+    }
     return arr;
-
 }
 let i=0;
 //temporary descriptions, will fix later once all the steps figured out
@@ -30,6 +33,11 @@ function LevelOne(props){
     const [testing11, setTesting] = useState([]);
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
+
+     //Gets the beginning array
+     useEffect(()=>{
+        setNumArr(generateArray());
+    },[]);
 
 
     const check = () =>{
