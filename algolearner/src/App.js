@@ -1,6 +1,7 @@
 import './App.css';
 import styled from "@emotion/styled";
 import LevelOne from './Level1/Level1Page';
+import LevelTwo from './Level2/Level2Page';
 import Boxes from './components/Boxes/Boxes';
 import Header from './components/Header'
 import VisNetwork from './tree.js'
@@ -29,6 +30,7 @@ function App() {
   
     
     <LevelOne/>
+    <LevelTwo/>
 
     </div>
     
