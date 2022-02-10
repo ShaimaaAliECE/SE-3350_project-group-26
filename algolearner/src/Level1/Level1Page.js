@@ -59,84 +59,65 @@ function LevelOne(props){
     }
     return(
         <>
-            <Header level = "Level One"/>
+            <Header level = "Level Two"/>
             <Box
             sx = {{
                 height: '60vh',
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
+                <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
+                    <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
+                        {numArr.map((v) =>{
+                            return(
+                                <Box sx= {{
+                                    width: '1vw'
 
-                <Stack width = '100vw' alignItems={'center'} justifyItems={'center'}>
-                    <Box 
-                    sx= {{
-                        marginTop: '5vw',
-                        marginLeft: '2vw',
-                        width: '20vw'
-
-                    }}>
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Enter your array numbers" 
-                            variant="outlined" 
-                            fullWidth
-                            onChange = {(e) =>{
-                                setNumString(e.target.value);
-                                console.log(numberString);
-                            }}/>
-                    </Box>
-                </Stack>
-
-                <Button
-                onClick = {()=>{
-                    setNumArr(stringToArr(numberString));
-                    console.log(numArr);
-                }}>
-                    Click me convert to Array
-                </Button>
-
-                <Button
-                    onClick = {()=>{
-                        check();
-                    }}>
-                    TESTING
-                </Button>
-
-                
-
-                <Stack direction={'row'}
-                marginLeft = '2vw'>
-
-                   
-                    <Button
-                        onClick = {()=>{
-
-                            setCount(count -1);
-                            i--;
-                        }}>
-                        Prev
-                    </Button>
-
-                    <Button
-                        onClick = {()=>{
-                            
-                            setCount(count +1);
-                         //   console.log(count);
-                         i++;
-                        }}>
+                                }}>
+                                    {v}
+                                </Box>
+                            );
+                        })}
                         
-                        Next
-                    </Button>
+                    </Stack>
 
+                    <Stack direction={'row'}
+                    >
+                        <Button variant='outlined'
+                            onClick = {()=>{
+
+                                setCount(count -1);
+                            }}>
+                            Prev
+                        </Button>
+
+                        <Button variant='outlined'
+                            onClick = {()=>{
+                                
+                                setCount(count +1);
+                            //   console.log(count);
+                            }}>
+                            
+                            Next
+                        </Button>
+
+
+                    </Stack>
+                    <Stack>
+                        {count}
+                    </Stack>
                     <Box alignItems={'right'}>
 
                         <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
 
 
                     </Box>
+                    
+                </Stack>
+
+                    
  
 
-                </Stack>
 
 
                     {console.log(count)}
