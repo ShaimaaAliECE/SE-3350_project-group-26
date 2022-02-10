@@ -12,7 +12,6 @@ const VisNetwork = (props) => {
   const stepsList=[step1(props.count),step2(props.count),step3(props.count),step4(props.count),step5(props.count),step6(props.count),step7(props.count),step8(props.count),step9(props.count),step10(props.count)]// step list(of each change)
   // An array of nodes
   const nodes = new DataSet(stepsList[props.treeForm])
-
   // it doesnt accept input but what we could do is that after each step we'd add our own textbox asking them to enter the next step and check if theyre right
     // if they are we display the next step in the tree otherwise tell them to try again
 
@@ -138,7 +137,11 @@ const VisNetwork = (props) => {
   
   useEffect(() =>
    {
+    const timeout = setTimeout(() => {
       network.current = new Network(rootNode.current, data, options);
+      console.log("USE EFFECT")
+    }, 500);
+      
    },
     [rootNode, network, data, options]
   );

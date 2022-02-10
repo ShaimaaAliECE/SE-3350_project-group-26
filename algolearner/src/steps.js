@@ -123,7 +123,7 @@ var array
  }
 
 console.log(array)
-function step1(count)
+function step1(count) 
 {
     const break_array = [];
     const full_array = [];
@@ -136,8 +136,8 @@ function step1(count)
           .then()
           .then(()=>{
 
-              //  console.log(break_array[0])
                 nodes1[0]['label']=break_array[0].toString()
+                console.log("GOT INfo",nodes1[0]['label'])
             }
           )
     }
@@ -147,9 +147,11 @@ function step1(count)
 
     }
     // to change label of node
+    console.log("Line 150"+ nodes1[0]['label'])
 
     return nodes1
 }
+
 
 
 function step2(count)
@@ -174,6 +176,7 @@ const full_array = [];
             }
           )
     }
+
 
     return nodes2
 }
