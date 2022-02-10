@@ -14,7 +14,13 @@ function stringToArr(stringVal){ //This converts a string into an array
     return arr;
 
 }
+let i=0;
+let des = ["The first step is to split up the array in half or as evenly as possible.", "The second step is to split the left array into half.", "The third step is to split the array into individual components.", 
+                "The fourth step is to rearrage the components from smallest to largest.", "The fifth step is to split the right array into half.", "The sixth step is to split the array into individual components", 
+                "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
+            ];
 const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
+
 
 function LevelOne(props){
     const [numberString, setNumString] = useState('');
@@ -95,14 +101,17 @@ function LevelOne(props){
                     TESTING
                 </Button>
 
-
+                
 
                 <Stack direction={'row'}
                 marginLeft = '2vw'>
+
+                   
                     <Button
                         onClick = {()=>{
 
                             setCount(count -1);
+                            i--;
                         }}>
                         Prev
                     </Button>
@@ -112,13 +121,22 @@ function LevelOne(props){
                             
                             setCount(count +1);
                          //   console.log(count);
+                         i++;
                         }}>
                         
                         Next
                     </Button>
 
+                    <Box alignItems={'right'}>
+
+                        <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
+
+
+                    </Box>
+ 
 
                 </Stack>
+
 
                     {console.log(count)}
                 <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
