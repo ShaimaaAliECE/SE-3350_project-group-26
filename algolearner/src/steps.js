@@ -1,5 +1,6 @@
 import {getStep} from './components/api/index'
 
+
 var nodes1=[
     { id: 1, label: 'Node 1' }
 ]
@@ -115,8 +116,13 @@ var allNodes=[
 { id: 19, label: 'Node 19' }
 
 ]
-var array = [5,4,6,8,9,2,1,3,0,7]
+var array
+ function setArray(arr)
+ {
+    array=arr
+ }
 
+console.log(array)
 function step1(count)
 {
     const break_array = [];
@@ -241,4 +247,4 @@ function step10()
     return nodes10
 }
 
-export {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10};
+export {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10,setArray};
