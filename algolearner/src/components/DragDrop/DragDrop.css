@@ -1,0 +1,39 @@
+.text {
+    font-size: 30px;
+    display: flex;
+    background-color: beige;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.board {
+    background-color: aqua;
+    width: 100px;
+    height: 50px;
+    border: 50px black;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    border: 3px solid black;
+    justify-content: center;
+    margin: 10px;
+    font-size: 30px;
+}
+
+.total {
+    display: flex;
+    border: 3px solid black;
+}
+
+.boards {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.board-text {
+    
+
+}
+
