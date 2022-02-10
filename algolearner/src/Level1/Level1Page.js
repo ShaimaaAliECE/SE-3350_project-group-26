@@ -5,20 +5,9 @@ import {useEffect, useState, UseState} from 'react';
 import VisNetwork from '../tree.js'
 
 
-function stringToArr(stringVal){ //This converts a string into an array
-
-    var arr = stringVal.split(',').map(function(item) {
-        return parseInt(item, 10);
-    });
-
-    return arr;
-
-}
-
 
 /*This generates the random array int */
 function generateArray(){
-
     let arr = [];
     var num;
     for(let i =0; i< 10; i++){
@@ -26,9 +15,7 @@ function generateArray(){
         arr.push(num);
         
     }
-
     return arr;
-
 }
 
 
@@ -218,3 +205,13 @@ export default LevelOne;
                         );
                     })}
                 </Stack>*/
+
+    /*function stringToArr(stringVal){ //This converts a string into an array
+
+    var arr = stringVal.split(',').map(function(item) {
+        return parseInt(item, 10);
+    });
+
+    return arr;
+
+}*/
