@@ -7,6 +7,11 @@ import Header from './components/Header'
 import VisNetwork from './tree.js'
 import {getStep} from './components/api/index'
 
+import {Routes, Route} from 'react-router-dom';
+
+import HomePage from './HomePage/home';
+
+
 
 
 function App() {
@@ -27,10 +32,13 @@ function App() {
 
   return (
     <div className='Main'>
-  
-    
-    <LevelOne/>
-    <LevelTwo/>
+
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="LevelOne" element={<LevelOne/>}/>
+        <Route path="LevelTwo" element={<LevelTwo/>}/>
+
+      </Routes>
 
     </div>
     
