@@ -206,11 +206,31 @@ const full_array = [];
 }
 
 
-function step4()
+function step4(count)
 {
+    const break_array = [];
+    const full_array = [];
+    if(count==3)
+    {
+        getStep(3,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+                console.log(break_array)
+                nodes4[0]['label']=nodes1[0]['label']
+                nodes4[1]['label']=nodes2[1]['label']
+                nodes4[2]['label']=nodes2[2]['label']
+                nodes4[3]['label']=break_array[0][0].toString()
+                nodes4[4]['label']=break_array[0][1].toString()
+                nodes4[5]['label']=break_array[1][0].toString()
+                nodes4[6]['label']=break_array[1][1].toString()
+            }
+          )
+    }
+
     return nodes4
 }
-
 
 function step5()
 {
