@@ -3,6 +3,7 @@ import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState,useEffect} from 'react';
 import VisNetwork from '../tree.js'
+import Timer from '../components/Timer';
 
 
 function stringToArr(stringVal){ //This converts a string into an array
@@ -122,46 +123,17 @@ function LevelTwo(props){
                     {console.log(count)}
                 <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
-                <Box>
-                        
+                <Box 
+                sx = {{
+                    height: '18vh',
+                    width: '100vw',
+                    backgroundColor: 'white'
+                }}>
 
                 </Box>
-
-
-
-
-
-
-
-
-
-
-
-
-
-               {/* <Stack direction={'row'}
-                marginLeft = '2vw'>
-                    {numArr.map((v) =>{
-                        return(
-                            <Box 
-                            sx = {{
-                                border: '2px solid Black',
-                                width: "20px"
-                            }}>
-                                {v}
-                            </Box>
-                           
-                        );
-                    })}
-                </Stack>
-*/}
+                <Timer/>
 
                 
-                {/* What ever is below here is for testing purposes */}
-                
-
-            
-            
             </Box>
 
         </>

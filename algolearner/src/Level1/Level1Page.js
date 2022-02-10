@@ -3,6 +3,7 @@ import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState} from 'react';
 import VisNetwork from '../tree.js'
+import Timer from '../components/Timer';
 
 
 function stringToArr(stringVal){ //This converts a string into an array
@@ -59,10 +60,10 @@ function LevelOne(props){
     }
     return(
         <>
-            <Header level = "Level Two"/>
+            <Header level = "Level One"/>
             <Box
             sx = {{
-                height: '60vh',
+                height: '86.2vh',
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
@@ -87,7 +88,6 @@ function LevelOne(props){
                             onClick = {()=>{
 
                                 setCount(count -1);
-                                i--;
                             }}>
                             Prev
                         </Button>
@@ -97,7 +97,6 @@ function LevelOne(props){
                                 
                                 setCount(count +1);
                             //   console.log(count);
-                                i++;
                             }}>
                             
                             Next
@@ -126,43 +125,10 @@ function LevelOne(props){
                 <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-               {/* <Stack direction={'row'}
-                marginLeft = '2vw'>
-                    {numArr.map((v) =>{
-                        return(
-                            <Box 
-                            sx = {{
-                                border: '2px solid Black',
-                                width: "20px"
-                            }}>
-                                {v}
-                            </Box>
-                           
-                        );
-                    })}
-                </Stack>
-*/}
-
-                
-                {/* What ever is below here is for testing purposes */}
-                
-
             
             
             </Box>
+            <Timer/>
 
         </>
 
