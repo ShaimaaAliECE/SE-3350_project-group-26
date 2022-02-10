@@ -3,6 +3,7 @@ import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState} from 'react';
 import VisNetwork from '../tree.js'
+import Timer from '../components/Timer';
 
 
 function stringToArr(stringVal){ //This converts a string into an array
@@ -14,7 +15,14 @@ function stringToArr(stringVal){ //This converts a string into an array
     return arr;
 
 }
+let i=0;
+//temporary descriptions, will fix later once all the steps figured out
+let des = ["The first step is to split up the array in half or as evenly as possible.", "The second step is to split the left array into half.", "The third step is to split the array into individual components.", 
+                "The fourth step is to rearrage the components from smallest to largest.", "The fifth step is to split the right array into half.", "The sixth step is to split the array into individual components", 
+                "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
+            ];
 const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
+
 
 function LevelOne(props){
     const [numberString, setNumString] = useState('');
@@ -55,112 +63,72 @@ function LevelOne(props){
             <Header level = "Level One"/>
             <Box
             sx = {{
-                height: '60vh',
+                height: '86.2vh',
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
+                <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
+                    <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
+                        {numArr.map((v) =>{
+                            return(
+                                <Box sx= {{
+                                    width: '1vw'
 
-                <Stack width = '100vw' alignItems={'center'} justifyItems={'center'}>
-                    <Box 
-                    sx= {{
-                        marginTop: '5vw',
-                        marginLeft: '2vw',
-                        width: '20vw'
-
-                    }}>
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Enter your array numbers" 
-                            variant="outlined" 
-                            fullWidth
-                            onChange = {(e) =>{
-                                setNumString(e.target.value);
-                                console.log(numberString);
-                            }}/>
-                    </Box>
-                </Stack>
-
-                <Button
-                onClick = {()=>{
-                    setNumArr(stringToArr(numberString));
-                    console.log(numArr);
-                }}>
-                    Click me convert to Array
-                </Button>
-
-                <Button
-                    onClick = {()=>{
-                        check();
-                    }}>
-                    TESTING
-                </Button>
-
-
-
-                <Stack direction={'row'}
-                marginLeft = '2vw'>
-                    <Button
-                        onClick = {()=>{
-
-                            setCount(count -1);
-                        }}>
-                        Prev
-                    </Button>
-
-                    <Button
-                        onClick = {()=>{
-                            
-                            setCount(count +1);
-                         //   console.log(count);
-                        }}>
+                                }}>
+                                    {v}
+                                </Box>
+                            );
+                        })}
                         
-                        Next
-                    </Button>
+                    </Stack>
+
+                    <Stack direction={'row'}
+                    >
+                        <Button variant='outlined'
+                            onClick = {()=>{
+
+                                setCount(count -1);
+                            }}>
+                            Prev
+                        </Button>
+
+                        <Button variant='outlined'
+                            onClick = {()=>{
+                                
+                                setCount(count +1);
+                            //   console.log(count);
+                            }}>
+                            
+                            Next
+                        </Button>
 
 
+                    </Stack>
+                    <Stack>
+                        {count}
+                    </Stack>
+                    <Box alignItems={'right'}>
+
+                        <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
+
+
+                    </Box>
+                    
                 </Stack>
+
+                    
+ 
+
+
 
                     {console.log(count)}
-                <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+                <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               {/* <Stack direction={'row'}
-                marginLeft = '2vw'>
-                    {numArr.map((v) =>{
-                        return(
-                            <Box 
-                            sx = {{
-                                border: '2px solid Black',
-                                width: "20px"
-                            }}>
-                                {v}
-                            </Box>
-                           
-                        );
-                    })}
-                </Stack>
-*/}
-
-                
-                {/* What ever is below here is for testing purposes */}
-                
 
             
             
             </Box>
+            <Timer/>
 
         </>
 

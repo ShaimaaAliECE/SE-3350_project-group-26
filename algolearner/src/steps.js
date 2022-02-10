@@ -1,5 +1,6 @@
 import {getStep} from './components/api/index'
 
+
 var nodes1=[
     { id: 1, label: 'Node 1' }
 ]
@@ -115,9 +116,14 @@ var allNodes=[
 { id: 19, label: 'Node 19' }
 
 ]
-var array = [5,4,6,8,9,2,1,3,0,7]
+var array
+ function setArray(arr)
+ {
+    array=arr
+ }
 
-function step1(count)
+console.log(array)
+function step1(count) 
 {
     const break_array = [];
     const full_array = [];
@@ -130,8 +136,8 @@ function step1(count)
           .then()
           .then(()=>{
 
-              //  console.log(break_array[0])
                 nodes1[0]['label']=break_array[0].toString()
+                console.log("GOT INfo",nodes1[0]['label'])
             }
           )
     }
@@ -141,9 +147,11 @@ function step1(count)
 
     }
     // to change label of node
+    console.log("Line 150"+ nodes1[0]['label'])
 
     return nodes1
 }
+
 
 
 function step2(count)
@@ -168,6 +176,7 @@ const full_array = [];
             }
           )
     }
+
 
     return nodes2
 }
@@ -241,4 +250,4 @@ function step10()
     return nodes10
 }
 
-export {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10};
+export {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10,setArray};
