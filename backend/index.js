@@ -95,11 +95,8 @@ app.post('/api/getStep', (req,res) =>{
     }
     
 
-    let fullArr = MergeSort(arr);
-    console.log(fullArr);
 
-
-    res.send({"break": breakdown, "full": fullArr});
+    res.send({"break": breakdown, "full": sorting});
 
 });
 
