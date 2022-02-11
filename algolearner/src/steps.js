@@ -232,11 +232,33 @@ function step4(count)
     return nodes4
 }
 
-function step5()
+function step5(count)
 {
+    const break_array = [];
+    const full_array = [];
+    if(count==4)
+    {
+        getStep(4,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+                console.log(break_array)
+                nodes5[0]['label']=nodes1[0]['label']
+                nodes5[1]['label']=nodes2[1]['label']
+                nodes5[2]['label']=nodes2[2]['label']
+                nodes5[3]['label']=nodes3[3]['label']
+                nodes5[4]['label']=nodes3[4]['label']
+                nodes5[5]['label']=nodes4[5]['label']
+                nodes5[6]['label']=nodes4[6]['label']
+                nodes5[7]['label']=break_array[0][0].toString()
+                nodes5[8]['label']=break_array[0][1].toString()
+            }
+          )
+    }
+
     return nodes5
 }
-
 
 function step6()
 {
