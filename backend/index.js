@@ -42,7 +42,7 @@ app.post('/api/getStep', (req,res) =>{
         }
     
     
-        var mid=array.length/2
+        var mid=Math.round(array.length/2)
         var left=array.slice(0,mid)
         var right=array.slice(mid,array.length)
     
