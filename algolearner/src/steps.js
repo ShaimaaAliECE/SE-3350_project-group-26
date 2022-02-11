@@ -260,8 +260,29 @@ function step5(count)
     return nodes5
 }
 
-function step6()
+function step6(count)
 {
+    const break_array = [];
+    const full_array = [];
+    if(count==5)
+    {
+        getStep(5,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+                console.log(break_array+"line274")
+                nodes6[0]['label']=nodes1[0]['label']
+                nodes6[1]['label']=nodes2[1]['label']
+                nodes6[2]['label']=nodes2[2]['label']
+                nodes6[3]['label']=nodes3[3]['label']
+                nodes6[4]['label']=nodes3[4]['label']
+                nodes5[10]['label']=full_array[0][1].toString()
+                nodes5[11]['label']=full_array[0][0].toString()
+            }
+          )
+    }
+
     return nodes6
 }
 
