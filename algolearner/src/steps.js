@@ -221,10 +221,10 @@ function step4(count)
                 nodes4[0]['label']=nodes1[0]['label']
                 nodes4[1]['label']=nodes2[1]['label']
                 nodes4[2]['label']=nodes2[2]['label']
-                nodes4[3]['label']=break_array[0][0].toString()
-                nodes4[4]['label']=break_array[0][1].toString()
-                nodes4[5]['label']=break_array[1][0].toString()
-                nodes4[6]['label']=break_array[1][1].toString()
+                nodes4[3]['label']=nodes3[3]['label']
+                nodes4[4]['label']=nodes3[4]['label']
+                nodes4[5]['label']=break_array[0][0].toString()
+                nodes4[6]['label']=break_array[0][1].toString()
             }
           )
     }
