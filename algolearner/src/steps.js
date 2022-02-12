@@ -274,7 +274,7 @@ function step6(count)
           full_array.push(data.full)})
           .then(()=>{
 
-                
+                console.log(full_array)
                 nodes6[0]['label']=nodes1[0]['label']
                 nodes6[1]['label']=nodes2[1]['label']
                 nodes6[2]['label']=nodes2[2]['label']
