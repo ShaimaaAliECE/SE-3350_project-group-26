@@ -32,7 +32,7 @@ function set(){
         }
     }
 
-    console.log("helo");
+   // console.log("helo");
 
 }
 

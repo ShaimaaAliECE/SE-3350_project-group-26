@@ -2,8 +2,9 @@ import Box from '@mui/material/Box';
 import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState, UseState,useEffect} from 'react';
-import VisNetwork from '../tree.js'
+import VisNetwork from './treeLevel2.js'
 import Timer from '../components/Timer';
+import {dragNum1,dragNum2,setArray} from './solutions'
 
 //Drag Drop Imports
 import {DndProvider} from 'react-dnd'
@@ -40,14 +41,16 @@ function LevelTwo(props){
     const [testing11, setTesting] = useState([]);
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
+    var numbersDrag
+    const nodesStep=[[2,3],[4,5],[6,7],[8,9],[6],[4],[10,11],[5],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1]]
 
     //Drag drop variables
     //numbers array contains the current ques selections, order properly based on nodes (ex. el1 of numbers is right answer to el1 node)
-    const [numbers,setNumbers]=useState(['5,6,7','2,3,4']) 
+    const [numbers,setNumbers]=useState(['5,6,8','4,5']) //we'd need to make a list manually for this 
     //nodes array contains the current nodes the question is for, this will display below the selection box
-    const [nodes,setNodes]=useState([3,9])
+    const [nodes,setNodes]=useState(nodesStep[count])
 
-    const [doTwo, setDoTwo] = useState(false); //This should be updated for every step whether one question or two questions
+    const [doTwo, setDoTwo] = useState(5==5); //This should be updated for every step whether one question or two questions, cant use true or false doesnt seem to work
     const [correct,setCorrect] = useState(false); //Updated if the answer is correct --> Can use to allow to move to next step
     let counter=1; 
     const NumberList = []
@@ -55,11 +58,25 @@ function LevelTwo(props){
     useEffect(()=>{
         setNumArr(generateArray());
     },[]);
-
+// for the steps we can either create a new stepsLevel2.js with the steps each one and we can either return the correct answers or have a list manually 
+// with each answer or 
+//var test2= test(numArr)
+setArray(numArr)
+//ISSUES:
+/*
+    new numbers dragged in the boxes dont appear, only those that were initialized in line49 do, and whenever i try to make the first page with the right numbers
+    either get an infinite loop or memory leak, didNotMount
+    2.
+*/
+const dragNumSteps=[dragNum1().then((data) => {
+    console.log(data)
+    console.log('LInE 66')
+    numbersDrag=data
+    //setNumbers(data)//results in an infinite loop
+})]
+let callingEAchStep=dragNumSteps[0] 
     
-
-
-    const check = () =>{
+    const check = () =>{    
         var send = {
                 "depth": count,
                 "arr": numArr
@@ -114,14 +131,37 @@ function LevelTwo(props){
                             onClick = {()=>{
 
                                 setCount(count -1);
+                                console.log(count)
+                                setNodes(nodesStep[count-1])
+                                if(nodesStep[count].length==2)
+                                {
+                                    setDoTwo(true)
+                                }
+                                else
+                                {
+                                    setDoTwo(false)
+                                }
                             }}>
                             Prev
                         </Button>
 
                         <Button
                             onClick = {()=>{
-                                
+                               
                                 setCount(count +1);
+                                setNodes(nodesStep[count+1])
+                                setNumbers(numbersDrag)
+                                if(nodesStep[count].length==2)
+                                {
+                                    console.log('Line139')
+                                    setDoTwo(5==5)
+                                }
+                                else
+                                {
+                                    setDoTwo(5==4)
+                                    console.log('Line144',nodesStep[count].length==1 )
+
+                                }
                             //   console.log(count);
                             }}>
                             
@@ -208,7 +248,7 @@ function LevelTwo(props){
                 </Box>
 
                     {console.log(count)}
-                <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+                    <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
                 <Box 
                 sx = {{
@@ -221,7 +261,7 @@ function LevelTwo(props){
                 <Timer/>
 
                     {console.log(count)}
-                <VisNetwork treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+                <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
                 
                 
 

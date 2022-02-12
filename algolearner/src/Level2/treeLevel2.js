@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { DataSet, Network} from 'vis-network/standalone/esm/vis-network';
-import {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10,setArray} from './steps';
+import {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10,setArray} from './stepsLevel2';
 
 const VisNetwork = (props) => {
   // A reference to the div rendered by this component

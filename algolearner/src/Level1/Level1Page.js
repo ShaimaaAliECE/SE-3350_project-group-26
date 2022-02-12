@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
-import VisNetwork from '../tree.js'
+import VisNetwork from './treeLevel1.js'
 import Timer from '../components/Timer';
 
 

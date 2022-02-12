@@ -1,8 +1,10 @@
-import {getStep} from './components/api/index'
+import {getStep} from '../components/api/index'
 
 
 var nodes1=[
-    { id: 1, label: 'Node 1' }
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
 ]
 console.log("here")
 //console.log(nodes1[0]['label']='4,5')
@@ -11,6 +13,8 @@ var nodes2=[
     { id: 1, label: 'Node 1' },
     { id: 2, label: 'Node 2' },
     { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
 ]
 var nodes3=[
     { id: 1, label: 'Node 1' },
@@ -18,6 +22,8 @@ var nodes3=[
     { id: 3, label: 'Node 3' },
     { id: 4, label: 'Node 4' },
     { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },
+    { id: 7, label: 'Node 7' },
 ]
 
 var nodes4=[
@@ -28,6 +34,8 @@ var nodes4=[
     { id: 5, label: 'Node 5' },
     { id: 6, label: 'Node 6' },
     { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },
+    { id: 9, label: 'Node 9' },
 ]
 
 
@@ -137,7 +145,7 @@ function step1(count)
           .then(()=>{
 
                 nodes1[0]['label']=break_array[0].toString()
-                console.log("GOT INfo",nodes1[0]['label'])
+              //  console.log("GOT INfo",nodes1[0]['label'])
             }
           )
     }
@@ -147,7 +155,9 @@ function step1(count)
 
     }
     // to change label of node
-    console.log("Line 150"+ nodes1[0]['label'])
+   // console.log("Line 150"+ nodes1[0]['label'])
+
+  //  console.log("NEW SCRIPT")
 
     return nodes1
 }
@@ -163,15 +173,14 @@ const full_array = [];
         getStep(1,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
-          .then(console.log(break_array))
           .then(()=>{
 
-                console.log(break_array[0][0])
+            //    console.log(break_array[0][0])
                 //nodes2[0]['label']=break_array[0][0].toString()
                 nodes2[0]['label']=nodes1[0]['label']
                 nodes2[1]['label']=break_array[0][0].toString()
                 nodes2[2]['label']=break_array[0][1].toString()
-                console.log('Done')
+            //    console.log('Done')
 
             }
           )
@@ -191,7 +200,6 @@ const full_array = [];
         getStep(2,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
-          .then(console.log(break_array))
           .then(()=>{
 
                 //console.log(break_array[2][0])
