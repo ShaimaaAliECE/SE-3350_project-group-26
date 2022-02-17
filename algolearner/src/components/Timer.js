@@ -41,6 +41,8 @@ function set(){
 //this is the timer componenet
 function Timer(props){
 
+    let timer = props.time;
+
     useEffect(()=>{
         set();
     })

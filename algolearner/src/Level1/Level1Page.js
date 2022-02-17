@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel1.js'
 import Timer from '../components/Timer';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -66,6 +68,10 @@ function LevelOne(props){
     });
 
     }
+
+    const nextLevel = () => {
+        document.getElementById("nextLevelButton").style.display = 'Block';
+    }
     return(
         <>
             <Header level = "Level One"/>
@@ -95,16 +101,22 @@ function LevelOne(props){
                         <Button variant='outlined'
                             onClick = {()=>{
 
-                                setCount(count -1);
+                                if (count > 0)
+                                    setCount(count -1);
                             }}>
                             Prev
                         </Button>
 
                         <Button variant='outlined'
                             onClick = {()=>{
-                                
-                                setCount(count +1);
-                            //   console.log(count);
+                                             
+                                if (count <19){
+                                    setCount(count +1);
+                                }
+                                else{
+                                    nextLevel();
+                                }
+
                             }}>
                             
                             Next
@@ -112,8 +124,16 @@ function LevelOne(props){
 
 
                     </Stack>
+
                     <Stack>
                         {count}
+                    </Stack>
+                    <Stack id = 'nextLevelButton' display = 'none'>
+                        <Link to = {"/LevelTwo"}>
+                            <Button  variant="contained">
+                                Next Level
+                            </Button>
+                        </Link>
                     </Stack>
                     <Box alignItems={'right'}>
 
