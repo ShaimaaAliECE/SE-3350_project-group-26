@@ -96,6 +96,7 @@ function LevelOne(props){
                             onClick = {()=>{
 
                                 setCount(count -1);
+                                i--;
                             }}>
                             Prev
                         </Button>
@@ -105,6 +106,7 @@ function LevelOne(props){
                                 
                                 setCount(count +1);
                             //   console.log(count);
+                            i++;
                             }}>
                             
                             Next
