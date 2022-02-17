@@ -10,6 +10,7 @@ import {getStep} from './components/api/index'
 import {Routes, Route} from 'react-router-dom';
 
 import HomePage from './HomePage/home';
+import LevelThree from './Level3/Level3Page';
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="LevelOne" element={<LevelOne/>}/>
         <Route path="LevelTwo" element={<LevelTwo/>}/>
+        <Route path="LevelThree" element={<LevelThree/>}/>
 
       </Routes>
 

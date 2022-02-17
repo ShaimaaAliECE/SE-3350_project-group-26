@@ -2,7 +2,9 @@ import {getStep} from '../components/api/index'
 
 
 var nodes1=[
-    { id: 1, label: 'Node 1' }
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
 ]
 //console.log("here")
 //console.log(nodes1[0]['label']='4,5')
