@@ -27,7 +27,14 @@ let des = ["The first step is to split up the array in half or as evenly as poss
                 "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
             ];
 const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
-
+var nodeNum2=2
+function nodeNum()
+{
+    nodeNum2+=0.5
+    
+    console.log('RUNNING', nodeNum2)
+    return 'Node'+nodeNum2
+}
 
 function LevelThree(props){
     const [numberString, setNumString] = useState('');
@@ -77,6 +84,8 @@ function LevelThree(props){
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
+             
+
                 <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
                     <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
                         {numArr.map((v) =>{
@@ -123,6 +132,12 @@ function LevelThree(props){
 
 
                     </Box>
+                    <Stack direction={'row'}>
+                        <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" />
+
+                        <TextField color="secondary" id="outlined-basic" label="Node 3" variant="outlined" /> 
+                    </Stack>
+                  
                     
                 </Stack>
 
@@ -135,8 +150,7 @@ function LevelThree(props){
                 <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
 
-            
-            
+               
             </Box>
             {/*<Timer/>*/}
 
@@ -145,5 +159,7 @@ function LevelThree(props){
     );
 
 }
+
+
 
 export default LevelThree;
