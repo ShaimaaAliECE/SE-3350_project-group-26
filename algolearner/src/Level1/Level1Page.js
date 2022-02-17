@@ -136,7 +136,7 @@ function LevelOne(props){
             
             
             </Box>
-            <Timer/>
+            {/*<Timer/>*/}
 
         </>
 

@@ -138,7 +138,7 @@ function LevelThree(props){
             
             
             </Box>
-            <Timer/>
+            {/*<Timer/>*/}
 
         </>
 
