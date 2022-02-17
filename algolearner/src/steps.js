@@ -134,7 +134,6 @@ function step1(count)
         getStep(0,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
-          .then()
           .then(()=>{
 
               //  console.log(break_array[0])
@@ -142,10 +141,16 @@ function step1(count)
             }
           )
     }
-    else if(count==18)
+    if(count==18)
     {
-        nodes1[0]['label']='Changed'
-
+        getStep(11,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+                console.log(full_array)
+                nodes1[0]['label']=full_array[0][8].toString()
+            }
+          )
     }
     // to change label of node
 
@@ -165,12 +170,49 @@ const full_array = [];
           .then(console.log(break_array))
           .then(()=>{
 
-                console.log(break_array[0][0])
+               // console.log(break_array[0][0])
                 //nodes2[0]['label']=break_array[0][0].toString()
                 nodes2[0]['label']=nodes1[0]['label']
                 nodes2[1]['label']=break_array[0][0].toString()
                 nodes2[2]['label']=break_array[0][1].toString()
                 console.log('Done')
+
+            }
+          )
+    }
+
+    if(count==9)
+    {
+        getStep(7,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(console.log(break_array))
+          .then(()=>{
+
+               console.log('COunt9')
+                console.log(full_array)
+                nodes2[0]['label']=nodes1[0]['label']
+                nodes2[1]['label']=full_array[0][3].toString()
+                nodes2[2]['label']=nodes2[2]['label']
+                console.log('Done')
+
+            }
+          )
+    }
+
+    if(count==17)
+    {
+        getStep(9,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(console.log(break_array))
+          .then(()=>{
+
+               console.log('COunt17')
+                console.log(full_array)
+                nodes2[0]['label']=nodes1[0]['label']
+                nodes2[1]['label']=nodes2[1]['label']
+                nodes2[2]['label']=full_array[0][7].toString()
 
             }
           )
@@ -203,6 +245,43 @@ const full_array = [];
           )
     }
 
+    if(count==6)
+    {
+        console.log('COUNT6')
+        getStep(4,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+                console.log(break_array)
+                nodes3[0]['label']=nodes1[0]['label']
+                nodes3[1]['label']=nodes2[1]['label']
+                nodes3[2]['label']=nodes2[2]['label']
+                nodes3[3]['label']=full_array[0][1].toString()
+                nodes3[4]['label']=nodes3[4]['label']
+                
+            }
+          )
+    }
+
+    if(count==8)
+    {
+        console.log('COUNT8')
+        getStep(6,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+                console.log(full_array)
+                nodes3[0]['label']=nodes1[0]['label']
+                nodes3[1]['label']=nodes2[1]['label']
+                nodes3[2]['label']=nodes2[2]['label']
+                nodes3[3]['label']=nodes3[3]['label']
+                nodes3[4]['label']=full_array[0][2].toString()
+                
+            }
+          )
+    }
     return nodes3
 }
 
@@ -218,7 +297,7 @@ function step4(count)
           full_array.push(data.full)})
           .then(()=>{
 
-                console.log(break_array)
+                //console.log(break_array)
                 nodes4[0]['label']=nodes1[0]['label']
                 nodes4[1]['label']=nodes2[1]['label']
                 nodes4[2]['label']=nodes2[2]['label']
@@ -226,6 +305,27 @@ function step4(count)
                 nodes4[4]['label']=nodes3[4]['label']
                 nodes4[5]['label']=break_array[0][0].toString()
                 nodes4[6]['label']=break_array[0][1].toString()
+            }
+          )
+    }
+
+    if(count==5)
+    {
+        console.log('Here156465465')
+        getStep(4,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+                console.log(full_array[0][0].toString())
+                nodes4[0]['label']=nodes1[0]['label']
+                nodes4[1]['label']=nodes2[1]['label']
+                nodes4[2]['label']=nodes2[2]['label']
+                nodes4[3]['label']=nodes3[3]['label']
+                nodes4[4]['label']=nodes3[4]['label']
+                nodes4[5]['label']=full_array[0][0].toString()
+                nodes4[6]['label']=nodes4[6]['label']
+
             }
           )
     }
@@ -239,12 +339,13 @@ function step5(count)
     const full_array = [];
     if(count==4)
     {
+        console.log('sTEP 5')
         getStep(4,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
           .then(()=>{
 
-                console.log(full_array)
+                //console.log(full_array)
                 nodes5[0]['label']=nodes1[0]['label']
                 nodes5[1]['label']=nodes2[1]['label']
                 nodes5[2]['label']=nodes2[2]['label']
@@ -266,21 +367,23 @@ function step6(count)
     const full_array = [];
     const break_array = [];
     
-    if(count==5)
+    if(count==7)
     {
-        console.log(break_array.toString+"sdasdasdads");
-        getStep(4,array)
+        console.log('COUNT6')
+        getStep(5,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
           .then(()=>{
-
-                console.log(full_array)
+                console.log('COUNT7')
+                console.log(break_array)
                 nodes6[0]['label']=nodes1[0]['label']
                 nodes6[1]['label']=nodes2[1]['label']
                 nodes6[2]['label']=nodes2[2]['label']
                 nodes6[3]['label']=nodes3[3]['label']
                 nodes6[4]['label']=nodes3[4]['label']
-       
+                nodes6[5]['label']=break_array[0][0].toString()
+                nodes6[6]['label']=break_array[0][1].toString()
+
             }
           )
     }
@@ -289,26 +392,179 @@ function step6(count)
 }
 
 
-function step7()
+function step7(count)
 {
+    
+    const full_array = [];
+    const break_array = [];
+    
+    if(count==10)
+    {
+        getStep(6,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt10')
+                console.log(break_array)
+                nodes7[0]['label']=nodes1[0]['label']
+                nodes7[1]['label']=nodes2[1]['label']
+                nodes7[2]['label']=nodes2[2]['label']
+                nodes7[3]['label']=break_array[0][0].toString()
+                nodes7[4]['label']=break_array[0][1].toString()
+            }
+          )
+    }
+
+    if(count==14)
+    {
+        getStep(8,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt14')
+                console.log(full_array)
+                nodes7[0]['label']=nodes1[0]['label']
+                nodes7[1]['label']=nodes2[1]['label']
+                nodes7[2]['label']=nodes2[2]['label']
+                nodes7[3]['label']=full_array[0][5].toString()
+                nodes7[4]['label']=nodes7[4]['label']
+               
+            }
+          )
+    }
+
+    if(count==16)
+    {
+        getStep(9,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt16')
+                console.log(full_array)
+                nodes7[0]['label']=nodes1[0]['label']
+                nodes7[1]['label']=nodes2[1]['label']
+                nodes7[2]['label']=nodes2[2]['label']
+                nodes7[3]['label']=nodes7[3]['label']
+                nodes7[4]['label']=full_array[0][6].toString()
+               
+            }
+          )
+    }
+
     return nodes7
 }
 
 
-function step8()
+function step8(count)
 {
+    const full_array = [];
+    const break_array = [];
+    
+    if(count==11)
+    {
+        getStep(7,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt11')
+                console.log(break_array)
+                nodes8[0]['label']=nodes1[0]['label']
+                nodes8[1]['label']=nodes2[1]['label']
+                nodes8[2]['label']=nodes2[2]['label']
+                nodes8[3]['label']=nodes7[3]['label']
+                nodes8[4]['label']=nodes7[4]['label']
+                nodes8[5]['label']=break_array[0][0].toString()
+                nodes8[6]['label']=break_array[0][1].toString()
+            }
+          )
+    }
+
+    if(count==13)
+    {
+        getStep(8,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt13')
+                console.log(full_array)
+                nodes8[0]['label']=nodes1[0]['label']
+                nodes8[1]['label']=nodes2[1]['label']
+                nodes8[2]['label']=nodes2[2]['label']
+                nodes8[3]['label']=nodes7[3]['label']
+                nodes8[4]['label']=nodes7[4]['label']
+                nodes8[5]['label']=full_array[0][4].toString()
+                nodes8[6]['label']=nodes8[6]['label']
+                
+            }
+          )
+    }
+
     return nodes8
 }
 
 
-function step9()
+function step9(count)
 {
+
+    const full_array = [];
+    const break_array = [];
+    
+    if(count==12)
+    {
+        getStep(8,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt12')
+                console.log(break_array)
+                nodes9[0]['label']=nodes1[0]['label']
+                nodes9[1]['label']=nodes2[1]['label']
+                nodes9[2]['label']=nodes2[2]['label']
+                nodes9[3]['label']=nodes7[3]['label']
+                nodes9[4]['label']=nodes7[4]['label']
+                nodes9[5]['label']=nodes8[5]['label']
+                nodes9[6]['label']=nodes8[6]['label']
+                nodes9[7]['label']=break_array[0][1].toString()
+                nodes9[8]['label']=break_array[0][0].toString()
+            }
+          )
+    }
+
     return nodes9
 }
 
 
-function step10()
+function step10(count)
 {
+    const full_array = [];
+    const break_array = [];
+
+    if(count==15)
+    {
+        getStep(9,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('COunt15')
+                console.log(break_array)
+                nodes10[0]['label']=nodes1[0]['label']
+                nodes10[1]['label']=nodes2[1]['label']
+                nodes10[2]['label']=nodes2[2]['label']
+                nodes10[3]['label']=nodes7[3]['label']
+                nodes10[4]['label']=nodes7[4]['label']
+                nodes10[5]['label']=break_array[0][0].toString()
+                nodes10[6]['label']=break_array[0][1].toString()
+            }
+          )
+    }
+
     return nodes10
 }
 
