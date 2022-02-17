@@ -101,34 +101,25 @@ function LevelOne(props){
                         <Button variant='outlined'
                             onClick = {()=>{
 
-<<<<<<< HEAD
-                                if (count > 0)
+                                if (count > 0){
                                     setCount(count -1);
-=======
-                                setCount(count -1);
-                                i--;
->>>>>>> 98d86fa67888b609e1060d52485158baf95b7f1f
+                                    i--;
+                                }
                             }}>
                             Prev
                         </Button>
 
                         <Button variant='outlined'
                             onClick = {()=>{
-<<<<<<< HEAD
                                              
                                 if (count <19){
                                     setCount(count +1);
+                                    i++;
                                 }
                                 else{
                                     nextLevel();
                                 }
-
-=======
-                                
-                                setCount(count +1);
-                            //   console.log(count);
-                            i++;
->>>>>>> 98d86fa67888b609e1060d52485158baf95b7f1f
+                            
                             }}>
                             
                             Next
