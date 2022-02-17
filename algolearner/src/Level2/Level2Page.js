@@ -5,11 +5,15 @@ import {useState, UseState,useEffect} from 'react';
 import VisNetwork from './treeLevel2.js'
 import Timer from '../components/Timer';
 import {dragNum1,dragNum2,setArray} from './solutions'
+import { Link } from "react-router-dom";
+
 
 //Drag Drop Imports
 import {DndProvider} from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import DragDrop from '../components/DragDrop/DragDrop'
+
+
 
 
 function stringToArr(stringVal){ //This converts a string into an array
@@ -101,6 +105,10 @@ let callingEAchStep=dragNumSteps[0]
                 console.error('Error:', error);
         });
     }
+
+    const nextLevel = () => {
+        document.getElementById("nextLevel2Button").style.display = 'Block';
+    }
     return(
         <>
             <Header level = "Level Two"/>
@@ -130,9 +138,10 @@ let callingEAchStep=dragNumSteps[0]
                         <Button
                             onClick = {()=>{
 
-                                setCount(count -1);
-                                console.log(count)
-                                setNodes(nodesStep[count-1])
+                                if (count > 0){
+                                    setCount(count -1);
+                                    setNodes(nodesStep[count-1])
+                                }
                                 if(nodesStep[count].length==2)
                                 {
                                     setDoTwo(true)
@@ -148,9 +157,14 @@ let callingEAchStep=dragNumSteps[0]
                         <Button
                             onClick = {()=>{
                                
-                                setCount(count +1);
-                                setNodes(nodesStep[count+1])
-                                setNumbers(numbersDrag)
+                                if (count <19){
+                                    setCount(count +1);
+                                    setNodes(nodesStep[count+1])
+                                    setNumbers(numbersDrag)
+                                }
+                                else{
+                                    nextLevel();
+                                }
                                 if(nodesStep[count].length==2)
                                 {
                                     console.log('Line139')
@@ -169,6 +183,13 @@ let callingEAchStep=dragNumSteps[0]
                         </Button>
 
 
+                    </Stack>
+                    <Stack id = 'nextLevel2Button' display = 'none'>
+                        <Link to = {"/levelThree"}>
+                            <Button  variant="contained">
+                                Next Level
+                            </Button>
+                        </Link>
                     </Stack>
                     <Stack>
                         {count}
