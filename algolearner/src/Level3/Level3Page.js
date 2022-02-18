@@ -26,13 +26,13 @@ let des = ["The first step is to split up the array in half or as evenly as poss
                 "The fourth step is to rearrage the components from smallest to largest.", "The fifth step is to split the right array into half.", "The sixth step is to split the array into individual components", 
                 "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
             ];
-const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
-var nodeNum2=2
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6]
+var nodeNum2=0
 function nodeNum()
 {
     nodeNum2+=0.5
     
-    console.log('RUNNING', nodeNum2)
+    //console.log('RUNNING', nodeNum2)
     return 'Node'+nodeNum2
 }
 
