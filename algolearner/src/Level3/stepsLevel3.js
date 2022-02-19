@@ -42,18 +42,6 @@ function step1(count)
           )
     }
 
-    if(count==18)
-    {
-        getStep(11,array)
-        .then((data) => { break_array.push(data.break)
-          full_array.push(data.full)})
-          .then(()=>{
-                //console.log(full_array)
-                nodes1[0]['label']=full_array[0][8].toString()
-            }
-          )
-    }
-
     return nodes1
 }
 
@@ -110,23 +98,6 @@ const full_array = [];
             }
           )
           return nodes10
-    }
-
-    if(count==17)
-    {
-        getStep(9,array)
-        .then((data) => { break_array.push(data.break)
-          full_array.push(data.full)})
-          .then(()=>{
-
-               console.log('COunt17')
-                console.log(full_array)
-                nodes2[0]['label']=nodes1[0]['label']
-                nodes2[1]['label']=nodes2[1]['label']
-                nodes2[2]['label']=full_array[0][7].toString()
-
-            }
-          )
     }
 
     return nodes2
@@ -601,6 +572,14 @@ var nodes11=[
 var nodes15=[
     { id: 1, label: 'Node 1' },
 ]
+var nodes18=[
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 12, label: 'Node 12' },
+    { id: 13, label: 'Node 13' },
+]
+
 
 function step7(count)
 {
@@ -641,11 +620,17 @@ function step7(count)
 
                console.log('COunt14')
                 console.log(full_array)
-                nodes15[0]['label']=full_array[0][8].toString()
+                nodes18[0]['label']=nodes1[0]['label']
+                nodes18[1]['label']=nodes8[1]['label']
+               // nodes18[2]['label']=nodes2[2]['label']
+                nodes18[3]['label']=nodes16[3]['label']
+                nodes18[4]['label']=full_array[0][6].toString()
+
+
                
             }
           )
-          return nodes15
+          return nodes18
     }
 
     if(count==16)
@@ -655,16 +640,13 @@ function step7(count)
           full_array.push(data.full)})
           .then(()=>{
 
-               console.log('COunt16')
+               console.log('COunt14')
                 console.log(full_array)
-                nodes7[0]['label']=nodes1[0]['label']
-                nodes7[1]['label']=nodes2[1]['label']
-                nodes7[2]['label']=nodes2[2]['label']
-                nodes7[3]['label']=nodes7[3]['label']
-                nodes7[4]['label']=full_array[0][6].toString()
+                nodes15[0]['label']=full_array[0][8].toString()
                
             }
           )
+          return nodes15
     }
 
     return nodes7
@@ -684,6 +666,17 @@ var nodes14=[
     { id: 1, label: 'Node 1' },
     { id: 2, label: 'Node 2' },
     { id: 3, label: 'Node 3' },
+]
+
+
+var nodes17=[
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 12, label: 'Node 12' },
+    { id: 13, label: 'Node 13' },
+    { id: 18, label: 'Node 18' },
+    { id: 19, label: 'Node 19' }
 ]
 
 function step8(count)
@@ -720,12 +713,18 @@ function step8(count)
           .then(()=>{
 
                console.log('COunt13')
-                console.log(full_array)
-                nodes14[1]['label']=nodes8[1]['label']
-                nodes14[2]['label']=full_array[0][7].toString()
+                console.log(break_array)
+                nodes17[0]['label']=nodes1[0]['label']
+                nodes17[1]['label']=nodes8[1]['label']
+                nodes17[2]['label']=nodes2[2]['label']
+                nodes17[3]['label']=nodes16[3]['label']
+                //nodes17[4]['label']=
+                nodes17[5]['label']=break_array[0][0].toString()
+                nodes17[6]['label']=break_array[0][1].toString()
+
             }
           )
-          return nodes14
+          return nodes17
     }
 
     return nodes8
@@ -740,7 +739,16 @@ var nodes13=[
     { id: 13, label: 'Node 13' },
 ]
 
-
+var nodes16=[
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 12, label: 'Node 12' },
+    { id: 13, label: 'Node 13' },
+    { id: 18, label: 'Node 18' },
+    { id: 19, label: 'Node 19' }
+    
+]
 
 
 function step9(count)
@@ -757,25 +765,46 @@ function step9(count)
           .then(()=>{
 
                console.log('COunt12')
-               console.log(full_array)
-               nodes13[0]['label']=nodes1[0]['label']
-               nodes13[1]['label']=nodes8[1]['label']
-               //nodes13[2]['label']=nodes2[2]['label']
-               nodes13[3]['label']=full_array[0][5].toString()
-               nodes13[4]['label']=nodes9[4]['label']
+               nodes16[0]['label']=nodes1[0]['label']
+               nodes16[1]['label']=nodes8[1]['label']
+               nodes16[2]['label']=nodes2[2]['label']
+               nodes16[3]['label']=full_array[0][5].toString()
+               nodes16[4]['label']=nodes9[4]['label']
                
 
 
 
             }
           )
-          return nodes13
+          return nodes16
     }
 
     return nodes9
 }
 
 
+function step10(count)
+{
+    const full_array = [];
+    const break_array = [];
 
+    if(count==15)
+    {
+        getStep(9,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
 
-export {step1,step2,step3,step4,step5,step6,step7,step8,step9,setArray};
+               console.log('COunt13')
+                console.log(full_array)
+                nodes14[1]['label']=nodes8[1]['label']
+                nodes14[2]['label']=full_array[0][7].toString()
+            }
+          )
+          return nodes14
+    }
+
+    return nodes10
+}
+
+export {step1,step2,step3,step4,step5,step6,step7,step8,step9,step10,setArray};
