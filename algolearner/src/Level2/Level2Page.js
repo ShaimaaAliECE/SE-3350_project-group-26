@@ -33,7 +33,7 @@ function generateArray(){
     return arr;
 }
 const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
-
+let nodecounter = 0;
 function LevelTwo(props){
     //Algorithmn Variables
     const [numberString, setNumString] = useState('');
@@ -42,40 +42,89 @@ function LevelTwo(props){
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
     var numbersDrag
-    const nodesStep=[[2,3],[4,5],[6,7],[8,9],[6],[4],[10,11],[5],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1]]
-
+    const nodesStep=[[2,3],[4,5],[6,7],[8,9],['none'],[8,9],[6,7],['none'],[6,7],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1]]
+    
     //Drag drop variables
     //numbers array contains the current ques selections, order properly based on nodes (ex. el1 of numbers is right answer to el1 node)
     const [numbers,setNumbers]=useState(['5,6,8','4,5']) //we'd need to make a list manually for this 
     //nodes array contains the current nodes the question is for, this will display below the selection box
     const [nodes,setNodes]=useState(nodesStep[count])
 
-    const [doTwo, setDoTwo] = useState(5==5); //This should be updated for every step whether one question or two questions, cant use true or false doesnt seem to work
+    const [doTwo, setDoTwo] = useState(true); //This should be updated for every step whether one question or two questions, cant use true or false doesnt seem to work
     const [correct,setCorrect] = useState(false); //Updated if the answer is correct --> Can use to allow to move to next step
     let counter=1; 
     const NumberList = []
+    const [newNumberList,setNewNumberList]=useState([{id:1,number:'5,6,8',node:1},{id:2,number:'4,5',node:1}])
+    const numberfix = []
+    const [dontShow,setDontShow] = useState(true);
+    const [showDnD,setShowDnD] = useState(true);
     //Gets the beginning array
     useEffect(()=>{
         setNumArr(generateArray());
     },[]);
-// for the steps we can either create a new stepsLevel2.js with the steps each one and we can either return the correct answers or have a list manually 
-// with each answer or 
-//var test2= test(numArr)
+
 setArray(numArr)
-//ISSUES:
-/*
-    new numbers dragged in the boxes dont appear, only those that were initialized in line49 do, and whenever i try to make the first page with the right numbers
-    either get an infinite loop or memory leak, didNotMount
-    2.
-*/
-const dragNumSteps=[dragNum1().then((data) => {
-    console.log(data)
-    console.log('LInE 66')
-    numbersDrag=data
-    //setNumbers(data)//results in an infinite loop
-})]
-let callingEAchStep=dragNumSteps[0] 
+
     
+    const getNums = (direction) => {
+        setDontShow(true);
+        let ranArr = []
+        if(direction == 'next') {
+            dragNum1().then((data) => {
+                ranArr=data
+                
+            }).then(() => {
+                if (ranArr.length > 1) {
+                    
+                    updateNums(ranArr)
+                } 
+                })
+        }
+        else {
+            
+            dragNum2().then((data) => {
+                ranArr=data
+                
+            }).then(() => {
+                if (ranArr.length > 1) {
+                    
+                    updateNums(ranArr)
+                } 
+                })
+        }
+        
+        
+        
+    }
+
+    const updateNums = (ranArr) => {
+        
+        if(ranArr[0] == 0 && ranArr[1] == 1){
+            
+            setShowDnD(false)
+        }
+        else{
+            setShowDnD(true)
+        }
+
+        setNumbers(ranArr)
+        
+        counter=1;
+        const ranArr2 = []
+        ranArr.forEach((element,i) => {
+            
+            ranArr2.push({id:counter++,number:element,node:nodesStep[nodecounter][i]});
+            //nodes[i]
+        })
+        setNewNumberList(ranArr2)
+        setDontShow(false);
+    }
+
+    const getNumList = () => {
+        
+        return newNumberList;
+    }
+
     const check = () =>{    
         var send = {
                 "depth": count,
@@ -94,7 +143,7 @@ let callingEAchStep=dragNumSteps[0]
             .then(data => {
                 setTesting(data.break);
                 setFull(data.full);     
-                console.log(fullArr);
+                
 
             })
             .catch((error) => {
@@ -104,6 +153,19 @@ let callingEAchStep=dragNumSteps[0]
     return(
         <>
             <Header level = "Level Two"/>
+
+            {dontShow ? (<><Box display={'block'} justifyContent={'center'} alignItems={'center'} textAlign={'center'}
+                    ><Button
+                            variant={'outlined'}
+                            size={'large'}
+                            sx={{p:5,m:5}}
+                            onClick = {()=>{
+                                getNums('next');
+                                
+                            }}>
+                            Start Level
+                        </Button><Typography>In this level, you will have to drag and drop numbers for certain steps. Press 'Check Solution' to check your answers!</Typography></Box></>) : (
+
             <Box
             sx = {{
                 height: '60vh',
@@ -124,16 +186,20 @@ let callingEAchStep=dragNumSteps[0]
                         })}
                         
                     </Stack>
-
+                    
+                    
                     <Stack direction={'row'}
                     >
-                        <Button
-                            onClick = {()=>{
 
+                        
+                        <Button id='777'
+                            onClick = {()=>{
+                                if(count>0) {
                                 setCount(count -1);
-                                console.log(count)
-                                setNodes(nodesStep[count-1])
-                                if(nodesStep[count].length==2)
+                                if(nodecounter > 0) nodecounter-=1
+                                setNodes(nodesStep[nodecounter])
+                                getNums('prev')
+                                if(nodesStep[nodecounter].length==2)
                                 {
                                     setDoTwo(true)
                                 }
@@ -141,28 +207,37 @@ let callingEAchStep=dragNumSteps[0]
                                 {
                                     setDoTwo(false)
                                 }
+                            }
                             }}>
                             Prev
                         </Button>
 
                         <Button
+                            id='888'
                             onClick = {()=>{
-                               
-                                setCount(count +1);
-                                setNodes(nodesStep[count+1])
-                                setNumbers(numbersDrag)
-                                if(nodesStep[count].length==2)
+                                if(count <= 17) {
+                                    
+                                
+                                setCount(count+1);
+                                
+                                nodecounter+=1
+                                
+                                setNodes(nodesStep[nodecounter])
+                                getNums('next')
+
+                                if(nodesStep[nodecounter].length==2)
                                 {
-                                    console.log('Line139')
+                                
                                     setDoTwo(5==5)
                                 }
                                 else
                                 {
                                     setDoTwo(5==4)
-                                    console.log('Line144',nodesStep[count].length==1 )
+                                    
 
                                 }
-                            //   console.log(count);
+                            }
+                            
                             }}>
                             
                             Next
@@ -171,7 +246,7 @@ let callingEAchStep=dragNumSteps[0]
 
                     </Stack>
                     <Stack>
-                        {count}
+                        Step {count}
                     </Stack>
                     
                 </Stack>
@@ -179,28 +254,22 @@ let callingEAchStep=dragNumSteps[0]
                 {/*Drag Drop Component*/}
                 <Box>
                     
-                    {
-                        //Generate number list with id, number, node
-                        numbers.forEach((element,i) => {
-                            NumberList.push({id:counter++,number:element,node:nodes[i]})
-                        })
-                        
-                    }
                     
-                    <DndProvider backend={HTML5Backend}>
+                    {showDnD ? (<>
+                        <DndProvider backend={HTML5Backend}>
                         <Box sx={{
                             display: 'flex',
                             width: '100%',
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-                            <DragDrop NumberList={NumberList} doTwoz={doTwo} />
+                            <DragDrop key={newNumberList} NumberList={newNumberList} getNumList={getNumList} doTwoz={doTwo} />
 
 
                         </Box>
-                    </DndProvider>
-                    
-                    <Box display={'flex'} textAlign={'center'} alignContent='center' justifyContent={'center'}>
+                        </DndProvider>
+
+                        <Box display={'flex'} textAlign={'center'} alignContent='center' justifyContent={'center'}>
                     <Button onClick={() => {
                         if(doTwo == true) {
                             
@@ -210,7 +279,7 @@ let callingEAchStep=dragNumSteps[0]
                             else {
                                 const answer1 = document.getElementById('check1')?.getElementsByTagName("h4")[0]?.innerHTML;
                                 const answer2 = document.getElementById('check2')?.getElementsByTagName("h4")[0]?.innerHTML;
-                                //console.log(answer1,answer2)
+                                
 
                                 //Checking answers
                                 if(answer1 == numbers[0] && answer2 == numbers[1]) {
@@ -229,7 +298,7 @@ let callingEAchStep=dragNumSteps[0]
                             }
                             else {
                                 const answer1 = document.getElementById('check1').getElementsByTagName("h4")[0].innerHTML;
-                                //console.log(answer1)
+                                
 
                                 //Checking answers
                                 if(answer1 == numbers[0]) {
@@ -243,11 +312,15 @@ let callingEAchStep=dragNumSteps[0]
                                 
                             }
                         }
-                    }}>Check Solution</Button></Box>
+                    }}>Check Solution</Button></Box></>
+                    ) : (<></>)}
+                    
+                    
+                    
 
                 </Box>
 
-                    {console.log(count)}
+                    
                     <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
                 <Box 
@@ -260,12 +333,11 @@ let callingEAchStep=dragNumSteps[0]
                 </Box>
                 {/*<Timer/>*/}
 
-                    {console.log(count)}
-                <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+                
                 
                 
 
-            </Box>
+            </Box>)}
 
         </>
 

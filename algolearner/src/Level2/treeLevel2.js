@@ -139,7 +139,7 @@ const VisNetwork = (props) => {
    {
     const timeout = setTimeout(() => {
       network.current = new Network(rootNode.current, data, options);
-      console.log("USE EFFECT")
+      
     }, 500);
       
    },

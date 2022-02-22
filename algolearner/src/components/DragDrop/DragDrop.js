@@ -4,7 +4,7 @@ import './DragDrop.css'
 import {useDrop} from 'react-dnd'
 import {Typography} from '@mui/material'
 
-function DragDrop({NumberList,doTwoz}) {
+function DragDrop({NumberList,doTwoz,getNumList}) {
 
     
     const [isLoading,setIsLoading] = useState(true);
@@ -46,6 +46,7 @@ function DragDrop({NumberList,doTwoz}) {
         //Specify depending on boards
         if (num==1) setBoard([numberList[0]])
         else setBoard2([numberList[0]])
+        
 
     }
 

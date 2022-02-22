@@ -8,8 +8,8 @@
 }
 
 .board {
-    background-color: aqua;
-    width: 100px;
+    background-color: #365794;
+    width: 100%;
     height: 50px;
     border: 50px black;
     align-items: center;
@@ -19,11 +19,13 @@
     justify-content: center;
     margin: 10px;
     font-size: 30px;
+    color: #F46D68
 }
 
 .total {
     display: flex;
     border: 3px solid black;
+    width: 600px;
 }
 
 .boards {
