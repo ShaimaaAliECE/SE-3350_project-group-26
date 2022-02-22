@@ -4,10 +4,18 @@ import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel3.js'
 import Timer from '../components/Timer';
+import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStep'
 
+//TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
-// for the answer create a function for each answer step 
+ 
 // need to add sound 
+//GETTING SOLUTIONS FOR EACH STEP: 
+const arrayStepBreakArray=[1,2,3,-1,-1,-1,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
+// if arrayStepBreakArray[count]!=-1 then call getBreakArraySolution() otherwise getFullArraySolution() 
+var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolution()
+//Might need to change the function to await or add a timer(setTimeout()) before re-rendering the page
+//Also when arrayStepBreakArray==-1 we need to display only 1 textbox not both
 
 
 function generateArray(){
@@ -26,8 +34,15 @@ let des = ["The first step is to split up the array in half or as evenly as poss
                 "The fourth step is to rearrage the components from smallest to largest.", "The fifth step is to split the right array into half.", "The sixth step is to split the array into individual components", 
                 "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
             ];
-const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
-
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6]
+var nodeNum2=0
+function nodeNum()// We can change the highlighted text in the textBoxes
+{
+    nodeNum2+=0.5
+    
+    //console.log('RUNNING', nodeNum2)
+    return 'Node'+nodeNum2
+}
 
 function LevelThree(props){
     const [numberString, setNumString] = useState('');
@@ -40,7 +55,7 @@ function LevelThree(props){
      useEffect(()=>{
         setNumArr(generateArray());
     },[]);
-
+setArray(numArr)
 
     const check = () =>{
         var send = {
@@ -77,6 +92,8 @@ function LevelThree(props){
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
+             
+
                 <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
                     <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
                         {numArr.map((v) =>{
@@ -123,6 +140,12 @@ function LevelThree(props){
 
 
                     </Box>
+                    <Stack direction={'row'}>
+                        <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" />
+
+                        <TextField color="secondary" id="outlined-basic" label="Node 3" variant="outlined" /> 
+                    </Stack>
+                  
                     
                 </Stack>
 
@@ -135,8 +158,7 @@ function LevelThree(props){
                 <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
 
-            
-            
+               
             </Box>
             {/*<Timer/>*/}
 
@@ -145,5 +167,7 @@ function LevelThree(props){
     );
 
 }
+
+
 
 export default LevelThree;
