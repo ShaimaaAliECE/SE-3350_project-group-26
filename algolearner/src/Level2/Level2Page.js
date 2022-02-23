@@ -36,7 +36,7 @@ function generateArray(){
     }
     return arr;
 }
-const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6,1,0]
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6]
 let nodecounter = 0;
 function LevelTwo(props){
     //Algorithmn Variables
