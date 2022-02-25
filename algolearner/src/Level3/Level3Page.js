@@ -50,6 +50,7 @@ function LevelThree(props){
     const [testing11, setTesting] = useState([]);
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
+    const[userArr, setUser] = useState([]);
 
      //Gets the beginning array
      useEffect(()=>{
@@ -141,7 +142,12 @@ setArray(numArr)
 
                     </Box>
                     <Stack direction={'row'}>
-                        <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" />
+                        <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" 
+                        onChange = {(e) =>{
+                            setUser(e.target.value);
+                            console.log(userArr);
+                        }}
+                        />
 
                         <TextField color="secondary" id="outlined-basic" label="Node 3" variant="outlined" /> 
                     </Stack>
