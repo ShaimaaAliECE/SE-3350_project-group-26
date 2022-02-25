@@ -114,28 +114,7 @@ function LevelOne(props){
 
                 </Stack>
 
-<<<<<<< Updated upstream
                 <Stack direction={'row'}
-=======
-                    {console.log(count)}
-                <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               {/* <Stack direction={'row'}
->>>>>>> Stashed changes
                 marginLeft = '2vw'>
                     {numArr.map((v) =>{
                         return(
