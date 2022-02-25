@@ -46,7 +46,7 @@ function LevelTwo(props){
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
     var numbersDrag
-    const nodesStep=[[2,3],[4,5],[6,7],[8,9],['none'],[8,9],[6,7],['none'],[6,7],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1]]
+    const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     
     //Drag drop variables
     //numbers array contains the current ques selections, order properly based on nodes (ex. el1 of numbers is right answer to el1 node)
@@ -62,6 +62,14 @@ function LevelTwo(props){
     const numberfix = []
     const [dontShow,setDontShow] = useState(true);
     const [showDnD,setShowDnD] = useState(true);
+    const [instruction,setIns] = useState(false);
+    const [instructionText,setInsText] = useState('');
+
+    //sound effect
+    let win = new Audio("/win.mp3")
+    let lose = new Audio("/lose.mp3")
+
+
     //Gets the beginning array
     useEffect(()=>{
         setNumArr(generateArray());
@@ -71,31 +79,32 @@ setArray(numArr)
 
     
     const getNums = (direction) => {
-        setDontShow(true);
-        let ranArr = []
-        if(direction == 'next') {
-            dragNum1().then((data) => {
-                ranArr=data
-                
-            }).then(() => {
-                if (ranArr.length > 1) {
+        
+            setDontShow(true);
+            let ranArr = []
+            if(direction == 'next') {
+                dragNum1().then((data) => {
+                    ranArr=data
                     
-                    updateNums(ranArr)
-                } 
-                })
-        }
-        else {
-            
-            dragNum2().then((data) => {
-                ranArr=data
+                }).then(() => {
+                    if (ranArr.length > 1) {
+                        
+                        updateNums(ranArr)
+                    } 
+                    })
+            }
+            else {
                 
-            }).then(() => {
-                if (ranArr.length > 1) {
+                dragNum2().then((data) => {
+                    ranArr=data
                     
-                    updateNums(ranArr)
-                } 
-                })
-        }
+                }).then(() => {
+                    if (ranArr.length > 1) {
+                        
+                        updateNums(ranArr)
+                    } 
+                    })
+            }
         
         
         
@@ -202,6 +211,7 @@ setArray(numArr)
                         
                         <Button id='777'
                             onClick = {()=>{
+                                setIns(false)
                                 if(count>0) {
                                 setCount(count -1);
                                 if(nodecounter > 0) nodecounter-=1
@@ -223,16 +233,16 @@ setArray(numArr)
                         <Button
                             id='888'
                             onClick = {()=>{
-                                if(count <= 17) {
+                                if(count <= 15 && correct!=false) {
                                     
-                                
+                                setIns(false)
                                 setCount(count+1);
                                 
                                 nodecounter+=1
                                 
                                 setNodes(nodesStep[nodecounter])
                                 getNums('next')
-
+                                setCorrect(false)
                                 if(nodesStep[nodecounter].length==2)
                                 {
                                 
@@ -245,6 +255,15 @@ setArray(numArr)
 
                                 }
                             }
+                            else if(count <= 15 && correct==false){
+                                setInsText('Please get the answer correct to proceed!')
+                                setIns(true)
+                            }
+                            else if (count == 16){
+                                setInsText('You have completed this level! Proceed to next level by clicking the button above.')
+                                setIns(true)
+                                nextLevel();
+                            }
                             
                             }}>
                             
@@ -254,11 +273,14 @@ setArray(numArr)
 
                     </Stack>
                     <Stack id = 'nextLevel2Button' display = 'none'>
-                        <Link to = {"/levelThree"}>
+                        <Link to = {"/LevelThree"}>
                             <Button  variant="contained">
                                 Next Level
                             </Button>
                         </Link>
+                    </Stack>
+                    <Stack>
+                        {instruction ? <Typography variant='h6'>{instructionText}</Typography> : <></> }
                     </Stack>
                     <Stack>
                         Step {count}
@@ -289,7 +311,8 @@ setArray(numArr)
                         if(doTwo == true) {
                             
                             if(document.getElementById('check1')?.getElementsByTagName("h4")[0]?.innerHTML == undefined || document.getElementById('check2')?.getElementsByTagName("h4")[0]?.innerHTML == undefined ) {
-                                alert('Please Drag Some Answers')
+                                setInsText('Please Drag Some Answers')
+                                setIns(true)
                             }
                             else {
                                 const answer1 = document.getElementById('check1')?.getElementsByTagName("h4")[0]?.innerHTML;
@@ -299,17 +322,23 @@ setArray(numArr)
                                 //Checking answers
                                 if(answer1 == numbers[0] && answer2 == numbers[1]) {
                                     setCorrect(true)
-                                    alert('correct answers entered.')
+                                    setInsText('Correct answers entered. Proceed to next step!')
+                                    setIns(true)
+                                    win.play()
                                 } 
                                 else
                                 {
-                                    alert('wrong answers entered try again.')
+                                    setCorrect(false)
+                                    setInsText('Wrong answers entered try again.')
+                                    setIns(true)
+                                    lose.play()
                                 }
                             }
                         }
                         else {
                             if(document.getElementById('check1')?.getElementsByTagName("h4")[0]?.innerHTML == undefined) {
-                                alert('Please Drag Some Answers')
+                                setInsText('Please Drag Some Answers')
+                                setIns(true)
                             }
                             else {
                                 const answer1 = document.getElementById('check1').getElementsByTagName("h4")[0].innerHTML;
@@ -318,11 +347,16 @@ setArray(numArr)
                                 //Checking answers
                                 if(answer1 == numbers[0]) {
                                     setCorrect(true)
-                                    alert('correct answers entered.')
+                                    setInsText('Correct answers entered. Proceed to next step!')
+                                    setIns(true)
+                                    win.play()
                                 } 
                                 else
                                 {
-                                    alert('wrong answers entered try again.')
+                                    setCorrect(false)
+                                    setInsText('Wrong answers entered try again.')
+                                    setIns(true)
+                                    lose.play()
                                 }
                                 
                             }

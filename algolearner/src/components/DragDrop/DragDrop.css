@@ -4,7 +4,7 @@
     background-color: beige;
     align-items: center;
     justify-content: center;
-    
+    width: 100%;
 }
 
 .board {
@@ -25,7 +25,7 @@
 .total {
     display: flex;
     border: 3px solid black;
-    width: 600px;
+    width: 800px;
 }
 
 .boards {
