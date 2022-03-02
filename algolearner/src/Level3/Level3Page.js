@@ -52,12 +52,25 @@ function LevelThree(props){
     const [fullArr, setFull] = useState([]);
     const[userArrL, setUserL] = useState([]);
     const[userArrR, setUserR] = useState([]);
+    const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
 
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
     },[]);
-setArray(numArr)
+    setArray(numArr)
+
+    const checkBreak = (x)   => {
+       const a = [];
+   
+        getFullArraySolution(3).then((data)=>{
+
+            console.log(data)
+
+        })
+
+        return(a);
+    }
 
     const check = () =>{
         var send = {
@@ -83,6 +96,8 @@ setArray(numArr)
         .catch((error) => {
             console.error('Error:', error);
     });
+
+  
 
     }
     return(
@@ -146,14 +161,27 @@ setArray(numArr)
                         <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" 
                         onChange = {(e) =>{
                             setUserL(e.target.value);
-                            console.log(userArrL+"L");
+                            const checkBreak = (x)   => {
+                                const a = [];
+                            
+                                 getFullArraySolution(x).then((data)=>{
+                         
+                                     console.log(data)
+                         
+                                 })
+                         
+                                 return(a);
+                             }
+
+                            checkBreak(1);
+                            
                         }}
                         />
 
                         <TextField color="secondary" id="outlined-basic" label="Node 3" variant="outlined" 
                         onChange = {(e) =>{
                             setUserR(e.target.value);
-                            console.log(userArrR+"R");
+                            
                         }}
                         /> 
                     </Stack>
