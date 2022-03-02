@@ -146,7 +146,7 @@ function LevelThree(props){
                                 
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
-                                    console.log('HELLO HERE')
+                                    
                                      console.log(data)
                          
                                  })
@@ -154,11 +154,23 @@ function LevelThree(props){
                         
                              }
                              const checkFull = ()   => {
-                                
+                                var dictF = {
+                                    4:0,
+                                    5:1,
+                                    7:2,
+                                    8:3,
+                                    12:4,
+                                    13:5,
+                                    15:6,
+                                    16:7,
+                                    17:8
+
+                                }
+
                             
                                  getFullArraySolution(9).then((data)=>{
                          
-                                     console.log(data)
+                                     console.log(data[dictF[count]])
                          
                                  })
                          
@@ -166,12 +178,12 @@ function LevelThree(props){
                              }
                              if (arrayStepBreakArray[count]==-1){
                                 console.log(checkFull());
-                                console.log('COTHER CAKKING')
+                         
 
 
                              }
                              else{
-                                 console.log('CALLING THID')
+                                
                                  console.log(checkBreak());
                              }  
 
