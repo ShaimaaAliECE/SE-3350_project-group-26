@@ -19,9 +19,12 @@ async function getBreakArraySolution(step)
           full_array.push(data.full)})
           .then(()=>{
 
+            console.log(break_array)
+
                 
             }
           )
+          console.log(break_array)
           return [break_array[0][0].toString(),break_array[0][1].toString()]
 }
 
@@ -40,6 +43,8 @@ async function getFullArraySolution(count)
                 
             }
           )
+          console.log(full_array)
+
           return [full_array[0][count].toString()]
 }
 

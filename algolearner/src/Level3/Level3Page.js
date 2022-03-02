@@ -145,8 +145,8 @@ function LevelThree(props){
                             const checkBreak = ()   => {
                                 
                             
-                                 getBreakArraySolution(arrayStepFullArray[count]).then((data)=>{
-                         
+                                 getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
+                                    console.log('HELLO HERE')
                                      console.log(data)
                          
                                  })
@@ -164,11 +164,14 @@ function LevelThree(props){
                          
                        
                              }
-                             if (arrayStepFullArray[count]==-1){
+                             if (arrayStepBreakArray[count]==-1){
                                 console.log(checkFull());
+                                console.log('COTHER CAKKING')
+
 
                              }
                              else{
+                                 console.log('CALLING THID')
                                  console.log(checkBreak());
                              }  
 
