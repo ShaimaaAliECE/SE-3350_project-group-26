@@ -10,6 +10,8 @@ var array
 
 async function getBreakArraySolution(step)
 {
+    
+
     const full_array = [];
     const break_array = [];
     await getStep(step,array)
@@ -25,6 +27,9 @@ async function getBreakArraySolution(step)
 
 async function getFullArraySolution(count)
 {
+  
+
+
     const full_array = [];
     const break_array = [];
     await getStep(9,array)

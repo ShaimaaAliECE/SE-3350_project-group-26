@@ -141,6 +141,39 @@ function LevelThree(props){
                                 
                                 setCount(count +1);
                             //   console.log(count);
+                     
+                            const checkBreak = ()   => {
+                                
+                            
+                                 getBreakArraySolution(arrayStepFullArray[count]).then((data)=>{
+                         
+                                     console.log(data)
+                         
+                                 })
+                         
+                        
+                             }
+                             const checkFull = ()   => {
+                                
+                            
+                                 getFullArraySolution(9).then((data)=>{
+                         
+                                     console.log(data)
+                         
+                                 })
+                         
+                       
+                             }
+                             if (arrayStepFullArray[count]==-1){
+                                console.log(checkFull());
+
+                             }
+                             else{
+                                 console.log(checkBreak());
+                             }  
+
+                            
+                            
                             }}>
                             
                             Next
@@ -161,19 +194,7 @@ function LevelThree(props){
                         <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" 
                         onChange = {(e) =>{
                             setUserL(e.target.value);
-                            const checkBreak = (x)   => {
-                                const a = [];
                             
-                                 getFullArraySolution(x).then((data)=>{
-                         
-                                     console.log(data)
-                         
-                                 })
-                         
-                                 return(a);
-                             }
-
-                            checkBreak(1);
                             
                         }}
                         />
