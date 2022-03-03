@@ -137,18 +137,14 @@ function LevelThree(props){
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
-                                     if(data[0].toString()==userArrL){
+                                     if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                          console.log("correct");
+                                         setCount(count +1);
                                      }
                                      else{
                                          console.log("incorrect");
                                      }
-                                     if(data[1].toString()==userArrR){
-                                         console.log("correct");
-                                     }
-                                     else{
-                                         console.log("incorrect");
-                                     }
+                                     
                          
                                  })
                          
@@ -171,6 +167,7 @@ function LevelThree(props){
                                             
                                         if(userArrL==data){
                                             console.log("correct");
+                                            setCount(count +1);
                                         }
                                         else{
                                             console.log("incorrect")
@@ -191,7 +188,7 @@ function LevelThree(props){
                                 
                                  checkBreak();
                              }  
-                             setCount(count +1);
+                             
                             
                             
                             }}>
