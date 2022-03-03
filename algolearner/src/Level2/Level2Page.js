@@ -46,7 +46,7 @@ function LevelTwo(props){
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
     var numbersDrag
-    const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
+    const nodesStep=[[2,3],[4,5],[6,7],[8,9],[4],[10,11],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     
     //Drag drop variables
     //numbers array contains the current ques selections, order properly based on nodes (ex. el1 of numbers is right answer to el1 node)
