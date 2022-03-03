@@ -53,6 +53,7 @@ function LevelThree(props){
     const[userArrL, setUserL] = useState([]);
     const[userArrR, setUserR] = useState([]);
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
+    const [instructionText,setInsText] = useState('');
 
      //Gets the beginning array
      useEffect(()=>{
@@ -138,11 +139,11 @@ function LevelThree(props){
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
-                                         console.log("correct");
+                                        setInsText("Correct");
                                          setCount(count +1);
                                      }
                                      else{
-                                         console.log("incorrect");
+                                        setInsText("Incorrect");
                                      }
                                      
                          
@@ -166,23 +167,17 @@ function LevelThree(props){
                                  getFullArraySolution(dictF[count]).then((data)=>{
                                             
                                         if(userArrL==data){
-                                            console.log("correct");
+                                            setInsText("Correct");
                                             setCount(count +1);
                                         }
                                         else{
-                                            console.log("incorrect")
+                                            setInsText("Inorrect");
                                         }
-                                     
-                         
                                  })
-                         
-                       
                              }
                              if (arrayStepBreakArray[count]==-1){
                                 checkFull();
                          
-
-
                              }
                              else{
                                 
@@ -200,6 +195,9 @@ function LevelThree(props){
                     </Stack>
                     <Stack>
                         {count}
+                    </Stack>
+                    <Stack>
+                         <Typography variant='h6'>{instructionText}</Typography>
                     </Stack>
                     <Box alignItems={'right'}>
 
