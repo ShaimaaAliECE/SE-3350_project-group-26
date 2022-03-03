@@ -35,14 +35,7 @@ let des = ["","The first step is to split up the array in half or as evenly as p
                 "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
             ];
 const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6]
-var nodeNum2=0
-function nodeNum()// We can change the highlighted text in the textBoxes
-{
-    nodeNum2+=0.5
-    
-    //console.log('RUNNING', nodeNum2)
-    return 'Node'+nodeNum2
-}
+
 
 function LevelThree(props){
     const [numberString, setNumString] = useState('');
@@ -64,7 +57,31 @@ function LevelThree(props){
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
 
-    
+    let nodeNum1Array=[2,4,6,8,4,10,12,14,17,14,12,18,13,3,1]
+    let nodeNum2Array=[3,5,7,9,'',11,'',13,15,16,'','',19,'','','']
+
+    function nodeNum2()// We can change the highlighted text in the textBoxes
+    {
+        if(nodeNum2Array[count]=='')
+        {
+            return ''
+        }
+        else
+        {
+            return 'Node'+nodeNum2Array[count]
+
+        }
+        
+    }
+
+    function nodeNum1()// We can change the highlighted text in the textBoxes
+    {
+        return 'Node'+nodeNum1Array[count]
+    }
+
+
+
+
 
     const check = () =>{
         var send = {
@@ -110,8 +127,11 @@ function LevelThree(props){
                         {numArr.map((v) =>{
                             return(
                                 <Box sx= {{
-                                    width: '1vw'
-
+                                    width: '1vw',
+                                    width: '1vw',
+                                    fontSize: 16,
+                                    p:1,    
+                                    border: '2.5px solid purple',
                                 }}>
                                     {v}
                                 </Box>
@@ -203,10 +223,10 @@ function LevelThree(props){
 
                     </Stack>
                     <Stack>
-                        {count}
+                         <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
                     </Stack>
                     <Stack>
-                         <Typography variant='h6'>{instructionText}</Typography>
+                         <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
                     </Stack>
                     <Box alignItems={'right'}>
 
@@ -215,7 +235,7 @@ function LevelThree(props){
 
                     </Box>
                     <Stack direction={'row'}>
-                        <TextField color="secondary" id="outlined-basic" label={nodeNum()} variant="outlined" 
+                        <TextField color="secondary" id="outlined-basic" label={nodeNum1()} variant="outlined" 
                         onChange = {(e) =>{
                             setUserL(e.target.value);
                             
@@ -223,7 +243,7 @@ function LevelThree(props){
                         }}
                         />
 
-                        <TextField color="secondary" id="outlined-basic" label="Node 3" variant="outlined" 
+                        <TextField color="secondary" id="outlined-basic" label={nodeNum2()} variant="outlined" 
                         onChange = {(e) =>{
                             setUserR(e.target.value);
                             

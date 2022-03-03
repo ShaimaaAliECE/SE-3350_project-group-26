@@ -194,7 +194,11 @@ setArray(numArr)
                         {numArr.map((v) =>{
                             return(
                                 <Box sx= {{
-                                    width: '1vw'
+                                    width: '1vw',
+                                    width: '1vw',
+                                    fontSize: 16,
+                                    p:1,    
+                                    border: '2.5px solid purple',
 
                                 }}>
                                     {v}
@@ -283,7 +287,7 @@ setArray(numArr)
                         {instruction ? <Typography variant='h6'>{instructionText}</Typography> : <></> }
                     </Stack>
                     <Stack>
-                        Step {count}
+                    <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
                     </Stack>
                     
                 </Stack>
