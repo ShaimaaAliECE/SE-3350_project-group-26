@@ -11,7 +11,7 @@ import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPer
  
 // need to add sound 
 //GETTING SOLUTIONS FOR EACH STEP: 
-const arrayStepBreakArray=[1,2,3,-1,-1,-1,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
+const arrayStepBreakArray=[2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 // if arrayStepBreakArray[count]!=-1 then call getBreakArraySolution() otherwise getFullArraySolution() 
 var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolution()
 //Might need to change the function to await or add a timer(setTimeout()) before re-rendering the page
@@ -155,22 +155,20 @@ function LevelThree(props){
                              }
                              const checkFull = ()   => {
                                 var dictF = {
-                                    4:0,
-                                    5:1,
-                                    7:2,
-                                    8:3,
-                                    12:4,
-                                    13:5,
-                                    15:6,
-                                    16:7,
-                                    17:8
+                                    4:1,
+                                    6:3,
+                                    10:4,
+                                    11:5,
+                                    13:6,
+                                    14:7,
+                                    15:8
 
                                 }
 
                             
-                                 getFullArraySolution(9).then((data)=>{
+                                 getFullArraySolution(dictF[count+1]).then((data)=>{
                          
-                                     console.log(data[dictF[count]])
+                                     console.log(data+"as")
                          
                                  })
                          
