@@ -45,7 +45,7 @@ async function getFullArraySolution(count)
           )
           console.log(full_array)
 
-          return [full_array[0][count]]
+          return [full_array[0][count].toString()]
 }
 
 export {getFullArraySolution,getBreakArraySolution,setArray}

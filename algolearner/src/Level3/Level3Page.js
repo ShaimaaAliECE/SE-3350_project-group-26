@@ -11,7 +11,7 @@ import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPer
  
 // need to add sound 
 //GETTING SOLUTIONS FOR EACH STEP: 
-const arrayStepBreakArray=[2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
+const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 // if arrayStepBreakArray[count]!=-1 then call getBreakArraySolution() otherwise getFullArraySolution() 
 var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolution()
 //Might need to change the function to await or add a timer(setTimeout()) before re-rendering the page
@@ -60,17 +60,7 @@ function LevelThree(props){
     },[]);
     setArray(numArr)
 
-    const checkBreak = (x)   => {
-       const a = [];
-   
-        getFullArraySolution(3).then((data)=>{
-
-            console.log(data)
-
-        })
-
-        return(a);
-    }
+    
 
     const check = () =>{
         var send = {
@@ -139,7 +129,7 @@ function LevelThree(props){
                         <Button variant='outlined'
                             onClick = {()=>{
                                 
-                                setCount(count +1);
+                                
                             //   console.log(count);
                      
                             const checkBreak = ()   => {
@@ -147,7 +137,18 @@ function LevelThree(props){
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
-                                     console.log(data)
+                                     if(data[0].toString()==userArrL){
+                                         console.log("correct");
+                                     }
+                                     else{
+                                         console.log("incorrect");
+                                     }
+                                     if(data[1].toString()==userArrR){
+                                         console.log("correct");
+                                     }
+                                     else{
+                                         console.log("incorrect");
+                                     }
                          
                                  })
                          
@@ -166,25 +167,31 @@ function LevelThree(props){
                                 }
 
                             
-                                 getFullArraySolution(dictF[count+1]).then((data)=>{
-                         
-                                     console.log(data+"as")
+                                 getFullArraySolution(dictF[count]).then((data)=>{
+                                            
+                                        if(userArrL==data){
+                                            console.log("correct");
+                                        }
+                                        else{
+                                            console.log("incorrect")
+                                        }
+                                     
                          
                                  })
                          
                        
                              }
                              if (arrayStepBreakArray[count]==-1){
-                                console.log(checkFull());
+                                checkFull();
                          
 
 
                              }
                              else{
                                 
-                                 console.log(checkBreak());
+                                 checkBreak();
                              }  
-
+                             setCount(count +1);
                             
                             
                             }}>
