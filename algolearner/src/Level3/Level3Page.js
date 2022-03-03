@@ -30,7 +30,7 @@ function generateArray(){
 }
 let i=0;
 //temporary descriptions, will fix later once all the steps figured out
-let des = ["The first step is to split up the array in half or as evenly as possible.", "The second step is to split the left array into half.", "The third step is to split the array into individual components.", 
+let des = ["","The first step is to split up the array in half or as evenly as possible.", "The second step is to split the left array into half.", "The third step is to split the array into individual components.", 
                 "The fourth step is to rearrage the components from smallest to largest.", "The fifth step is to split the right array into half.", "The sixth step is to split the array into individual components", 
                 "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
             ];
@@ -60,6 +60,9 @@ function LevelThree(props){
         setNumArr(generateArray());
     },[]);
     setArray(numArr)
+
+    let win = new Audio("/win.mp3")
+    let lose = new Audio("/lose.mp3")
 
     
 
@@ -141,9 +144,11 @@ function LevelThree(props){
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct");
                                          setCount(count +1);
+                                         win.play()
                                      }
                                      else{
                                         setInsText("Incorrect");
+                                        lose.play()
                                      }
                                      
                          
@@ -169,9 +174,11 @@ function LevelThree(props){
                                         if(userArrL==data){
                                             setInsText("Correct");
                                             setCount(count +1);
+                                            win.play()
                                         }
                                         else{
                                             setInsText("Inorrect");
+                                            lose.play()
                                         }
                                  })
                              }
