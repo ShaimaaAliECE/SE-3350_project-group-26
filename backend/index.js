@@ -104,6 +104,6 @@ app.post('/api/getStep', (req,res) =>{
 
 
 
-app.listen(3001, ()=>{
+app.listen(80, ()=>{
     console.log("running on port 3001");
  }); //listen to 3001
