@@ -7,8 +7,8 @@ export const getStep = async (depth,arr) => {
             arr: arr
         }
 
-
-        const response = await fetch('http://localhost:3001/api/getStep', {method : 'POST', headers: { 'Content-Type': 'application/json' 
+        //use for localhost testing http://localhost:80/api/getStep
+        const response = await fetch('http://35.225.122.85:3001/api/getStep', {method : 'POST', headers: { 'Content-Type': 'application/json' 
           }, body: JSON.stringify(body_data) })
            
         const data = await response.json();
