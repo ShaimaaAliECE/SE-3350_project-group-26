@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-
+//WHEN DEPLOYING CHANGE THE ORIGIN TO "http://34.70.157.84" before deploying on GCP
+//Note also need to change frontend --> components --> api and change the fetch ip there
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "DELETE"],

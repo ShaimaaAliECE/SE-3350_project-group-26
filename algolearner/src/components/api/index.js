@@ -7,8 +7,9 @@ export const getStep = async (depth,arr) => {
             arr: arr
         }
 
-        //use for localhost testing http://localhost:3001/api/getStep
-        const response = await fetch('http://35.225.122.85:3001/api/getStep', {method : 'POST', headers: { 'Content-Type': 'application/json' 
+        //use for GCP backend server http://34.70.157.84:3001/api/getStep
+        //Note also need to change backend origin ip in the index.js file before deploying
+        const response = await fetch('http://localhost:3001/api/getStep', {method : 'POST', headers: { 'Content-Type': 'application/json' 
           }, body: JSON.stringify(body_data) })
            
         const data = await response.json();

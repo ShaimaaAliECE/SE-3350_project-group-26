@@ -7,7 +7,7 @@ import Header from './components/Header'
 import VisNetwork from './Level1/treeLevel1.js'
 import {getStep} from './components/api/index'
 
-import {Routes, Route} from 'react-router-dom';
+import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 
 import HomePage from './HomePage/home';
 import LevelThree from './Level3/Level3Page';
@@ -34,13 +34,15 @@ function App() {
   return (
     <div className='Main'>
 
-      <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="LevelOne" element={<LevelOne/>}/>
-        <Route path="LevelTwo" element={<LevelTwo/>}/>
-        <Route path="LevelThree" element={<LevelThree/>}/>
-
-      </Routes>
+      <Router>
+        <Switch>
+          <Route exact path="/"><HomePage/></Route>
+          <Route path="/LevelOne"><LevelOne/></Route>
+          <Route path="/LevelTwo"><LevelTwo/></Route>
+          <Route path="/LevelThree"><LevelThree/></Route>
+        </Switch>
+        
+      </Router>
 
     </div>
     
