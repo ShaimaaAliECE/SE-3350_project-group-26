@@ -83,7 +83,6 @@ function LevelTwo(props){
 setArray(numArr)
 setArray2(numArr)
 
-const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 
     //Remove Later Push//
     let history = useHistory();
@@ -155,14 +154,53 @@ const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling whi
         }
         else if (joinSteps.includes(count) == true){
             document.getElementById("showJoinSteps").style.display = 'Block';
+            console.log("EXPLAINING Count: ",count)
+            const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
+
+            var dictF = {
+                4:2,
+                6:1,
+
+                10:7,
+                11:6,
 
 
-            getBreakArraySolution(arrayStepBreakArray[1]).then((data)=>{
-                console.log("EXPLAINING")
-                console.log(data[0])
-                let arrayNum=[data[0]]
-                addsToDisplay(arrayNum)
-            })
+                13:6,//but data[1]
+                14:1,
+
+                15:numArr//calls somethin else, cuz need whole array
+
+            }
+
+            var dataIndex = {
+                4:0,
+                6:0,
+
+                10:0,
+                11:0,
+
+
+                13:1,//but data[1]
+                14:1,
+
+                15:0
+
+            }
+
+            if(count!=15)
+            {
+                getBreakArraySolution(dictF[count]).then((data)=>{
+                    console.log(dataIndex[count])
+                    let arrayNum=[data[dataIndex[count]]]
+                    addsToDisplay(arrayNum)
+                })
+            }
+            else
+            {
+                addsToDisplay(numArr)
+
+            }
+         
             
             
             //addsToDisplay([13,5,4])// we can just call SolutionPerStep to retunr the answer of the break array before it 
@@ -186,7 +224,7 @@ const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling whi
         let whole_array = []
         const completedarr = []
         console.log('first array', arr)
-        /*
+        
         let count =0;
         for(let x of arr) {
             if(count == 0){
@@ -197,8 +235,8 @@ const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling whi
                 count = 1;
             }
             
-        }*/
-        whole_array = arr
+        }
+        //whole_array = arr
         //for(let y of arr[1]) whole_array.push(y)
         console.log('input array', whole_array)
         for(let i=0; i < whole_array.length; i++) {
