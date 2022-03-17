@@ -2,10 +2,10 @@ import Box from '@mui/material/Box';
 import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
-import VisNetwork from './treeLevel3.js'
+import VisNetwork from './treeLevel5.js'
 import Timer from '../components/Timer';
-import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStep'
-import { useHistory } from "react-router-dom";
+import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStepLevel5'
+
 //TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
  
@@ -21,8 +21,8 @@ var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolut
 function generateArray(){
     let arr = [];
     var num;
-    for(let i =0; i< 10; i++){
-        num = Math.floor(Math.random() * 20) + 1;
+    for(let i =0; i< 50; i++){
+        num = Math.floor(Math.random() * 100) + 1;
         arr.push(num);
         
     }
@@ -30,15 +30,11 @@ function generateArray(){
 }
 let i=0;
 //temporary descriptions, will fix later once all the steps figured out
-let des = ["The first step is to split up the array in half or as evenly as possible.", "The second step is to split the left array into half or as evenly as possible.", "The third step is to split the left array into half or as evenly as possible.",
-                "The fourth step is to split the left array into half or as evenly as possible.", "The fifth step is to rearrage the components from smallest to largest.", "The sixth step is to merge the bottom two arrays.", "The seventh step is to merge the bottom two arrays.", 
-                "The eigth step is to split the right array into half or as evenly as possible.","The ninth step is to rearrange the numbers from smallest to largest and merge the bottom two arrays", 
-                "The tenth step is to split the right array into half or as evenly as possible.", "The eleventh step is to split up the right array in half or as evenly as possible.", "The twelfth step is to split the left array into half or as evenly as possible.", 
-                "The thirteenth step is to split the left array into half or as evenly as possible.",
-                "The fourteenth step is to rearrage the components from smallest to largest and merge the bottom two arrays.", "The fifteenth step is to merge the bottom two arrays.", "The sixteenth step is to split the right array into half or as evenly as possible.",
-                "The seventeenth step is to rearrange the numbers from smallest to largest and merge the bottom two arrays.", "The eighteenth step is to merge the bottom two arrays." , "The ninteenth step is to merge the bottom two arrays and you are left with your sorted array.","Congratulations!!! You may proceed to the next level"
+let des = ["","The first step is to split up the array in half or as evenly as possible.", "The second step is to split the left array into half.", "The third step is to split the array into individual components.", 
+                "The fourth step is to rearrage the components from smallest to largest.", "The fifth step is to split the right array into half.", "The sixth step is to split the array into individual components", 
+                "The seventh step is to rearrange the components from smallest to largest", "The eigth step is to combine the two arrays", "The ninth step is to sort the combination to form the final sorted array"
             ];
-const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6]
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,     8,  9,    6,   8,   6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]
 
 
 function LevelThree(props){
@@ -51,8 +47,7 @@ function LevelThree(props){
     const[userArrR, setUserR] = useState([]);
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
-    const [levelText,setLevText] = useState('');
-    const [incorrectCount, setincorrectCount] = useState(1);
+
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
@@ -84,22 +79,9 @@ function LevelThree(props){
         return 'Node'+nodeNum1Array[count]
     }
 
-    //Change levels code
-    const previousLevel = () => {
-        document.getElementById("previousLevelButton").style.display = 'Block';
-    }
 
-    let history = useHistory()
-    const changeLevel = (lvl) => {
-        if (lvl == 1)
-            history.push('./LevelOne')
-        else if (lvl == 2)
-            history.push('./LevelTwo')
-        else if (lvl == 0)
-            history.push('./') // push to home page
-        else if (lvl == 3)
-            window.location.reload(false);
-    }
+
+
 
     const check = () =>{
         var send = {
@@ -126,14 +108,12 @@ function LevelThree(props){
             console.error('Error:', error);
     });
 
-    
+  
 
     }
-
-
     return(
         <>
-            <Header level = "Level Three"/>
+            <Header level = "Level One"/>
             <Box
             sx = {{
                 height: '86.2vh',
@@ -173,19 +153,14 @@ function LevelThree(props){
                         </Button>
 
                         <Button variant='outlined'
-                        
                             onClick = {()=>{
                                 
-                                
+                                /*
                             //   console.log(count);
-                            
-                               
+                     
                             const checkBreak = ()   => {
                                 
-                                if (incorrectCount>=3){
-                                    setLevText("Sorry out of tries. Please select an option below!");
-                                    previousLevel();
-                                }
+                            
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
@@ -194,9 +169,7 @@ function LevelThree(props){
                                          win.play()
                                      }
                                      else{
-                                        setInsText("You are Incorrect. This is your " + incorrectCount + "/3 chance.");
-                                        if (incorrectCount < 4)
-                                            setincorrectCount(incorrectCount+1);
+                                        setInsText("Incorrect");
                                         lose.play()
                                      }
                                      
@@ -226,28 +199,23 @@ function LevelThree(props){
                                             win.play()
                                         }
                                         else{
-                                            
-                                            if (incorrectCount < 4)
-                                                setincorrectCount(incorrectCount+1);
-                                            setInsText("You are Incorrect. This was your " + incorrectCount + " /3 chance.");
+                                            setInsText("Inorrect");
                                             lose.play()
                                         }
                                  })
                              }
                              if (arrayStepBreakArray[count]==-1){
-                                 if (incorrectCount != 4)
-                                    checkFull();
+                                checkFull();
                          
                              }
                              else{
-                                if (incorrectCount != 4)
-                                    checkBreak();
-                             } 
+                                
+                                 checkBreak();
+                             }  
                              
-                  
-                             
-                            
-                            
+                            */
+                             setCount(count +1);
+
                             }}>
                             
                             Next
@@ -259,28 +227,8 @@ function LevelThree(props){
                          <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
                     </Stack>
                     <Stack>
-                         <Typography sx={{textAlign:'center'}} color='#a61113' variant='h4'>{instructionText}</Typography>
-                         <Typography color='#a61113' variant='h4'>{levelText}</Typography>
-                        
+                         <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
                     </Stack>
-
-                    
-                    <Stack id = 'previousLevelButton' display = 'None' >
-                         <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(3)}}>
-                                Restart Lvl
-                        </Button>
-                        <Button  sx={{justifyContent:'flex',mr:2}}  variant="contained" onClick={() => {changeLevel(1)}}>
-                                Level One
-                        </Button>
-                        <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(2)}}>
-                                Level Two
-                        </Button>
-                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
-                                HomePage
-                        </Button>
-                    </Stack>
-                   
-
                     <Box alignItems={'right'}>
 
                         <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>

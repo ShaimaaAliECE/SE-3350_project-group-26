@@ -12,6 +12,7 @@ import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import HomePage from './HomePage/home';
 import LevelThree from './Level3/Level3Page';
 import LevelFour from './Level4/Level4Page';
+import LevelFive from './Level5/Level5Page';
 
 import Login from './LoginPage/login';
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/LevelThree"><LevelThree/></Route>
           <Route path="/LevelFour"><LevelFour/></Route>
           <Route path = "/Login"><Login/></Route>
+          <Route path="/LevelFive"><LevelFive/></Route>
 
         </Switch>
         
