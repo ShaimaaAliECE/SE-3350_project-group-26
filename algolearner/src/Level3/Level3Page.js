@@ -5,7 +5,7 @@ import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel3.js'
 import Timer from '../components/Timer';
 import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStep'
-
+import { Link } from "react-router-dom";
 //TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
  
@@ -47,7 +47,8 @@ function LevelThree(props){
     const[userArrR, setUserR] = useState([]);
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
-
+    const [levelText,setLevText] = useState('');
+    const [incorrectCount, setincorrectCount] = useState(0);
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
@@ -153,14 +154,19 @@ function LevelThree(props){
                         </Button>
 
                         <Button variant='outlined'
+                        
                             onClick = {()=>{
                                 
                                 
                             //   console.log(count);
-                     
+                            
+                               
                             const checkBreak = ()   => {
                                 
-                            
+                                if (incorrectCount>=3){
+                                    setLevText("Go to previous levels to practice more");
+                                    
+                                }
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
@@ -170,6 +176,7 @@ function LevelThree(props){
                                      }
                                      else{
                                         setInsText("Incorrect");
+                                        setincorrectCount(incorrectCount+1);
                                         lose.play()
                                      }
                                      
@@ -200,6 +207,7 @@ function LevelThree(props){
                                         }
                                         else{
                                             setInsText("Inorrect");
+                                            setincorrectCount(incorrectCount+1);
                                             lose.play()
                                         }
                                  })
@@ -211,7 +219,9 @@ function LevelThree(props){
                              else{
                                 
                                  checkBreak();
-                             }  
+                             } 
+                             
+                  
                              
                             
                             
@@ -227,7 +237,16 @@ function LevelThree(props){
                     </Stack>
                     <Stack>
                          <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
+                         <Typography color='#a61113' variant='h4'>{levelText}</Typography>
+                         <Stack id = 'nextLevel2Button' display = 'none'>
+                        <Link to = {"/LevelThree"}>
+                            <Button  variant="contained">
+                                Next Level
+                            </Button>
+                        </Link>
                     </Stack>
+                    </Stack>
+                    
                     <Box alignItems={'right'}>
 
                         <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
