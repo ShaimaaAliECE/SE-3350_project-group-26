@@ -7,7 +7,170 @@ var array
     array=arr
  }
  const full_array = [];
+/*
+var nodes1 = [
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+]
 
+var nodes2 = [
+    { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+]
+
+var nodes3 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+]
+
+var nodes4 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },   
+    { id: 9, label: 'Node 9' },
+]
+
+var nodes5 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },   
+    { id: 9, label: 'Node 9' },
+    { id: 10, label: 'Node 10' },   
+    { id: 11, label: 'Node 11' },
+]
+
+var nodes6 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },   
+    { id: 9, label: 'Node 9' },
+    { id: 10, label: 'Node 10' },   
+    { id: 11, label: 'Node 11' },
+    { id: 12, label: 'Node 12' },   
+    { id: 13, label: 'Node 13' },
+]
+var nodes7 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },   
+    { id: 9, label: 'Node 9' },
+    { id: 10, label: 'Node 10' },   
+    { id: 11, label: 'Node 11' },
+    { id: 15, label: 'Node 14' },   
+    { id: 14, label: 'Node 15' },
+
+]   
+
+var nodes8 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },   
+    { id: 9, label: 'Node 9' },
+    { id: 16, label: 'Node 16' },   
+    { id: 17, label: 'Node 17' },
+]
+var nodes9 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 8, label: 'Node 8' },   
+    { id: 9, label: 'Node 9' },
+    { id: 16, label: 'Node 16' },   
+    { id: 17, label: 'Node 17' },
+    { id: 18, label: 'Node 18' },   
+    { id: 19, label: 'Node 19' },
+]
+var nodes10 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 20, label: 'Node 20' },   
+    { id: 21, label: 'Node 21' },
+]
+var nodes11 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 20, label: 'Node 20' },   
+    { id: 21, label: 'Node 21' },
+    { id: 22, label: 'Node 22' },   
+    { id: 23, label: 'Node 23' },
+]
+var nodes12 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 20, label: 'Node 20' },   
+    { id: 21, label: 'Node 21' },
+    { id: 22, label: 'Node 22' },   
+    { id: 23, label: 'Node 23' },
+    { id: 24, label: 'Node 24' },   
+    { id: 25, label: 'Node 25' },
+]
+var nodes13 = [
+     { id: 1, label: 'Node 1' },
+    { id: 2, label: 'Node 2' },
+    { id: 3, label: 'Node 3' },
+    { id: 4, label: 'Node 4' },
+    { id: 5, label: 'Node 5' },
+    { id: 6, label: 'Node 6' },   
+    { id: 7, label: 'Node 7' },
+    { id: 20, label: 'Node 20' },   
+    { id: 21, label: 'Node 21' },
+    { id: 22, label: 'Node 22' },   
+    { id: 23, label: 'Node 23' },
+]
+*/
 
 var nodes1=[
     { id: 1, label: 'Node 1' },
