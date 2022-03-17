@@ -145,7 +145,7 @@ setArray(numArr)
         else if (joinSteps.includes(count) == true){
             document.getElementById("showJoinSteps").style.display = 'Block';
         }
-        addsToDisplay(prevNums)
+        addsToDisplay([1,13,15,12])
         //Change this between numbers and prevnumbers and fix for different levels
         //cant use prevnums from dnd, need to query backend to get the actual unsorted parts back
         //implement later
@@ -161,9 +161,10 @@ setArray(numArr)
       });
 
     const addsToDisplay = (arr) => {
-        const whole_array = []
+        let whole_array = []
         const completedarr = []
-
+        console.log('first array', arr)
+        /*
         let count =0;
         for(let x of arr) {
             if(count == 0){
@@ -174,7 +175,8 @@ setArray(numArr)
                 count = 1;
             }
             
-        }
+        }*/
+        whole_array = arr
         //for(let y of arr[1]) whole_array.push(y)
         console.log('input array', whole_array)
         for(let i=0; i < whole_array.length; i++) {
