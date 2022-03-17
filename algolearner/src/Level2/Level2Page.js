@@ -306,10 +306,7 @@ setArray2(numArr)
         <>
             <Header level = "Level Two"/>
 
-            {/*Remove later for push code*/}
-            <Button onClick={goToLevel}>Level 3</Button>
-            {/*Remove later for push code*/}
-            
+                        
             {dontShow ? (<><Box display={'block'} justifyContent={'center'} alignItems={'center'} textAlign={'center'}
                     ><Button
                             variant={'outlined'}

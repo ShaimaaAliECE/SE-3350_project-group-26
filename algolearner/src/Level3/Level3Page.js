@@ -5,7 +5,7 @@ import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel3.js'
 import Timer from '../components/Timer';
 import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStep'
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 //TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
  
@@ -52,14 +52,14 @@ function LevelThree(props){
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
     const [levelText,setLevText] = useState('');
-    const [incorrectCount, setincorrectCount] = useState(0);
     const splitSteps = [0,1,2,3,5,7,8,9,12]
     const joinSteps = [4,6,10,11,13,14,15]
     const [displayArr,setDispArr] = useState([[9,8,7],[8,9,7],[8,7,9],[7,8,9]]);
     const [prevNums,setPrevNums] = useState([]);
 
-    const [numbers,setNumbers]=useState(['5,6,8','4,5'])
+    const [numbers,setNumbers]=useState([])
 
+    const [incorrectCount, setincorrectCount] = useState(1);
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
@@ -91,11 +91,22 @@ function LevelThree(props){
         return 'Node'+nodeNum1Array[count]
     }
 
-
+    //Change levels code
     const previousLevel = () => {
         document.getElementById("previousLevelButton").style.display = 'Block';
     }
 
+    let history = useHistory()
+    const changeLevel = (lvl) => {
+        if (lvl == 1)
+            history.push('./LevelOne')
+        else if (lvl == 2)
+            history.push('./LevelTwo')
+        else if (lvl == 0)
+            history.push('./') // push to home page
+        else if (lvl == 3)
+            window.location.reload(false);
+    }
 
     const showBreakdown = () => {
         //If its a split step show this
@@ -245,9 +256,11 @@ function LevelThree(props){
             console.error('Error:', error);
     });
 
-  
+    
 
     }
+
+
     return(
         <>
             <Header level = "Level Three"/>
@@ -299,8 +312,8 @@ function LevelThree(props){
                                
                             const checkBreak = ()   => {
                                 
-                                if (incorrectCount>=2){
-                                    setLevText("Go to previous levels to practice more");
+                                if (incorrectCount>=3){
+                                    setLevText("Sorry out of tries. Please select an option below!");
                                     previousLevel();
                                 }
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
@@ -313,8 +326,9 @@ function LevelThree(props){
                                          win.play()
                                      }
                                      else{
-                                        setInsText("Incorrect");
-                                        setincorrectCount(incorrectCount+1);
+                                        setInsText("You are Incorrect. This is your " + incorrectCount + "/3 chance.");
+                                        if (incorrectCount < 4)
+                                            setincorrectCount(incorrectCount+1);
                                         lose.play()
                                      }
                                      
@@ -346,19 +360,22 @@ function LevelThree(props){
 
                                         }
                                         else{
-                                            setInsText("Inorrect");
-                                            setincorrectCount(incorrectCount+1);
+                                            
+                                            if (incorrectCount < 4)
+                                                setincorrectCount(incorrectCount+1);
+                                            setInsText("You are Incorrect. This was your " + incorrectCount + " /3 chance.");
                                             lose.play()
                                         }
                                  })
                              }
                              if (arrayStepBreakArray[count]==-1){
-                                checkFull();
+                                 if (incorrectCount != 4)
+                                    checkFull();
                          
                              }
                              else{
-                                
-                                 checkBreak();
+                                if (incorrectCount != 4)
+                                    checkBreak();
                              } 
                              
                   
@@ -376,26 +393,25 @@ function LevelThree(props){
                          <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
                     </Stack>
                     <Stack>
-                         <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
+                         <Typography sx={{textAlign:'center'}} color='#a61113' variant='h4'>{instructionText}</Typography>
                          <Typography color='#a61113' variant='h4'>{levelText}</Typography>
                         
                     </Stack>
 
                     
-                    <Stack id = 'previousLevelButton' display = 'None'>
-
-                        <Link to = {"/LevelOne"}>
-                            <Button  variant="contained">
+                    <Stack id = 'previousLevelButton' display = 'None' >
+                         <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(3)}}>
+                                Restart Lvl
+                        </Button>
+                        <Button  sx={{justifyContent:'flex',mr:2}}  variant="contained" onClick={() => {changeLevel(1)}}>
                                 Level One
-                            </Button>
-                        </Link>
-
-                        <Link to = {"/LevelTwo"}>
-                            <Button  variant="contained">
+                        </Button>
+                        <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(2)}}>
                                 Level Two
-                            </Button>
-                        </Link>
-
+                        </Button>
+                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
+                                HomePage
+                        </Button>
                     </Stack>
                    
 

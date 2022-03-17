@@ -37,7 +37,7 @@ function HomePage(){
                     <Typography variant="subtitle1" color = "#2D3748">
                         You can view eachs step and go forwards or backwards.
                     </Typography>
-
+            
                     <Box  marginTop = '5vh'>
                         <Link to = {"/LevelOne"}>
                             <Button  variant="contained">
