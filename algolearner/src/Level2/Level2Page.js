@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import {DndProvider} from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import DragDrop from '../components/DragDrop/DragDrop'
+import {getFullArraySolution,getBreakArraySolution,setArray2} from './SolutionPerStep'
 
 
 
@@ -80,6 +81,9 @@ function LevelTwo(props){
     },[]);
 
 setArray(numArr)
+setArray2(numArr)
+
+const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 
     
     const getNums = (direction) => {
@@ -141,11 +145,24 @@ setArray(numArr)
         //If its a split step show this
         if(splitSteps.includes(count) == true){
             document.getElementById("showSplitSteps").style.display = 'Block';
+            addsToDisplay(prevNums)
+
         }
         else if (joinSteps.includes(count) == true){
             document.getElementById("showJoinSteps").style.display = 'Block';
+
+
+            getBreakArraySolution(arrayStepBreakArray[1]).then((data)=>{
+                console.log("EXPLAINING")
+                console.log(data[0])
+                let arrayNum=[data[0]]
+                addsToDisplay(arrayNum)
+            })
+            
+            
+            //addsToDisplay([13,5,4])// we can just call SolutionPerStep to retunr the answer of the break array before it 
+
         }
-        addsToDisplay(prevNums)
         //Change this between numbers and prevnumbers and fix for different levels
         //cant use prevnums from dnd, need to query backend to get the actual unsorted parts back
         //implement later
