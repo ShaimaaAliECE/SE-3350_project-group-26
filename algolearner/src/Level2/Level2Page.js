@@ -69,6 +69,10 @@ function LevelTwo(props){
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
 
+    const splitSteps = [0,1,2,3,5,7,8,9,12]
+    const joinSteps = [4,6,10,11,13,14,15]
+    const [displayArr,setDispArr] = useState([[9,8,7],[8,9,7],[8,7,9],[7,8,9]]);
+    const [prevNums,setPrevNums] = useState([]);
 
     //Gets the beginning array
     useEffect(()=>{
@@ -121,7 +125,7 @@ setArray(numArr)
         }
 
         setNumbers(ranArr)
-        
+        console.log('RAN ARRAY',ranArr)
         counter=1;
         const ranArr2 = []
         ranArr.forEach((element,i) => {
@@ -132,6 +136,75 @@ setArray(numArr)
         setNewNumberList(ranArr2)
         setDontShow(false);
     }
+
+    const showBreakdown = () => {
+        //If its a split step show this
+        if(splitSteps.includes(count) == true){
+            document.getElementById("showSplitSteps").style.display = 'Block';
+        }
+        else if (joinSteps.includes(count) == true){
+            document.getElementById("showJoinSteps").style.display = 'Block';
+        }
+        addsToDisplay(prevNums)
+        //Change this between numbers and prevnumbers and fix for different levels
+        //cant use prevnums from dnd, need to query backend to get the actual unsorted parts back
+        //implement later
+
+        /*
+            4 -- use current, 11 https://prnt.sc/MKMAiTDJi5lc, 13 https://prnt.sc/ZqYTtkcZaId_
+
+        */
+    }
+
+    const checkArray = (arrays, array) => arrays.some(a => {
+        return (a.length > array.length ? a : array).every((_, i) => a[i] === array[i]);
+      });
+
+    const addsToDisplay = (arr) => {
+        const whole_array = []
+        const completedarr = []
+
+        let count =0;
+        for(let x of arr) {
+            if(count == 0){
+                let randomarr = x.split(',');
+                for(let y of randomarr){
+                    whole_array.push(parseInt(y))
+                }
+                count = 1;
+            }
+            
+        }
+        //for(let y of arr[1]) whole_array.push(y)
+        console.log('input array', whole_array)
+        for(let i=0; i < whole_array.length; i++) {
+
+            for(let j=i; j < whole_array.length; j++){
+                
+                if(whole_array[i] > whole_array[j]){
+                    let initnum = whole_array[i]
+                    whole_array[i] = whole_array[j]
+                    whole_array[j] = initnum
+                    
+                }
+               
+                let construct = []
+                for(let k of whole_array){
+                    
+                    construct.push(k)
+                }
+                
+                if(checkArray(completedarr,construct) == false){
+                    completedarr.push(construct)
+                } 
+                
+
+            }
+        }
+        setDispArr(completedarr);
+        console.log(completedarr);
+    }
+
 
     const getNumList = () => {
         
@@ -258,6 +331,8 @@ setArray(numArr)
                                     
 
                                 }
+                                let prevnums = numbers;
+                                setPrevNums(prevnums);
                             }
                             else if(count <= 15 && correct==false){
                                 setInsText('Please get the answer correct to proceed!')
@@ -329,6 +404,7 @@ setArray(numArr)
                                     setInsText('Correct answers entered. Proceed to next step!')
                                     setIns(true)
                                     win.play()
+                                    showBreakdown()
                                 } 
                                 else
                                 {
@@ -354,6 +430,7 @@ setArray(numArr)
                                     setInsText('Correct answers entered. Proceed to next step!')
                                     setIns(true)
                                     win.play()
+                                    showBreakdown()
                                 } 
                                 else
                                 {
@@ -373,7 +450,44 @@ setArray(numArr)
 
                 </Box>
 
+                <Box id = 'showSplitSteps' display= 'none' sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center' }}>
+                    <Typography variant={'h6'}>Key Lesson</Typography>
+                    <Typography>
+                        <Box sx={{ fontSize: 18 }}>{'In this step, the algorithmn breaks down these number array ' + numbers + ' by half, splitting it into two as seen below. '}</Box>
+                        <Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{''+numbers+''}</Box>
+                        <Box sx={{ fontSize: 20,fontWeight: 'bold' }}>⬇️</Box>
+                        <Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{numbers[0] + '   |   ' + numbers[1]}</Box>
+                        <Box sx={{ fontSize: 18 }}>Notice if there are an uneven number of elements, they get moved to the left array.</Box>
+                    </Typography>
+                </Box>
+                
+                <Box id = 'showJoinSteps' display= 'none' sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center', mt: 2, mb: 2 }}>
+                    <Typography variant={'h6'}>Key Lesson</Typography>
+                    <Typography>
+                        <Box sx={{ fontSize: 18 }}>{'When joining, the array ' + displayArr[0] +' is checked element by element and sorted. '}</Box>
+                        <Box sx={{ fontSize: 18 }}>{'You can see the sequence of comparison the algorithm makes below: '}</Box>
+                        <Box sx={{ fontSize: 20,fontWeight: 'bold', mt: 2 }}>{'Starting Sequence'}</Box>
+                        {
+                            displayArr.map((el,count) => {
+                                    if(count != displayArr.length-1){
+                                        return <><Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{''+el+''}</Box>
+                                    <Box sx={{ fontSize: 18, mb: 2 }}>⬇️ Comparison ⬇️</Box></>
+                                    }
+                                    else {
+                                        return <><Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{''+el+''}</Box>
+                                                <Box sx={{ fontSize: 20,fontWeight: 'bold'}}>Final Result Reached</Box>
+                                                <Box sx={{ fontSize: 20, mt: 2, mb: 2 }}>{'[' + displayArr[0] + ']  ➡️  [' + displayArr[displayArr.length-1]+']'}</Box>
+                                                </>
+                                    }
+                                    
+                                
+                            })
+                        }
+                        <Box sx={{ fontSize: 18 }}>The final result is the sorted array you see in the tree below, but take note the algorithm has to individually check each element.</Box>
+                    </Typography>
                     
+                </Box>
+
                     <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
                 <Box 
