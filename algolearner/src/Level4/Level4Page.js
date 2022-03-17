@@ -2,10 +2,10 @@ import Box from '@mui/material/Box';
 import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
-import VisNetwork from './treeLevel3.js'
+import VisNetwork from './treeLevel4.js'
 import Timer from '../components/Timer';
-import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStep'
-import { Link } from "react-router-dom";
+import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStepLevel4'
+
 //TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
  
@@ -21,8 +21,8 @@ var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolut
 function generateArray(){
     let arr = [];
     var num;
-    for(let i =0; i< 10; i++){
-        num = Math.floor(Math.random() * 20) + 1;
+    for(let i =0; i< 20; i++){
+        num = Math.floor(Math.random() * 50) + 1;
         arr.push(num);
         
     }
@@ -38,7 +38,7 @@ let des = ["The first step is to split up the array in half or as evenly as poss
                 "The fourteenth step is to rearrage the components from smallest to largest and merge the bottom two arrays.", "The fifteenth step is to merge the bottom two arrays.", "The sixteenth step is to split the right array into half or as evenly as possible.",
                 "The seventeenth step is to rearrange the numbers from smallest to largest and merge the bottom two arrays.", "The eighteenth step is to merge the bottom two arrays." , "The ninteenth step is to merge the bottom two arrays and you are left with your sorted array.","Congratulations!!! You may proceed to the next level"
             ];
-const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,7,6,9,6]
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,     8,  9,    6,   8,   6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]
 
 
 function LevelThree(props){
@@ -51,8 +51,7 @@ function LevelThree(props){
     const[userArrR, setUserR] = useState([]);
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
-    const [levelText,setLevText] = useState('');
-    const [incorrectCount, setincorrectCount] = useState(0);
+
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
@@ -85,9 +84,7 @@ function LevelThree(props){
     }
 
 
-    const previousLevel = () => {
-        document.getElementById("previousLevelButton").style.display = 'Block';
-    }
+
 
 
     const check = () =>{
@@ -120,7 +117,7 @@ function LevelThree(props){
     }
     return(
         <>
-            <Header level = "Level Three"/>
+            <Header level = "Level One"/>
             <Box
             sx = {{
                 height: '86.2vh',
@@ -160,19 +157,14 @@ function LevelThree(props){
                         </Button>
 
                         <Button variant='outlined'
-                        
                             onClick = {()=>{
                                 
-                                
+                                /*
                             //   console.log(count);
-                            
-                               
+                     
                             const checkBreak = ()   => {
                                 
-                                if (incorrectCount>=2){
-                                    setLevText("Go to previous levels to practice more");
-                                    previousLevel();
-                                }
+                            
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
@@ -182,7 +174,6 @@ function LevelThree(props){
                                      }
                                      else{
                                         setInsText("Incorrect");
-                                        setincorrectCount(incorrectCount+1);
                                         lose.play()
                                      }
                                      
@@ -213,7 +204,6 @@ function LevelThree(props){
                                         }
                                         else{
                                             setInsText("Inorrect");
-                                            setincorrectCount(incorrectCount+1);
                                             lose.play()
                                         }
                                  })
@@ -225,12 +215,11 @@ function LevelThree(props){
                              else{
                                 
                                  checkBreak();
-                             } 
+                             }  
                              
-                  
-                             
-                            
-                            
+                            */
+                             setCount(count +1);
+
                             }}>
                             
                             Next
@@ -243,28 +232,7 @@ function LevelThree(props){
                     </Stack>
                     <Stack>
                          <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
-                         <Typography color='#a61113' variant='h4'>{levelText}</Typography>
-                        
                     </Stack>
-
-                    
-                    <Stack id = 'previousLevelButton' display = 'None'>
-
-                        <Link to = {"/LevelOne"}>
-                            <Button  variant="contained">
-                                Level One
-                            </Button>
-                        </Link>
-
-                        <Link to = {"/LevelTwo"}>
-                            <Button  variant="contained">
-                                Level Two
-                            </Button>
-                        </Link>
-
-                    </Stack>
-                   
-
                     <Box alignItems={'right'}>
 
                         <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
