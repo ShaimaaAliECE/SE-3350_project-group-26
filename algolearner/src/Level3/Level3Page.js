@@ -81,7 +81,9 @@ function LevelThree(props){
     }
 
 
-
+    const previousLevel = () => {
+        document.getElementById("previousLevelButton").style.display = 'Block';
+    }
 
 
     const check = () =>{
@@ -163,9 +165,9 @@ function LevelThree(props){
                                
                             const checkBreak = ()   => {
                                 
-                                if (incorrectCount>=3){
+                                if (incorrectCount>=2){
                                     setLevText("Go to previous levels to practice more");
-                                    
+                                    previousLevel();
                                 }
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     
@@ -238,15 +240,27 @@ function LevelThree(props){
                     <Stack>
                          <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
                          <Typography color='#a61113' variant='h4'>{levelText}</Typography>
-                         <Stack id = 'nextLevel2Button' display = 'none'>
-                        <Link to = {"/LevelThree"}>
+                        
+                    </Stack>
+
+                    
+                    <Stack id = 'previousLevelButton' display = 'None'>
+
+                        <Link to = {"/LevelOne"}>
                             <Button  variant="contained">
-                                Next Level
+                                Level One
                             </Button>
                         </Link>
+
+                        <Link to = {"/LevelTwo"}>
+                            <Button  variant="contained">
+                                Level Two
+                            </Button>
+                        </Link>
+
                     </Stack>
-                    </Stack>
-                    
+                   
+
                     <Box alignItems={'right'}>
 
                         <Typography paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
