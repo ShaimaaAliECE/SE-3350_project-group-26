@@ -5,7 +5,7 @@ import {useState, UseState,useEffect} from 'react';
 import VisNetwork from './treeLevel2.js'
 import Timer from '../components/Timer';
 import {dragNum1,dragNum2,setArray} from './solutions'
-import { Link } from "react-router-dom";
+import { Link, useHistory  } from "react-router-dom";
 
 
 //Drag Drop Imports
@@ -81,6 +81,11 @@ function LevelTwo(props){
 
 setArray(numArr)
 
+    //Remove Later Push//
+    let history = useHistory();
+    const goToLevel = () => {
+        history.push('./LevelThree')
+    }
     
     const getNums = (direction) => {
         
@@ -246,6 +251,10 @@ setArray(numArr)
         <>
             <Header level = "Level Two"/>
 
+            {/*Remove later for push code*/}
+            <Button onClick={goToLevel}>Level 3</Button>
+            {/*Remove later for push code*/}
+            
             {dontShow ? (<><Box display={'block'} justifyContent={'center'} alignItems={'center'} textAlign={'center'}
                     ><Button
                             variant={'outlined'}
