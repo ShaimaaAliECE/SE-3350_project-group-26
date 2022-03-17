@@ -5,7 +5,7 @@ import {useState, UseState,useEffect} from 'react';
 import VisNetwork from './treeLevel2.js'
 import Timer from '../components/Timer';
 import {dragNum1,dragNum2,setArray} from './solutions'
-import { Link } from "react-router-dom";
+import { Link, useHistory  } from "react-router-dom";
 
 
 //Drag Drop Imports
@@ -85,6 +85,11 @@ setArray2(numArr)
 
 const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 
+    //Remove Later Push//
+    let history = useHistory();
+    const goToLevel = () => {
+        history.push('./LevelThree')
+    }
     
     const getNums = (direction) => {
         
@@ -178,9 +183,10 @@ const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling whi
       });
 
     const addsToDisplay = (arr) => {
-        const whole_array = []
+        let whole_array = []
         const completedarr = []
-
+        console.log('first array', arr)
+        /*
         let count =0;
         for(let x of arr) {
             if(count == 0){
@@ -191,7 +197,8 @@ const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling whi
                 count = 1;
             }
             
-        }
+        }*/
+        whole_array = arr
         //for(let y of arr[1]) whole_array.push(y)
         console.log('input array', whole_array)
         for(let i=0; i < whole_array.length; i++) {
@@ -261,6 +268,10 @@ const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling whi
         <>
             <Header level = "Level Two"/>
 
+            {/*Remove later for push code*/}
+            <Button onClick={goToLevel}>Level 3</Button>
+            {/*Remove later for push code*/}
+            
             {dontShow ? (<><Box display={'block'} justifyContent={'center'} alignItems={'center'} textAlign={'center'}
                     ><Button
                             variant={'outlined'}
