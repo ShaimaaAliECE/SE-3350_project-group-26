@@ -1,11 +1,22 @@
 const express = require('express');
 const cors = require("cors"); //cross origin
 const app = express(); //express
+const mysql = require('mysql'); //mysql
+var axios = require("axios").default;
+
+
+const bcrypt = require('bcrypt');
+const saltrounds = 10;
 
 const bodyParser = require('body-parser');
 
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+
 
 //WHEN DEPLOYING CHANGE THE ORIGIN TO "http://34.70.157.84" before deploying on GCP
 //Note also need to change frontend --> components --> api and change the fetch ip there
@@ -16,11 +27,116 @@ app.use(cors({
     
 }));
 
+app.use(cookieParser());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 
    extended: true
 }))
 
+
+const db = mysql.createConnection({ //connection to the mysql database
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'algolearner'
+});
+
+app.use(session({
+    key: "userId",
+    secret: "algo",
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        maxAge: 60*60*2400
+    },
+})
+);
+
+db.connect(function(err){ //connect
+    if(err) throw err;
+    console.log('Database connected'); 
+});
+
+/*
+* THESE ARE USED FOR USER REGISTRATION AND LOGIN
+*
+*
+*
+ */
+app.post('/api/register', (req,res) =>{
+    const username = req.body.username;  //recieves form username
+    const password = req.body.password; //recieves form password
+    
+    bcrypt.hash(password, saltrounds, (err, hash) =>{ //encrypt password before inserting
+        if (err){
+            console.log(err); //console log error is there is
+        }
+        db.query(`INSERT INTO users (username,password) VALUES('${username}', '${hash}');`, //inserting into mysql database for users
+            (err, result) =>{
+                if (err){
+                    console.log(err);
+                    res.send({message: "Error"});
+                }
+                else {
+                    db.query(`INSERT INTO userLevel (username,currentLevel) VALUES('${username}', 0);`,
+                        () =>{
+                            res.send({message: "Registered"})
+
+                        })
+                    
+                }
+
+            }
+        );
+    })
+
+
+   
+});
+
+
+app.post('/api/login', (req, res) =>{
+    const username = req.body.username;  //recieves form username
+    const password = req.body.password; //recieves form password
+
+    db.query(`SELECT * FROM users WHERE username = '${username}';`,
+    (err, result) =>{
+        if (err){
+            res.send({err: err})
+        }
+
+        if (result.length >0){//if there is a result password
+            bcrypt.compare(password, result[0].password, (error, response) =>{ //compare password with the bcrypt variant
+                if(response){
+                    req.session.user = result;
+                    res.send({login:"Logged In"});
+                }
+                else {
+                    res.send({message: "Incorrect username or password."})
+                }    
+            });
+        } 
+        else {
+            res.send({message: "Incorrect username or password."})
+        }
+
+
+    }
+    )
+});
+
+app.get('/api/login', (req, res) =>{
+    if (req.session.user){
+        res.send({loggedIn: true, user: req.session.user}); //sends the loggedIn as true
+    }
+    else{
+        res.send({loggedIn: false, user: req.session.user}); //sends the loggedIn as true
+    }
+    
+});
+app.get('/api/signout', (req,res) =>{
+    res.clearCookie('userId').send("Signed out"); //clears the cookie when you click on the signout
+})
 
 app.post('/api/getStep', (req,res) =>{
     const d = req.body.depth;  //receive step
