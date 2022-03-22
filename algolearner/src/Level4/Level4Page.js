@@ -11,7 +11,7 @@ import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPer
  
 // need to add sound 
 //GETTING SOLUTIONS FOR EACH STEP: 
-const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
+const arrayStepBreakArray=[1,2,3,4,5,-1,-1,7,8,9,-1,-1,10]// calling which step in the solution to call using 'count' as the index
 // if arrayStepBreakArray[count]!=-1 then call getBreakArraySolution() otherwise getFullArraySolution() 
 var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolution()
 //Might need to change the function to await or add a timer(setTimeout()) before re-rendering the page
@@ -38,7 +38,7 @@ let des = ["The first step is to split up the array in half or as evenly as poss
                 "The fourteenth step is to rearrage the components from smallest to largest and merge the bottom two arrays.", "The fifteenth step is to merge the bottom two arrays.", "The sixteenth step is to split the right array into half or as evenly as possible.",
                 "The seventeenth step is to rearrange the numbers from smallest to largest and merge the bottom two arrays.", "The eighteenth step is to merge the bottom two arrays." , "The ninteenth step is to merge the bottom two arrays and you are left with your sorted array.","Congratulations!!! You may proceed to the next level"
             ];
-const steps=[0,1,2,3,4,3,2,5,2,1,6,7,     8,  9,    6,   8,   6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]
+const steps=[0,1,2,3,4,3,2,5,2,1,6,7,8,9,6,8,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]
 
 
 function LevelThree(props){
@@ -159,14 +159,14 @@ function LevelThree(props){
                         <Button variant='outlined'
                             onClick = {()=>{
                                 
-                                /*
+                                
                             //   console.log(count);
                      
                             const checkBreak = ()   => {
                                 
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
-                                    
+                                    console.log(data);
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct");
                                          setCount(count +1);
@@ -182,21 +182,20 @@ function LevelThree(props){
                          
                         
                              }
+                             
                              const checkFull = ()   => {
                                 var dictF = {
-                                    4:1,
+                                    5:1,
                                     6:3,
                                     10:4,
-                                    11:5,
-                                    13:6,
-                                    14:7,
-                                    15:8
+                                    11:5
+                                    
 
                                 }
 
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
-                                            
+                                        console.log(data+"dsads");
                                         if(userArrL==data){
                                             setInsText("Correct");
                                             setCount(count +1);
@@ -217,7 +216,8 @@ function LevelThree(props){
                                  checkBreak();
                              }  
                              
-                            */
+                            
+                             
                              setCount(count +1);
 
                             }}>

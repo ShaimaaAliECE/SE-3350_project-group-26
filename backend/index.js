@@ -33,13 +33,14 @@ app.use(bodyParser.urlencoded({
    extended: true
 }))
 
-
+/*
 const db = mysql.createConnection({ //connection to the mysql database
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'algolearner'
 });
+*/
 
 app.use(session({
     key: "userId",
@@ -51,11 +52,12 @@ app.use(session({
     },
 })
 );
-
+/*
 db.connect(function(err){ //connect
     if(err) throw err;
     console.log('Database connected'); 
 });
+*/
 
 /*
 * THESE ARE USED FOR USER REGISTRATION AND LOGIN
@@ -63,6 +65,7 @@ db.connect(function(err){ //connect
 *
 *
  */
+/*
 app.post('/api/register', (req,res) =>{
     const username = req.body.username;  //recieves form username
     const password = req.body.password; //recieves form password
@@ -71,7 +74,9 @@ app.post('/api/register', (req,res) =>{
         if (err){
             console.log(err); //console log error is there is
         }
+        
         db.query(`INSERT INTO users (username,password) VALUES('${username}', '${hash}');`, //inserting into mysql database for users
+    
             (err, result) =>{
                 if (err){
                     console.log(err);
@@ -90,11 +95,11 @@ app.post('/api/register', (req,res) =>{
         );
     })
 
-
+});*/
    
-});
 
 
+/*
 app.post('/api/login', (req, res) =>{
     const username = req.body.username;  //recieves form username
     const password = req.body.password; //recieves form password
@@ -124,7 +129,7 @@ app.post('/api/login', (req, res) =>{
     }
     )
 });
-
+*/
 app.get('/api/login', (req, res) =>{
     if (req.session.user){
         res.send({loggedIn: true, user: req.session.user}); //sends the loggedIn as true
