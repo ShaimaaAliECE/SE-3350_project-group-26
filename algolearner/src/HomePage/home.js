@@ -3,20 +3,33 @@ import {Stack,Item,TextField,Button, Typography} from '@mui/material';
 import Header from '../components/Header';
 import {useEffect, useState, UseState} from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 
 
-function HomePage(){
-
+function HomePage(props){
+    const [but, setButton] = useState('Please Login');
+    const [p, setPath] = useState('/login');
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/login", { withCredentials: true })
+        .then(response =>{
+          if (response.data.loggedIn == true){
+            setButton('Start');
+            setPath('/LevelOne');
+          }
+        })
+    },[]);
+    
     return(
         <Box>
-            <Header level = ""/>
+            
             <Box
             sx = {{
                 height: '60vh',
                 width: '100vw',
                 backgroundColor: 'white'
             }}>
+                <Header level = ""/>
 
                 
                 <Stack width = '100vw' alignItems={'center'} justifyContent='center'>
@@ -37,11 +50,11 @@ function HomePage(){
                     <Typography variant="subtitle1" color = "#2D3748">
                         You can view eachs step and go forwards or backwards.
                     </Typography>
-            
-                    <Box  marginTop = '5vh'>
-                        <Link to = {"/LevelOne"}>
+
+                    <Box  marginTop = '5vh' >
+                        <Link to = {p}>
                             <Button  variant="contained">
-                                Start
+                                {but}
                             </Button>
                         </Link>
                     </Box>

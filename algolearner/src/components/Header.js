@@ -2,15 +2,18 @@ import Box from '@mui/material/Box';
 import { Stack, AppBar, Toolbar, Typography, MenuItem,Select, Menu } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
-
+import axios from 'axios'
+import {useState, useEffect} from 'react'
 
 import { fontSize } from '@mui/system';
 import './Bar.css'
 import * as React from 'react';
+import AccHeader from './accHeader';
 
 
 
 function Header(props){
+    /*Header Components*/
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -19,16 +22,38 @@ function Header(props){
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    /*Acc Header */
+    const [loggedIn, setLogin] = useState('');
+    const [sDisplay, setDisplay] = useState('none');
+  
+    useEffect(()=>{
+      axios.get("http://localhost:3001/api/login", { withCredentials: true })
+      .then(response =>{
+        if (response.data.loggedIn = true){
+          setLogin(response.data.user[0].username);
+          setDisplay('block');
+        }
+        else{
+          setDisplay('none');
+        }
+      })
+  
+    },[]);
+
+
     return(
+        <Box>
         
         <AppBar position='static'>
             <Toolbar className='toolbar'>
 
-                <Box display="block">
-                    
+                <Box display="block" id = 'homeTitle'>
+                    <Link to = {"/"} style={{ textDecoration: 'none',color :'white' }}>
                     <Typography variant="h4">
                         Sorting Visualizer
                     </Typography>
+                    </Link>
                     
                 </Box>
 
@@ -63,66 +88,30 @@ function Header(props){
                             'aria-labelledby': 'basic-button',
                             }}
                         >
-                            <Link to = {"/Login"}>
+                            <Link to = {"/Login"} style={{ textDecoration: 'none',color :'black' }}>
                                 <MenuItem onClick={handleClose}>Login</MenuItem>
                             </Link>
-                            <MenuItem onClick={handleClose}>Account Info</MenuItem>
+
+                            <Link to = {"/AccountInfo"} style={{ textDecoration: 'none',color :'black' }}>
+                                <MenuItem onClick={handleClose}>Account Info</MenuItem>
+                            </Link>
                             <MenuItem onClick={handleClose}>
                                 <Select defaultValue={1}>
                                     <MenuItem value={1}>MergeSort</MenuItem>
                                 </Select>
                             </MenuItem>
                         </Menu>
+                        
 
                 </Box>
-
                 
-                
-                {
-                    /*
 
-                    <Box sx = {{
-                            width: '45vw',
-                            fontSize: '2em'
-                            
-                            
-                        }}>
-                        Sorting Visualizer
-                </Box>
-            
-            
-            {/*<Box
-                sx = {{
-                    height: '8vh',
-                    width : '100vw',
-                    backgroundColor :'white',
-                    borderBottom: '2px, solid black'
-                }}>
-                
-                <Stack direction = "row" spacing = {2} alignItems={'center'} justifyContent={'center'} width = '100vw' height = '8vh' >
-                    <Box sx = {{
-                            width: '45vw',
-                            fontSize: '2em'
-                            
-                            
-                        }}>
-                        Sorting Visualizer
-                    </Box>
-                    <Box sx = {{
-                            width: '45vw',
-                            fontSize: '2em',
-                            textAlign: 'right'
-                        }}>
-                        {props.level}
-                    </Box>
-
-                
-                </Stack>
-
-            </Box>*/}
 
             </Toolbar>
         </AppBar>
+        <AccHeader name = {loggedIn} display = {sDisplay}/>
+
+        </Box>
 
         
     );

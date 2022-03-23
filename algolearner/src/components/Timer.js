@@ -2,62 +2,53 @@ import Box from '@mui/material/Box';
 import { Stack, AppBar, Toolbar, Typography, MenuItem,Select } from '@mui/material';
 import { fontSize } from '@mui/system';
 import './Bar.css'
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
-
-//this function updates the time
-function set(){
-    var minutesLabel = document.getElementById("timerMinutes");
-    var secondsLabel = document.getElementById("timerSeconds");
-    var totalSeconds = 0;
-    setInterval(setTime, 1000);
-
-    function setTime()
-    {
-        ++totalSeconds;
-        secondsLabel.innerHTML = pad(totalSeconds%60);
-        minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-    }
-
-    function pad(val)
-    {
-        var valString = val + "";
-        if(valString.length < 2)
-        {
-            return "0" + valString;
-        }
-        else
-        {
-            return valString;
-        }
-    }
-
-   // console.log("helo");
-
-}
 
 
 
 //this is the timer componenet
 function Timer(props){
 
-    let timer = props.time;
+    const [totalSeconds, setTotalSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [isActive, setIsActive] = useState(true);
 
-    useEffect(()=>{
-        set();
-    })
+    function toggle() {
+    setIsActive(!isActive);
+    }
+
+    function reset() {
+    setSeconds(0);
+    setIsActive(false);
+    }
+
+    useEffect(() => {
+    let interval = null;
+    if (isActive) {
+        interval = setInterval(() => {
+        setTotalSeconds(totalSeconds => totalSeconds + 1);
+        }, 1000);
+        setMinutes(Math.floor(totalSeconds/60));
+        setSeconds(totalSeconds%60);
+    } else if (!isActive && totalSeconds !== 0) {
+        clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+    }, [isActive, totalSeconds]);
     
     return(
         <Box>
             <Stack direction = 'row'>
                 <Typography variant='h3' marginLeft = '2vw' id = 'timerMinutes'>
-                    00
+                    {minutes}
                 </Typography>
                 <Typography variant='h3' id = 'timerColon'>
                     :
                 </Typography>
                 <Typography variant='h3' id = 'timerSeconds'>
-                    00
+                    {seconds}
                 </Typography>
             </Stack>
         </Box>
