@@ -11,7 +11,7 @@ import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPer
  
 // need to add sound 
 //GETTING SOLUTIONS FOR EACH STEP: 
-const arrayStepBreakArray=[1,2,3,4,5,-1,-1,7,8,9,-1,-1,10]// calling which step in the solution to call using 'count' as the index
+const arrayStepBreakArray=[1,2,3,4,5,-1,-1,7,8,9,-1,-1,10,-1,-1,-1,11,12,13,14,-1,-1,15,-1,-1,16,17,18,-1,-1,19,-1,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 // if arrayStepBreakArray[count]!=-1 then call getBreakArraySolution() otherwise getFullArraySolution() 
 var arrayStepFullArray=0; //increment it everytime we call the getFullArraySolution()
 //Might need to change the function to await or add a timer(setTimeout()) before re-rendering the page
@@ -166,7 +166,7 @@ function LevelThree(props){
                                 
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
-                                    console.log(data);
+                               
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct");
                                          setCount(count +1);
@@ -188,14 +188,25 @@ function LevelThree(props){
                                     5:1,
                                     6:3,
                                     10:4,
-                                    11:5
-                                    
-
+                                    11:5,
+                                    13:6,
+                                    14:7,
+                                    15:8,
+                                    20:9,
+                                    21:10,
+                                    23:11,
+                                    24:12,
+                                    28:13,
+                                    29:14,
+                                    31:15,
+                                    32:16,
+                                    33:17,
+                                    34:18
                                 }
 
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
-                                        console.log(data+"dsads");
+                                        
                                         if(userArrL==data){
                                             setInsText("Correct");
                                             setCount(count +1);
@@ -218,7 +229,7 @@ function LevelThree(props){
                              
                             
                              
-                             setCount(count +1);
+                            
 
                             }}>
                             

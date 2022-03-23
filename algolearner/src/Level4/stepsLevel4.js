@@ -924,8 +924,8 @@ function step7(count)
                 nodes15[3]['label']=nodes8[3]['label']
                 //nodes15[4]['label']=nodes3[4]['label']
 
-                nodes15[5]['label']=nodes13[6]['label']
-                nodes15[6]['label']=full_array[0][1].toString()
+                nodes15[5]['label']=nodes13[5]['label']
+                nodes15[6]['label']=full_array[0][6].toString()
 
                
             }
@@ -1605,7 +1605,7 @@ function step10(count)
 
     if(count==13)
     {
-        getStep(8,array)
+        getStep(10,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
           .then(()=>{
@@ -1618,7 +1618,7 @@ function step10(count)
                 nodes14[3]['label']=nodes8[3]['label']
                 nodes14[4]['label']=nodes3[4]['label']
 
-                nodes14[5]['label']=nodes13[6]['label']
+                nodes14[5]['label']=nodes13[5]['label']
                 //nodes14[6]['label']=nodes9[6]['label']
 
                 nodes14[7]['label']=break_array[0][0].toString()
