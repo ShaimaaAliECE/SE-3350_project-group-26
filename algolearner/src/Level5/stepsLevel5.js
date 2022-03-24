@@ -2078,6 +2078,27 @@ function step7(count)
 
     if(count==46)
     {
+        getStep(26  ,array)
+        .then((data) => { break_array.push(data.break)
+          full_array.push(data.full)})
+          .then(()=>{
+
+               console.log('HelloTest'+count)
+                console.log(break_array)
+                nodes47[0]['label']=nodes1[0]['label']
+                nodes47[1]['label']=nodes46[1]['label']
+                nodes47[2]['label']=nodes2[2]['label']
+
+                nodes47[3]['label']=break_array[0][0].toString()
+                nodes47[4]['label']=break_array[0][1].toString()
+               
+            }
+          )
+          return nodes47
+    }
+
+    if(count==47)
+    {
         getStep(27  ,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
@@ -2107,9 +2128,8 @@ var nodes47=[
     { id: 49, label: 'Node 49' },
     { id: 50, label: 'Node 50' },
     { id: 51, label: 'Node 51' },
-
-
 ]
+
 var nodes46=[
     { id: 1, label: 'Node 1' },
     { id: 2, label: 'Node 2' },

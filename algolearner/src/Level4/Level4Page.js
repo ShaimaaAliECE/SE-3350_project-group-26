@@ -51,7 +51,13 @@ function LevelThree(props){
     const[userArrR, setUserR] = useState([]);
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
+    const [levelText,setLevText] = useState('');
+    const splitSteps = [0,1,2,3,5,7,8,9,12]
+    const joinSteps = [4,6,10,11,13,14,15]
+    const [displayArr,setDispArr] = useState([[9,8,7],[8,9,7],[8,7,9],[7,8,9]]);
+    const [prevNums,setPrevNums] = useState([]);
 
+    const [numbers,setNumbers]=useState([])
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
@@ -84,6 +90,127 @@ function LevelThree(props){
     }
 
 
+    const showBreakdown = () => {
+        //If its a split step show this
+        if(splitSteps.includes(count) == true){
+            document.getElementById("showSplitSteps").style.display = 'Block';
+            addsToDisplay(prevNums)
+
+        }
+        else if (joinSteps.includes(count) == true){
+            document.getElementById("showJoinSteps").style.display = 'Block';
+            console.log("EXPLAINING Count: ",count)
+            const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
+
+            var dictF = {
+                4:2,
+                6:1,
+
+                10:7,
+                11:6,
+
+
+                13:6,//but data[1]
+                14:1,
+
+                15:numArr//calls somethin else, cuz need whole array
+
+            }
+
+            var dataIndex = {
+                4:0,
+                6:0,
+
+                10:0,
+                11:0,
+
+
+                13:1,//but data[1]
+                14:1,
+
+                15:0
+
+            }
+
+            if(count!=15)
+            {
+                getBreakArraySolution(dictF[count]).then((data)=>{
+                    console.log(dataIndex[count])
+                    let arrayNum=[data[dataIndex[count]]]
+                    addsToDisplay(arrayNum)
+                })
+            }
+            else
+            {
+                addsToDisplay(numArr)
+
+            }
+         
+            
+            
+            //addsToDisplay([13,5,4])// we can just call SolutionPerStep to retunr the answer of the break array before it 
+
+        }
+        //Change this between numbers and prevnumbers and fix for different levels
+        //cant use prevnums from dnd, need to query backend to get the actual unsorted parts back
+        //implement later
+
+        /*
+            4 -- use current, 11 https://prnt.sc/MKMAiTDJi5lc, 13 https://prnt.sc/ZqYTtkcZaId_
+
+        */
+    }
+
+    const checkArray = (arrays, array) => arrays.some(a => {
+        return (a.length > array.length ? a : array).every((_, i) => a[i] === array[i]);
+      });
+
+    const addsToDisplay = (arr) => {
+        let whole_array = []
+        const completedarr = []
+        console.log('first array', arr)
+        
+        let count =0;
+        for(let x of arr) {
+            if(count == 0){
+                let randomarr = x.split(',');
+                for(let y of randomarr){
+                    whole_array.push(parseInt(y))
+                }
+                count = 1;
+            }
+            
+        }
+        //whole_array = arr
+        //for(let y of arr[1]) whole_array.push(y)
+        console.log('input array', whole_array)
+        for(let i=0; i < whole_array.length; i++) {
+
+            for(let j=i; j < whole_array.length; j++){
+                
+                if(whole_array[i] > whole_array[j]){
+                    let initnum = whole_array[i]
+                    whole_array[i] = whole_array[j]
+                    whole_array[j] = initnum
+                    
+                }
+               
+                let construct = []
+                for(let k of whole_array){
+                    
+                    construct.push(k)
+                }
+                
+                if(checkArray(completedarr,construct) == false){
+                    completedarr.push(construct)
+                } 
+                
+
+            }
+        }
+        setDispArr(completedarr);
+        console.log(completedarr);
+    }
 
 
 
@@ -167,9 +294,11 @@ function LevelThree(props){
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                
-                                     if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
+                                     if((data[0].toString()!=userArrL)&&(data[1].toString()!=userArrR)){
                                         setInsText("Correct");
                                          setCount(count +1);
+                                         setNumbers(data)
+                                         showBreakdown();
                                          win.play()
                                      }
                                      else{
@@ -210,6 +339,8 @@ function LevelThree(props){
                                         if(userArrL==data){
                                             setInsText("Correct");
                                             setCount(count +1);
+                                            showBreakdown();
+
                                             win.play()
                                         }
                                         else{
@@ -270,7 +401,43 @@ function LevelThree(props){
                     
                 </Stack>
 
+                <Box id = 'showSplitSteps' display= 'none' sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center' }}>
+                    <Typography variant={'h6'}>Key Lesson</Typography>
+                    <Typography>
+                        <Box sx={{ fontSize: 18 }}>{'In this step, the algorithmn breaks down these number array ' + numbers + ' by half, splitting it into two as seen below. '}</Box>
+                        <Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{''+numbers+''}</Box>
+                        <Box sx={{ fontSize: 20,fontWeight: 'bold' }}>⬇️</Box>
+                        <Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{numbers[0] + '   |   ' + numbers[1]}</Box>
+                        <Box sx={{ fontSize: 18 }}>Notice if there are an uneven number of elements, they get moved to the left array.</Box>
+                    </Typography>
+                </Box>
+                
+                <Box id = 'showJoinSteps' display= 'none' sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center', mt: 2, mb: 2 }}>
+                    <Typography variant={'h6'}>Key Lesson</Typography>
+                    <Typography>
+                        <Box sx={{ fontSize: 18 }}>{'When joining, the array ' + displayArr[0] +' is checked element by element and sorted. '}</Box>
+                        <Box sx={{ fontSize: 18 }}>{'You can see the sequence of comparison the algorithm makes below: '}</Box>
+                        <Box sx={{ fontSize: 20,fontWeight: 'bold', mt: 2 }}>{'Starting Sequence'}</Box>
+                        {
+                            displayArr.map((el,count) => {
+                                    if(count != displayArr.length-1){
+                                        return <><Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{''+el+''}</Box>
+                                    <Box sx={{ fontSize: 18, mb: 2 }}>⬇️ Comparison ⬇️</Box></>
+                                    }
+                                    else {
+                                        return <><Box sx={{ fontSize: 25,fontWeight: 'bold' }}>{''+el+''}</Box>
+                                                <Box sx={{ fontSize: 20,fontWeight: 'bold'}}>Final Result Reached</Box>
+                                                <Box sx={{ fontSize: 20, mt: 2, mb: 2 }}>{'[' + displayArr[0] + ']  ➡️  [' + displayArr[displayArr.length-1]+']'}</Box>
+                                                </>
+                                    }
+                                    
+                                
+                            })
+                        }
+                        <Box sx={{ fontSize: 18 }}>The final result is the sorted array you see in the tree below, but take note the algorithm has to individually check each element.</Box>
+                    </Typography>
                     
+                </Box>
  
 
 
