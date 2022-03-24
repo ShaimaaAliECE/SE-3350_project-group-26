@@ -29,6 +29,68 @@ const VisNetwork = (props) => {
 
     { from: 8, to: 10 },
     { from: 8, to: 11 },
+
+    { from: 10, to: 12 },
+    { from: 10, to: 13 },
+
+    { from: 11, to: 14 },
+    { from: 11, to: 15 },
+
+    { from: 9, to: 16 },
+    { from: 9, to: 17 },
+
+    { from: 16, to: 18 },
+    { from: 16, to: 19 },
+
+    { from: 7, to: 20 },
+    { from: 7, to: 21 },
+
+    { from: 20, to: 22 },
+    { from: 20, to: 23 },
+
+    { from: 22, to: 24 },
+    { from: 22, to: 25 },
+
+    { from: 5, to: 26 },
+    { from: 5, to: 27 },
+    
+    { from: 26, to: 28 },
+    { from: 26, to: 29 },
+
+    { from: 28, to: 30 },
+    { from: 28, to: 31 },
+
+    { from: 30, to: 32 },
+    { from: 30, to: 33 },
+
+    { from: 29, to: 34 },
+    { from: 29, to: 35 },
+
+    { from: 34, to: 36 },
+    { from: 34, to: 37 },
+
+    { from: 27, to: 38 },
+    { from: 27, to: 39 },
+
+    { from: 38, to: 40 },
+    { from: 38, to: 41 },
+
+    { from: 40, to: 42 },
+    { from: 40, to: 43 },
+
+    { from: 39, to: 44 },
+    { from: 39, to: 45 },
+
+    { from: 44, to: 46 },
+    { from: 44, to: 47 },
+
+    { from: 3, to: 48 },
+    { from: 3, to: 49 },
+
+    { from: 48, to: 50 },
+    { from: 48, to: 51 },
+
+    /*
     { from: 5, to: 12 },
     { from: 5, to: 13 },
     { from: 12, to: 14 },
