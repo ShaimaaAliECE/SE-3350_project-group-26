@@ -30,12 +30,13 @@ function Header(props){
     useEffect(()=>{
       axios.get("http://localhost:3001/api/login", { withCredentials: true })
       .then(response =>{
-        if (response.data.loggedIn = true){
-          setLogin(response.data.user[0].username);
-          setDisplay('block');
+        if (response.data.loggedIn == true){
+            
+            setLogin(response.data.user[0].username);
+            setDisplay('block');
         }
         else{
-          setDisplay('none');
+            setDisplay('none');
         }
       })
   

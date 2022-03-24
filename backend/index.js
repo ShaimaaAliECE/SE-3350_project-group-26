@@ -83,7 +83,7 @@ app.post('/api/register', (req,res) =>{
                     res.send({message: "Error"});
                 }
                 else {
-                    db.query(`INSERT INTO userLevel (username,currentLevel) VALUES('${username}', 0);`,
+                    db.query(`INSERT INTO userLevel (username,currentLevel) VALUES('${username}', 1);`,
                         () =>{
                             res.send({message: "Registered"})
 
@@ -137,11 +137,63 @@ app.get('/api/login', (req, res) =>{
     }
     
 });
+
+
+/**
+ * 
+ * DEALING WITH TIME COMPLETION AND LOGS
+ * 
+ * 
+ * 
+ */
+
+ app.post('/api/sendtime', (req,res)=>{
+    const time = req.body.seconds;
+    const level = req.body.level;
+
+
+     if (req.session.user){ //checks for the cookie of the user (basically if he is logged in)
+        const username = req.session.user[0].username;
+        db.query(`SELECT * FROM usertimespent WHERE username = '${username}' AND level = '${level}' ;`, //checks if level complete
+        (err, result) =>{ 
+            if (err){
+                res.send({err: err});
+            }
+            else{
+                if(result === undefined || result.length == 0){ //continue if the level is not complete
+                    db.query(`INSERT INTO usertimespent (username, level, timespent) VALUES ('${username}',  ${level}, ${time})`,
+                    (err,result) =>{
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            res.send({message: "Level " + level + " completed in " + time+"."}); 
+                        }
+                    });
+                }
+                else{
+                    res.send({message: "Level already completed"})
+                }
+
+
+            }
+        })
+
+    }
+    else{
+        res.send({message: "Not logged in"});
+   }
+})
+
+/** */
+
 app.get('/api/signout', (req,res) =>{
     res.clearCookie('userId').send("Signed out"); //clears the cookie when you click on the signout
 })
 
-app.post('/api/getStep', (req,res) =>{
+
+
+app.post('api/getStep', (req,res) =>{
     const d = req.body.depth;  //receive step
     const arr = req.body.arr;  //receive array
     

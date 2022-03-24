@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel1.js'
 import Timer from '../components/Timer';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { color } from '@mui/system';
 import axios from 'axios';
 
@@ -42,11 +42,64 @@ function LevelOne(props){
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
 
+
+
+
+    /* TIMER VARIABLES*/
+    const [totalSeconds, setTotalSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [isActive, setIsActive] = useState(true);
+
+    useEffect(() => {
+    let interval = null;
+    if (isActive) {
+        interval = setInterval(() => {
+        setTotalSeconds(totalSeconds => totalSeconds + 1);
+        }, 1000);
+        setMinutes(Math.floor(totalSeconds/60));
+        setSeconds(totalSeconds%60);
+    } else if (!isActive && totalSeconds !== 0) {
+        clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+    }, [isActive, totalSeconds]);
+    //
+    //
+    //
+    //
+    //
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
     },[]);
 
+
+    const completionTime = () =>{
+        var send = {
+            "seconds": totalSeconds,
+            "level": 1
+        }
+        fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+        method: 'POST', //post
+        credentials: 'include', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(send), //body is the set data from earlier
+        })
+        .then(response => (response.json()))
+
+        .then(data => {
+            console.log(data);
+
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    }
 
     const check = () =>{
         var send = {
@@ -58,9 +111,9 @@ function LevelOne(props){
         credentials: 'include', 
         headers: {
             'Content-Type': 'application/json',
-    },
+        },
         body: JSON.stringify(send), //body is the set data from earlier
-    })
+        })
         .then(response => (response.json()))
 
         .then(data => {
@@ -71,7 +124,7 @@ function LevelOne(props){
         })
         .catch((error) => {
             console.error('Error:', error);
-    });
+        });
 
     }
 
@@ -90,6 +143,17 @@ function LevelOne(props){
           }
         })
     },[]);
+
+    //
+    //THIS REDIRECTS IF IDLE (5mins_
+
+    if (props.idle == true){
+        return <Redirect to = '/'/>;
+    }
+    //
+    //
+    //
+
 
     if (loggedIn == false){
         return(
@@ -170,7 +234,7 @@ function LevelOne(props){
                         </Stack>
                         <Stack id = 'nextLevelButton' display = 'none'>
                             <Link to = {"/LevelTwo"}>
-                                <Button  variant="contained">
+                                <Button  variant="contained" onClick = {completionTime}>
                                     Next Level
                                 </Button>
                             </Link>
@@ -196,7 +260,7 @@ function LevelOne(props){
                 
                 
                 </Box>
-                {<Timer/>}
+                {<Timer minutes = {minutes} seconds ={seconds}  />}
 
             </>
 
