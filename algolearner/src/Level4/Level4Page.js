@@ -101,127 +101,7 @@ function LevelFour(props){
     }
 
 
-    const showBreakdown = () => {
-        //If its a split step show this
-        if(splitSteps.includes(count) == true){
-            document.getElementById("showSplitSteps").style.display = 'Block';
-            addsToDisplay(prevNums)
 
-        }
-        else if (joinSteps.includes(count) == true){
-            document.getElementById("showJoinSteps").style.display = 'Block';
-            console.log("EXPLAINING Count: ",count)
-            const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
-
-            var dictF = {
-                4:2,
-                6:1,
-
-                10:7,
-                11:6,
-
-
-                13:6,//but data[1]
-                14:1,
-
-                15:numArr//calls somethin else, cuz need whole array
-
-            }
-
-            var dataIndex = {
-                4:0,
-                6:0,
-
-                10:0,
-                11:0,
-
-
-                13:1,//but data[1]
-                14:1,
-
-                15:0
-
-            }
-
-            if(count!=15)
-            {
-                getBreakArraySolution(dictF[count]).then((data)=>{
-                    console.log(dataIndex[count])
-                    let arrayNum=[data[dataIndex[count]]]
-                    addsToDisplay(arrayNum)
-                })
-            }
-            else
-            {
-                addsToDisplay(numArr)
-
-            }
-         
-            
-            
-            //addsToDisplay([13,5,4])// we can just call SolutionPerStep to retunr the answer of the break array before it 
-
-        }
-        //Change this between numbers and prevnumbers and fix for different levels
-        //cant use prevnums from dnd, need to query backend to get the actual unsorted parts back
-        //implement later
-
-        /*
-            4 -- use current, 11 https://prnt.sc/MKMAiTDJi5lc, 13 https://prnt.sc/ZqYTtkcZaId_
-
-        */
-    }
-
-    const checkArray = (arrays, array) => arrays.some(a => {
-        return (a.length > array.length ? a : array).every((_, i) => a[i] === array[i]);
-      });
-
-    const addsToDisplay = (arr) => {
-        let whole_array = []
-        const completedarr = []
-        console.log('first array', arr)
-        
-        let count =0;
-        for(let x of arr) {
-            if(count == 0){
-                let randomarr = x.split(',');
-                for(let y of randomarr){
-                    whole_array.push(parseInt(y))
-                }
-                count = 1;
-            }
-            
-        }
-        //whole_array = arr
-        //for(let y of arr[1]) whole_array.push(y)
-        console.log('input array', whole_array)
-        for(let i=0; i < whole_array.length; i++) {
-
-            for(let j=i; j < whole_array.length; j++){
-                
-                if(whole_array[i] > whole_array[j]){
-                    let initnum = whole_array[i]
-                    whole_array[i] = whole_array[j]
-                    whole_array[j] = initnum
-                    
-                }
-               
-                let construct = []
-                for(let k of whole_array){
-                    
-                    construct.push(k)
-                }
-                
-                if(checkArray(completedarr,construct) == false){
-                    completedarr.push(construct)
-                } 
-                
-
-            }
-        }
-        setDispArr(completedarr);
-        console.log(completedarr);
-    
     //Change levels code
     const previousLevel = () => {
         document.getElementById("previousLevelButton").style.display = 'Block';
@@ -388,6 +268,7 @@ function LevelFour(props){
   
 
     }
+
     return(
         <>
             <Header level = "Level One"/>
@@ -628,5 +509,5 @@ function LevelFour(props){
     );
 
 }
-}
+
 export default LevelFour;
