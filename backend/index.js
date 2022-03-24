@@ -1,17 +1,17 @@
 const express = require('express');
 const cors = require("cors"); //cross origin
 const app = express(); //express
-const mysql = require('mysql'); //mysql
-var axios = require("axios").default;
+//const mysql = require('mysql'); //mysql
+//var axios = require("axios").default;
 
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const saltrounds = 10;
 
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+//const cookieParser = require('cookie-parser');
+//const session = require('express-session');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -26,21 +26,21 @@ app.use(cors({
     credentials: true
     
 }));
-
+/*
 app.use(cookieParser());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 
    extended: true
 }))
 
-/*
+
 const db = mysql.createConnection({ //connection to the mysql database
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'algolearner'
 });
-*/
+
 
 app.use(session({
     key: "userId",
@@ -51,7 +51,7 @@ app.use(session({
         maxAge: 60*60*2400
     },
 })
-);
+);*/
 /*
 db.connect(function(err){ //connect
     if(err) throw err;
