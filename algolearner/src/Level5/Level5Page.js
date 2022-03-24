@@ -113,7 +113,7 @@ function LevelThree(props){
     }
     return(
         <>
-            <Header level = "Level One"/>
+            <Header level = "Level Five"/>
             <Box
             sx = {{
                 height: '86.2vh',
@@ -123,13 +123,13 @@ function LevelThree(props){
              
 
                 <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
-                    <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
+                    <Stack direction = "row" gap = {0.8} marginTop = {'2vh'}>
                         {numArr.map((v) =>{
                             return(
                                 <Box sx= {{
-                                    width: '1vw',
-                                    width: '1vw',
-                                    fontSize: 16,
+                                    width: '0.5vw',
+                                    width: '0.5vw',
+                                    fontSize: 15,
                                     p:1,    
                                     border: '2.5px solid purple',
                                 }}>
