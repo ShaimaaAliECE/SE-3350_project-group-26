@@ -66,6 +66,9 @@ function LevelTwo(props){
     const [instruction,setIns] = useState(false);
     const [instructionText,setInsText] = useState('');
 
+    const [incorrectCount,setincorrectCount] = useState(1);
+    const [levelText,setLevText] = useState('');
+
     //sound effect
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
@@ -84,10 +87,18 @@ setArray(numArr)
 setArray2(numArr)
 
 
-    //Remove Later Push//
-    let history = useHistory();
-    const goToLevel = () => {
-        history.push('./LevelThree')
+    const previousLevel = () => {
+        document.getElementById("previousLevelButton").style.display = 'Block';
+    }
+
+    let history = useHistory()
+    const changeLevel = (lvl) => {
+        if (lvl == 1)
+            history.push('./LevelOne')
+        else if (lvl == 0)
+            history.push('./') // push to home page
+        else if (lvl == 3)
+            window.location.reload(false);
     }
     
     const getNums = (direction) => {
@@ -373,7 +384,7 @@ setArray2(numArr)
                         <Button
                             id='888'
                             onClick = {()=>{
-                                if(count <= 15 && correct!=false) {
+                                if(count <= 15 && correct!=false && incorrectCount != 4) {
                                     
                                 setIns(false)
                                 setCount(count+1);
@@ -421,6 +432,24 @@ setArray2(numArr)
                             </Button>
                         </Link>
                     </Stack>
+                    
+                    <Stack id = 'previousLevelButton' display = 'None' >
+                        
+                         <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(3)}}>
+                                Restart Lvl
+                        </Button>
+                        <Button  sx={{justifyContent:'flex',mr:2}}  variant="contained" onClick={() => {changeLevel(1)}}>
+                                Level One
+                        </Button>
+                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
+                                HomePage
+                        </Button>
+                    </Stack>
+                    <Stack>
+                        <Typography color='#a61113' variant='h6'>{levelText}</Typography>
+                    </Stack>
+
+
                     <Stack>
                         {instruction ? <Typography variant='h6'>{instructionText}</Typography> : <></> }
                     </Stack>
@@ -462,19 +491,33 @@ setArray2(numArr)
                                 
 
                                 //Checking answers
-                                if(answer1 == numbers[0] && answer2 == numbers[1]) {
+                                if(answer1 == numbers[0] && answer2 == numbers[1] && incorrectCount<=3) {
                                     setCorrect(true)
                                     setInsText('Correct answers entered. Proceed to next step!')
                                     setIns(true)
                                     win.play()
                                     showBreakdown()
+                                    setincorrectCount(1)
                                 } 
                                 else
                                 {
                                     setCorrect(false)
-                                    setInsText('Wrong answers entered try again.')
+                                    
+                                    
+                                    setincorrectCount(incorrectCount+1);
+                                    let blanktext = ''
+                                    if(incorrectCount >= 4)
+                                        blanktext = 3
+                                    else
+                                        blanktext = incorrectCount
+                                    setInsText("Wrong answers entered try again. This is your " + blanktext + "/3 chance.")
                                     setIns(true)
                                     lose.play()
+
+                                    if (incorrectCount>3){
+                                        setLevText("Sorry out of tries. Please select an option above!");
+                                        previousLevel();
+                                    }
                                 }
                             }
                         }
@@ -488,19 +531,31 @@ setArray2(numArr)
                                 
 
                                 //Checking answers
-                                if(answer1 == numbers[0]) {
+                                if(answer1 == numbers[0] && incorrectCount<=3) {
                                     setCorrect(true)
                                     setInsText('Correct answers entered. Proceed to next step!')
                                     setIns(true)
                                     win.play()
                                     showBreakdown()
+                                    setincorrectCount(1)
                                 } 
                                 else
                                 {
                                     setCorrect(false)
-                                    setInsText('Wrong answers entered try again.')
+                                    setincorrectCount(incorrectCount+1);
+                                    let blanktext = ''
+                                    if(incorrectCount >= 4)
+                                        blanktext = 3
+                                    else
+                                        blanktext = incorrectCount
+                                    setInsText("Wrong answers entered try again. This is your " + blanktext + "/3 chance.")
                                     setIns(true)
                                     lose.play()
+
+                                    if (incorrectCount>3){
+                                        setLevText("Sorry out of tries. Please select an option above!");
+                                        previousLevel();
+                                    }
                                 }
                                 
                             }

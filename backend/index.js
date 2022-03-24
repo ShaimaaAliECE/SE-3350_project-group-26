@@ -1,17 +1,17 @@
 const express = require('express');
 const cors = require("cors"); //cross origin
 const app = express(); //express
-const mysql = require('mysql'); //mysql
-var axios = require("axios").default;
+//const mysql = require('mysql'); //mysql
+//var axios = require("axios").default;
 
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const saltrounds = 10;
 
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+//const cookieParser = require('cookie-parser');
+//const session = require('express-session');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -26,7 +26,7 @@ app.use(cors({
     credentials: true
     
 }));
-
+/*
 app.use(cookieParser());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 
@@ -41,6 +41,7 @@ const db = mysql.createConnection({ //connection to the mysql database
     database: 'algolearner'
 });
 
+
 app.use(session({
     key: "userId",
     secret: "algo",
@@ -50,12 +51,13 @@ app.use(session({
         maxAge: 60*60*2400
     },
 })
-);
-
+);*/
+/*
 db.connect(function(err){ //connect
     if(err) throw err;
     console.log('Database connected'); 
 });
+*/
 
 /*
 * THESE ARE USED FOR USER REGISTRATION AND LOGIN
@@ -63,6 +65,7 @@ db.connect(function(err){ //connect
 *
 *
  */
+/*
 app.post('/api/register', (req,res) =>{
     const username = req.body.username;  //recieves form username
     const password = req.body.password; //recieves form password
@@ -71,7 +74,9 @@ app.post('/api/register', (req,res) =>{
         if (err){
             console.log(err); //console log error is there is
         }
+        
         db.query(`INSERT INTO users (username,password) VALUES('${username}', '${hash}');`, //inserting into mysql database for users
+    
             (err, result) =>{
                 if (err){
                     console.log(err);
@@ -90,11 +95,11 @@ app.post('/api/register', (req,res) =>{
         );
     })
 
-
+});*/
    
-});
 
 
+/*
 app.post('/api/login', (req, res) =>{
     const username = req.body.username;  //recieves form username
     const password = req.body.password; //recieves form password
@@ -124,7 +129,7 @@ app.post('/api/login', (req, res) =>{
     }
     )
 });
-
+*/
 app.get('/api/login', (req, res) =>{
     if (req.session.user){
         res.send({loggedIn: true, user: req.session.user}); //sends the loggedIn as true
