@@ -136,22 +136,35 @@ function LevelFour(props){
             const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 
             var dictF = {
-                4:2,
-                6:1,
+                5:3,
+                6:2,
 
-                10:7,
-                11:6,
+                10:9,
+                11:8,
 
+                13:12,
+                14:11,
+                15:1,
 
-                13:6,//but data[1]
-                14:1,
+                20:19,
+                21:18,
 
-                15:numArr//calls somethin else, cuz need whole array
+                23:22,
+                24:21,
+
+                28:27,
+                29:26,
+
+                31:30,
+                32:29,
+                33:2,
+
+                34:numArr//calls somethin else, cuz need whole array
 
             }
 
             var dataIndex = {
-                4:0,
+                5:0,
                 6:0,
 
                 10:0,
