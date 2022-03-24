@@ -135,7 +135,7 @@ function LevelFour(props){
             console.log("EXPLAINING Count: ",count)
             const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 
-            var dictF = {
+            var dictF = {//temp
                 5:3,
                 6:2,
 
@@ -163,18 +163,31 @@ function LevelFour(props){
 
             }
 
-            var dataIndex = {
+            var dataIndex = {//temp
                 5:0,
                 6:0,
 
                 10:0,
                 11:0,
 
+                13:0,
+                14:0,
+                15:0,
 
-                13:1,//but data[1]
-                14:1,
+                20:0,
+                21:0,
 
-                15:0
+                23:0,
+                24:1,
+
+                28:0,
+                29:1,
+
+                31:1,
+                32:1,
+                33:1,
+
+                34:0
 
             }
 
@@ -337,7 +350,7 @@ function LevelFour(props){
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                
-                                     if((data[0].toString()!=userArrL)&&(data[1].toString()!=userArrR)){
+                                     if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct");
                                          setCount(count +1);
                                          setNumbers(data)
