@@ -167,6 +167,11 @@ app.get('/api/login', (req, res) =>{
                             console.log(err);
                         }
                         else{
+                            db.query(
+                                    `UPDATE userLevel SET currentLevel = ${level + 1}  WHERE username = '${username}';`, 
+                                    (err, result) =>{
+                                    }
+                                );
                             res.send({message: "Level " + level + " completed in " + time+"."}); 
                         }
                     });
@@ -192,6 +197,31 @@ app.get('/api/signout', (req,res) =>{
 })
 
 
+/** GET USER HISTORY AND LEVELS */
+
+app.get('/api/getTime', (req,res) =>{
+    if (req.session.user){ //checks for the cookie of the user (basically if he is logged in)
+        const username = req.session.user[0].username;
+        db.query(`SELECT * FROM usertimespent WHERE username = '${username}';`, 
+        (err, result) =>{ 
+            res.send(result);
+
+        })
+    }
+
+})
+
+app.get('/api/getLevel', (req,res) =>{
+    if (req.session.user){ //checks for the cookie of the user (basically if he is logged in)
+        const username = req.session.user[0].username;
+        db.query(`SELECT * FROM userLevel WHERE username = '${username}';`, 
+        (err, result) =>{ 
+            res.send(result);
+        })
+    }
+
+})
+///////////////
 
 app.post('api/getStep', (req,res) =>{
     const d = req.body.depth;  //receive step
