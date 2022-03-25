@@ -2,3 +2,11 @@
     font-family: 'Open Sans', sans-serif;
 
 }
+
+
+#signoutButton{
+    cursor: pointer;
+}
+#homeTitle{
+    cursor: pointer;
+}
