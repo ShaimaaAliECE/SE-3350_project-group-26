@@ -79,7 +79,8 @@ function App() {
   const handleReset = () => reset()
   const handlePause = () => pause()
   const handleResume = () => resume()
-
+  
+  /* Disabled timer running 
   useEffect(() => {
     setRemaining(getRemainingTime())
     setLastActive(getLastActiveTime())
@@ -92,7 +93,7 @@ function App() {
     }, 1000)
   }, [])
 
-  console.log(isIdle);
+  console.log(isIdle);*/
 
 
   /** */

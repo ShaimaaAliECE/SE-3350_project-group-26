@@ -51,11 +51,11 @@ app.use(session({
     },
 })
 );
-
+/* Commented out b/c no database for testing. Also commented out interval code in App.js..    
 db.connect(function(err){ //connect
     if(err) throw err;
     console.log('Database connected'); 
-});
+});*/
 
 
 /*
@@ -222,7 +222,7 @@ app.get('/api/getLevel', (req,res) =>{
 })
 ///////////////
 
-app.post('api/getStep', (req,res) =>{
+app.post('/api/getStep', (req,res) =>{
     const d = req.body.depth;  //receive step
     const arr = req.body.arr;  //receive array
     
