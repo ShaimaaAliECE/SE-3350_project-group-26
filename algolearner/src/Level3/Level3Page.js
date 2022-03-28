@@ -125,6 +125,7 @@ function LevelThree(props){
 
             var dictF = {
                 4:2,
+                3:1,
                 6:1,
 
                 10:7,

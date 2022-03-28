@@ -4,8 +4,9 @@ import Header from '../components/Header';
 import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel1.js'
 import Timer from '../components/Timer';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { color } from '@mui/system';
+import axios from 'axios';
 
 
 
@@ -41,11 +42,64 @@ function LevelOne(props){
     const [count, setCount] = useState(0);
     const [fullArr, setFull] = useState([]);
 
+
+
+
+    /* TIMER VARIABLES*/
+    const [totalSeconds, setTotalSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [isActive, setIsActive] = useState(true);
+
+    useEffect(() => {
+    let interval = null;
+    if (isActive) {
+        interval = setInterval(() => {
+        setTotalSeconds(totalSeconds => totalSeconds + 1);
+        }, 1000);
+        setMinutes(Math.floor(totalSeconds/60));
+        setSeconds(totalSeconds%60);
+    } else if (!isActive && totalSeconds !== 0) {
+        clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+    }, [isActive, totalSeconds]);
+    //
+    //
+    //
+    //
+    //
      //Gets the beginning array
      useEffect(()=>{
         setNumArr(generateArray());
     },[]);
 
+
+    const completionTime = () =>{
+        var send = {
+            "seconds": totalSeconds,
+            "level": 1
+        }
+        fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+        method: 'POST', //post
+        credentials: 'include', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(send), //body is the set data from earlier
+        })
+        .then(response => (response.json()))
+
+        .then(data => {
+            console.log(data);
+
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    }
 
     const check = () =>{
         var send = {
@@ -57,9 +111,9 @@ function LevelOne(props){
         credentials: 'include', 
         headers: {
             'Content-Type': 'application/json',
-    },
+        },
         body: JSON.stringify(send), //body is the set data from earlier
-    })
+        })
         .then(response => (response.json()))
 
         .then(data => {
@@ -70,107 +124,148 @@ function LevelOne(props){
         })
         .catch((error) => {
             console.error('Error:', error);
-    });
+        });
 
     }
 
     const nextLevel = () => {
         document.getElementById("nextLevelButton").style.display = 'Block';
     }
-    return(
-        <>
-            <Header level = "Level One"/>
-            <Box
-            sx = {{
-                height: '86.2vh',
-                width: '100vw',
-                backgroundColor: 'white'
-            }}>
-                <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
-                    <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
-                        {numArr.map((v) =>{
-                            return(
-                                <Box sx= {{
-                                    width: '1vw',
-                                    fontSize: 16,
-                                    p:1,    
-                                    border: '2.5px solid purple'
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/login", { withCredentials: true })
+        .then(response =>{
+          if (response.data.loggedIn == true){
+              setLoggedIn(true);
+             
+          }
+        })
+    },[]);
+
+    //
+    //THIS REDIRECTS IF IDLE (5mins_
+
+    if (props.idle == true){
+        return <Redirect to = '/'/>;
+    }
+    //
+    //
+    //
+
+
+    if (loggedIn == false){
+        return(
+            <Box textAlign={'center'}>
+                <Link to = {"/Login"} style={{ textDecoration: 'none',color :'black' }}>
+                    <Button>
+                    
+                    <Typography variant='h3'>
+                        PLEASE LOGIN
+                    </Typography>
+                    </Button>
+                </Link>
+            </Box>
+        
+        );
+    }
+    else{
+        return(
+            <>
+                <Header level = "Level One"/>
+                <Box
+                sx = {{
+                    height: '86.2vh',
+                    width: '100vw',
+                    backgroundColor: 'white'
+                }}>
+                    <Stack direction = "column" gap = {3} width = '100vw' alignItems={'center'} justifyItems={'center'} >
+                        <Stack direction = "row" gap = {3} marginTop = {'2vh'}>
+                            {numArr.map((v) =>{
+                                return(
+                                    <Box sx= {{
+                                        width: '1vw',
+                                        fontSize: 16,
+                                        p:1,    
+                                        border: '2.5px solid purple'
+                                    }}>
+                                        {v}
+                                    </Box>
+                                );
+                            })}
+                            
+                        </Stack>
+
+                        <Stack direction={'row'}
+                        >
+                            <Button variant='outlined'
+                                onClick = {()=>{
+
+                                    if (count > 0){
+                                        setCount(count -1);
+                                        i--; //get the previous description
+                                    }
                                 }}>
-                                    {v}
-                                </Box>
-                            );
-                        })}
+                                Prev
+                            </Button>
+
+                            <Button variant='outlined'
+                                onClick = {()=>{
+                                                
+                                    if (count <19){
+                                        setCount(count +1);
+                                        i++; //get the next description
+                                    }
+                                    else{
+                                        nextLevel();
+                                    }
+                                
+                                }}>
+                                
+                                Next
+                            </Button>
+
+
+                        </Stack>
+
+                        <Stack>
+                        <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
+                        </Stack>
+                        <Stack id = 'nextLevelButton' display = 'none'>
+                            <Link to = {"/LevelTwo"}>
+                                <Button  variant="contained" onClick = {completionTime}>
+                                    Next Level
+                                </Button>
+                            </Link>
+                        </Stack>
+                        <Box alignItems={'right'} sx={{ fontSize: 45,fontStyle: 'oblique',fontFamily: 'Monospace',p: .4,border: '5px solid green', '&:hover': {backgroundColor: '#49c470',},}}>
+
+                            <Typography variant="h6" color='#a61113' paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
+
+
+                        </Box>
                         
                     </Stack>
 
-                    <Stack direction={'row'}
-                    >
-                        <Button variant='outlined'
-                            onClick = {()=>{
-
-                                if (count > 0){
-                                    setCount(count -1);
-                                    i--; //get the previous description
-                                }
-                            }}>
-                            Prev
-                        </Button>
-
-                        <Button variant='outlined'
-                            onClick = {()=>{
-                                             
-                                if (count <19){
-                                    setCount(count +1);
-                                    i++; //get the next description
-                                }
-                                else{
-                                    nextLevel();
-                                }
-                            
-                            }}>
-                            
-                            Next
-                        </Button>
-
-
-                    </Stack>
-
-                    <Stack>
-                    <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
-                    </Stack>
-                    <Stack id = 'nextLevelButton' display = 'none'>
-                        <Link to = {"/LevelTwo"}>
-                            <Button  variant="contained">
-                                Next Level
-                            </Button>
-                        </Link>
-                    </Stack>
-                    <Box alignItems={'right'} sx={{ fontSize: 45,fontStyle: 'oblique',fontFamily: 'Monospace',p: .4,border: '5px solid green', '&:hover': {backgroundColor: '#49c470',},}}>
-
-                        <Typography variant="h6" color='#a61113' paragraph='true' align='left' marginY={5} width={'50vh'}>{des[i]}</Typography>
-
-
-                    </Box>
-                    
-                </Stack>
-
-                    
- 
+                        
+    
 
 
 
-                    {console.log(count)}
-                <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
+                        {console.log(count)}
+                    <VisNetwork numberArray={numArr} treeForm={steps[count]} count={count}/>{/* We need to make it so after count 19 it the buttons dont work */}
 
 
-            
-            
-            </Box>
-            {/*<Timer/>*/}
+                
+                
+                </Box>
+                {<Timer minutes = {minutes} seconds ={seconds}  />}
 
-        </>
+            </>
 
-    );
+        );
+    }
 
 }
 

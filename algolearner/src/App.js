@@ -6,8 +6,11 @@ import Boxes from './components/Boxes/Boxes';
 import Header from './components/Header'
 import VisNetwork from './Level1/treeLevel1.js'
 import {getStep} from './components/api/index'
+import { useIdleTimer } from 'react-idle-timer'
+
 
 import {HashRouter as Router, Switch, Route} from 'react-router-dom';
+import AccHeader from './components/accHeader';
 
 import HomePage from './HomePage/home';
 import LevelThree from './Level3/Level3Page';
@@ -15,7 +18,11 @@ import LevelFour from './Level4/Level4Page';
 import LevelFive from './Level5/Level5Page';
 
 import Login from './LoginPage/login';
+import AccInfo from './AccountInfo/accountInfo';
 
+
+import axios from 'axios';
+import { useEffect,useState } from 'react';
 
 
 function App() {
@@ -34,18 +41,75 @@ function App() {
 
   //console.log(break_array)*/
 
+
+
+
+  /**
+   * 
+   * 
+   * 
+   * THESE variables and functions are used to check if idle (ALL THESE ARE SENT AS PROPS TO EACH LEVEL)
+   * 
+   * 
+   * 
+   * 
+   */
+  const timeout = 1000*60*5;
+  const [remaining, setRemaining] = useState(timeout)
+  const [elapsed, setElapsed] = useState(0)
+  const [lastActive, setLastActive] = useState(+new Date())
+  const [isIdle, setIsIdle] = useState(false)
+
+  const handleOnActive = () => setIsIdle(false)
+  const handleOnIdle = () => setIsIdle(true)
+
+  const {
+    reset,
+    pause,
+    resume,
+    getRemainingTime,
+    getLastActiveTime,
+    getElapsedTime
+  } = useIdleTimer({
+    timeout,
+    onActive: handleOnActive,
+    onIdle: handleOnIdle
+  })
+
+  const handleReset = () => reset()
+  const handlePause = () => pause()
+  const handleResume = () => resume()
+
+  useEffect(() => {
+    setRemaining(getRemainingTime())
+    setLastActive(getLastActiveTime())
+    setElapsed(getElapsedTime())
+
+    setInterval(() => {
+      setRemaining(getRemainingTime())
+      setLastActive(getLastActiveTime())
+      setElapsed(getElapsedTime())
+    }, 1000)
+  }, [])
+
+  console.log(isIdle);
+
+
+  /** */
+
   return (
     <div className='Main'>
 
       <Router>
         <Switch>
           <Route exact path="/"><HomePage/></Route>
-          <Route path="/LevelOne"><LevelOne/></Route>
+          <Route path="/LevelOne"><LevelOne idle = {isIdle}/></Route>
           <Route path="/LevelTwo"><LevelTwo/></Route>
           <Route path="/LevelThree"><LevelThree/></Route>
           <Route path="/LevelFour"><LevelFour/></Route>
           <Route path = "/Login"><Login/></Route>
           <Route path="/LevelFive"><LevelFive/></Route>
+          <Route path ="/AccountInfo"><AccInfo/></Route>
 
         </Switch>
         
