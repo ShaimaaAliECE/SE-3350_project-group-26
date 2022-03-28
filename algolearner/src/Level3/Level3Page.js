@@ -56,9 +56,12 @@ function LevelThree(props){
     const joinSteps = [4,6,10,11,13,14,15]
     const [displayArr,setDispArr] = useState([[9,8,7],[8,9,7],[8,7,9],[7,8,9]]);
     const [prevNums,setPrevNums] = useState([]);
-
+    
     const [numbers,setNumbers]=useState([])
 
+
+    const [boxvalL,setBoxLVal] = useState('');
+    const [boxvalR,setBoxRVal] = useState('');
     const [incorrectCount, setincorrectCount] = useState(1);
      //Gets the beginning array
      useEffect(()=>{
@@ -317,10 +320,10 @@ function LevelThree(props){
                                     previousLevel();
                                 }
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
-                                    
+                                    console.log(data)
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
-                                        setInsText("Correct");
-                                         setCount(count +1);
+                                        setInsText("Correct, please review the breakdown below!");
+                                        document.getElementById('goToNextBtn').style.display = "Block"
                                          setNumbers(data)
                                          showBreakdown();
                                          win.play()
@@ -351,10 +354,10 @@ function LevelThree(props){
 
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
-                                            
+                                        console.log(data)
                                         if(userArrL==data){
-                                            setInsText("Correct");
-                                            setCount(count +1);
+                                            setInsText("Correct, please review the breakdown below!");
+                                            document.getElementById('goToNextBtn').style.display = "Block"
                                             showBreakdown();
                                             win.play()
 
@@ -393,11 +396,13 @@ function LevelThree(props){
                          <Typography color='#d43378' variant='h5'>{'Step: '+count}</Typography>
                     </Stack>
                     <Stack>
-                         <Typography sx={{textAlign:'center'}} color='#a61113' variant='h4'>{instructionText}</Typography>
+                         <Typography sx={{textAlign:'center'}} id='instrucText' color='#a61113' variant='h4'>{instructionText}</Typography>
                          <Typography color='#a61113' variant='h4'>{levelText}</Typography>
                         
                     </Stack>
-
+                    
+                    
+                    
                     
                     <Stack id = 'previousLevelButton' display = 'None' >
                          <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(3)}}>
@@ -422,16 +427,18 @@ function LevelThree(props){
 
                     </Box>
                     <Stack direction={'row'}>
-                        <TextField color="secondary" id="outlined-basic" label={nodeNum1()} variant="outlined" 
+                        <TextField color="secondary" id="outlined-basic" className='left-box' value={boxvalL} label={nodeNum1()} variant="outlined" 
                         onChange = {(e) =>{
+                            setBoxLVal(e.target.value);
                             setUserL(e.target.value);
                             
                             
                         }}
                         />
 
-                        <TextField color="secondary" id="outlined-basic" label={nodeNum2()} variant="outlined" 
+                        <TextField color="secondary" id="outlined-basic" className='right-box' value={boxvalR} label={nodeNum2()} variant="outlined" 
                         onChange = {(e) =>{
+                            setBoxRVal(e.target.value);
                             setUserR(e.target.value);
                             
                         }}
@@ -441,7 +448,26 @@ function LevelThree(props){
                     
                 </Stack>
 
-                    
+                <Stack id='goToNextBtn' display = 'None'  sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center',m:5 }}>
+                        <Button  sx={{justifyContent:'flex',mr:2,alignSelf:'center'}} variant="contained" onClick={() => {
+                            
+                            
+                            //Change to next step
+                            setCount(count +1);
+                            //Reset incorrect count
+                            setincorrectCount(1);
+                            //Hide button again
+                            document.getElementById('goToNextBtn').style.display = "None"
+                            //Clear the text boxes and hide the breakdown for next step
+                            setBoxRVal('');
+                            setBoxLVal('');
+                            document.getElementById('showSplitSteps').style.display = "None"
+                            document.getElementById('showJoinSteps').style.display = "None"
+                            setInsText('');
+                            }}>
+                                Go To Next Step
+                        </Button>
+                    </Stack>
  
                 <Box id = 'showSplitSteps' display= 'none' sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center' }}>
                     <Typography variant={'h6'}>Key Lesson</Typography>

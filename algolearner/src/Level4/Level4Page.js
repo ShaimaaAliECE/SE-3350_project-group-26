@@ -71,6 +71,8 @@ function LevelFour(props){
     let nodeNum1Array=[2,4,6,8,4,10,12,14,17,14,12,18,13,3,1]
     let nodeNum2Array=[3,5,7,9,'',11,'',13,15,16,'','',19,'','','']
 
+    const [boxvalL,setBoxLVal] = useState('');
+    const [boxvalR,setBoxRVal] = useState('');
     //3 Mistakes States
     const [incorrectCount,setincorrectCount] = useState(1);
 
@@ -328,7 +330,7 @@ function LevelFour(props){
                                 
                                 
                             //   console.log(count);
-                     
+                                
                             const checkBreak = ()   => {
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
@@ -336,10 +338,10 @@ function LevelFour(props){
                                 }
                             
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
-                               
-                                     if((data[0].toString()!=userArrL)&&(data[1].toString()!=userArrR)){
-                                        setInsText("Correct");
-                                         setCount(count +1);
+                                    console.log(data)
+                                     if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
+                                        setInsText("Correct, please review the breakdown below!");
+                                        document.getElementById('goToNextBtn').style.display = "Block"
                                          setNumbers(data)
                                          showBreakdown();
                                          win.play()
@@ -382,8 +384,8 @@ function LevelFour(props){
                                  getFullArraySolution(dictF[count]).then((data)=>{
                                         
                                         if(userArrL==data){
-                                            setInsText("Correct");
-                                            setCount(count +1);
+                                            setInsText("Correct, please review the breakdown below!");
+                                            document.getElementById('goToNextBtn').style.display = "Block"
                                             setNumbers(data) //Idk if the setnumbers is nessasary check**
                                             showBreakdown();
                                             win.play()
@@ -449,16 +451,18 @@ function LevelFour(props){
 
                     </Box>
                     <Stack direction={'row'}>
-                        <TextField color="secondary" id="outlined-basic" label={nodeNum1()} variant="outlined" 
+                        <TextField color="secondary" id="outlined-basic" className='left-box' value={boxvalL} label={nodeNum1()} variant="outlined" 
                         onChange = {(e) =>{
+                            setBoxLVal(e.target.value);
                             setUserL(e.target.value);
                             
                             
                         }}
                         />
 
-                        <TextField color="secondary" id="outlined-basic" label={nodeNum2()} variant="outlined" 
+                        <TextField color="secondary" id="outlined-basic" className='right-box' value={boxvalR} label={nodeNum2()} variant="outlined" 
                         onChange = {(e) =>{
+                            setBoxRVal(e.target.value);
                             setUserR(e.target.value);
                             
                         }}
@@ -467,6 +471,29 @@ function LevelFour(props){
                   
                     
                 </Stack>
+                
+                <Stack id='goToNextBtn' display = 'None'  sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center',m:5 }}>
+                        <Button  sx={{justifyContent:'flex',mr:2,alignSelf:'center'}} variant="contained" onClick={() => {
+                            
+                            
+                            //Change to next step
+                            setCount(count +1);
+                            //Reset incorrect count
+                            setincorrectCount(1);
+                            //Hide button again
+                            document.getElementById('goToNextBtn').style.display = "None"
+                            //Clear the text boxes and hide the breakdown for next step
+                            setBoxRVal('');
+                            setBoxLVal('');
+                            document.getElementById('showSplitSteps').style.display = "None"
+                            document.getElementById('showJoinSteps').style.display = "None"
+                            setInsText('');
+                            }}>
+                                Go To Next Step
+                        </Button>
+                    </Stack>
+
+
 
                 <Box id = 'showSplitSteps' display= 'none' sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center' }}>
                     <Typography variant={'h6'}>Key Lesson</Typography>
