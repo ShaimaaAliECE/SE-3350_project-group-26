@@ -35,7 +35,7 @@ async function getFullArraySolution(count)
 
     const full_array = [];
     const break_array = [];
-    await getStep(9,array)
+    await getStep(49,array)
         .then((data) => { break_array.push(data.break)
           full_array.push(data.full)})
           .then(()=>{
