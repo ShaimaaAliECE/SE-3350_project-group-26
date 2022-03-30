@@ -355,6 +355,7 @@ function LevelFour(props){
                             const checkBreak = ()   => {
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
+                                    document.getElementById('goToNextBtn').style.display = "None"
                                     previousLevel();
                                 }
                             
@@ -384,6 +385,7 @@ function LevelFour(props){
 
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
+                                    document.getElementById('goToNextBtn').style.display = "None"
                                     previousLevel();
                                 }
 
@@ -510,6 +512,7 @@ function LevelFour(props){
                             setincorrectCount(1);
                             //Hide button again
                             document.getElementById('goToNextBtn').style.display = "None"
+                            document.getElementById('previousLevelButton').style.display = "None"
                             //Clear the text boxes and hide the breakdown for next step
                             setBoxRVal('');
                             setBoxLVal('');
