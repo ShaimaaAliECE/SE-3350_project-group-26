@@ -6,6 +6,9 @@ import VisNetwork from './treeLevel5.js'
 import Timer from '../components/Timer';
 import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStepLevel5'
 
+
+
+
 //TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
  
@@ -47,6 +50,20 @@ function LevelThree(props){
     const[userArrR, setUserR] = useState([]);
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
+
+
+    const splitSteps =[
+        0,  1,  2,  3,  4,  7,  8,
+        9, 12, 16, 17, 18, 19, 22,
+       25, 26, 27, 30
+     ];
+    const joinSteps = [
+        6,  8,  9, 12, 13, 14, 18, 19, 20, 21, 26,
+       27, 30, 31, 32, 36, 37, 40, 41, 42, 43, 44,
+       50, 52, 53, 56, 57, 58, 62, 63, 66, 67, 68,
+       69, 74, 75, 76, 80, 81, 84, 85, 86, 87, 88,
+       89
+     ];
 
      //Gets the beginning array
      useEffect(()=>{

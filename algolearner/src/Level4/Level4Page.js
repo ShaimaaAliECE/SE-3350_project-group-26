@@ -53,8 +53,16 @@ function LevelFour(props){
     const nodesStep=[[2,3],[4,5],[6,7],[10,11],[4],[8,9],[2],[12,13],[14,15],[17,16],[14],[12],[18,19],[13],[3],[1],[13],[3],[1]]
     const [instructionText,setInsText] = useState('');
     const [levelText,setLevText] = useState('');
-    const splitSteps = [0,1,2,3,5,7,8,9,12]
-    const joinSteps = [4,6,10,11,13,14,15]
+    const splitSteps = [
+        0,  1,  2,  3,  4,  7,  8,
+        9, 12, 16, 17, 18, 19, 22,
+       25, 26, 27, 30
+     ]
+    const joinSteps = [
+        5,  6, 10, 11, 13, 14, 15,
+       20, 21, 23, 24, 28, 29, 31,
+       32, 33, 34
+     ];
     const [displayArr,setDispArr] = useState([[9,8,7],[8,9,7],[8,7,9],[7,8,9]]);
     const [prevNums,setPrevNums] = useState([]);
 
