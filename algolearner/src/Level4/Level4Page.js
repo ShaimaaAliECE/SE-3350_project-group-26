@@ -381,6 +381,13 @@ function LevelFour(props){
                              }
                              
                              const checkFull = ()   => {
+
+                                if (incorrectCount>=3){
+                                    setLevText("Sorry out of tries. Please select an option below!");
+                                    previousLevel();
+                                }
+
+
                                 var dictF = {
                                     5:1,
                                     6:3,
