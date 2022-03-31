@@ -153,21 +153,21 @@ function LevelFour(props){
                 11:7,
 
                 13:7,
-                14:5,
-                15:2,
+                14:2,
+                15:1,
 
-                20:18,
-                21:17,
+                20:13,
+                21:12,
 
-                23:22,
-                24:21,
+                23:12,
+                24:11,
 
-                28:27,
-                29:26,
+                28:17,
+                29:16,
 
-                31:30,
-                32:29,
-                33:2,
+                31:16,
+                32:11,
+                33:1,
 
                 34:numArr//calls somethin else, cuz need whole array
 
@@ -187,11 +187,11 @@ function LevelFour(props){
                 20:0,
                 21:0,
 
-                23:0,
-                24:1,
+                23:1,
+                24:0,
 
                 28:0,
-                29:1,
+                29:0,
 
                 31:1,
                 32:1,
@@ -201,7 +201,7 @@ function LevelFour(props){
 
             }
 
-            if(count!=15)
+            if(count!=34)
             {
                 getBreakArraySolution(dictF[count]).then((data)=>{
                     console.log(dataIndex[count])
