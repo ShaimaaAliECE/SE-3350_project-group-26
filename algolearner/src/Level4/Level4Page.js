@@ -76,8 +76,8 @@ function LevelFour(props){
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
 
-    let nodeNum1Array=[2,4,6,8,4,10,12,14,17,14,12,18,13,3,1]
-    let nodeNum2Array=[3,5,7,9,'',11,'',13,15,16,'','',19,'','','']
+    let nodeNum1Array=[2,4,6,8,10,6,4, 12, 14,  16,14, 12,18,13, 5,2,20, 22, 24, 26, 24, 22,28, 23, 20, 30, 32, 34,32, 30, 36,31, 21,3,1]
+    let nodeNum2Array=[3,5,7,9,11,'', '',13, 15, 17, '','', 19,'','','',21, 23, 25, 27,'', '', 29,'', '', 31, 33, 35,'', '', 37,'', '','','']
 
     const [boxvalL,setBoxLVal] = useState('');
     const [boxvalR,setBoxRVal] = useState('');
