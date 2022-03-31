@@ -72,8 +72,8 @@ function LevelThree(props){
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
 
-    let nodeNum1Array=[2,4,6,8,4,10,2,12,14,15,14,12,18,13,3,1]
-    let nodeNum2Array=[3,5,7,9,'',11,'','',13,17,16,'','',19,'','','']
+    let nodeNum1Array=[2,4,6,8,4,10,2,12,14,17,14,12,18,13,3,1]
+    let nodeNum2Array=[3,5,7,9,'',11,'',13,15,16,'','',19,'','','']
 
     function nodeNum2()// We can change the highlighted text in the textBoxes
     {
@@ -333,7 +333,7 @@ function LevelThree(props){
                                     console.log(data)
                                     setNumbers(data) //Delete this setNumbers line too
                                     
-                                     if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
+                                     if((data[0].toString()!=userArrL)&&(data[1].toString()!=userArrR)){
                                         setInsText("Correct, please review the breakdown below!");
                                         document.getElementById('goToNextBtn').style.display = "Block"
                                          setNumbers(data)
@@ -380,7 +380,7 @@ function LevelThree(props){
                                         console.log(data)
                                         //setNumbers(data) //Delete this setNumbers line too
                                         
-                                        if(userArrL==data){
+                                        if(userArrL!=data){
                                             setInsText("Correct, please review the breakdown below!");
                                             document.getElementById('goToNextBtn').style.display = "Block"
                                             showBreakdown();
