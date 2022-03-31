@@ -5,7 +5,8 @@ import {useState,useEffect, UseState} from 'react';
 import VisNetwork from './treeLevel5.js'
 import Timer from '../components/Timer';
 import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStepLevel5'
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
+import axios from 'axios';
 
 
 
@@ -346,8 +347,103 @@ function LevelThree(props){
             console.error('Error:', error);
     });
     }
+    /* TIMER VARIABLES*/
+    const [totalSeconds, setTotalSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [isActive, setIsActive] = useState(true);
+
+    useEffect(() => {
+    let interval = null;
+    if (isActive) {
+        interval = setInterval(() => {
+        setTotalSeconds(totalSeconds => totalSeconds + 1);
+        }, 1000);
+        setMinutes(Math.floor(totalSeconds/60));
+        setSeconds(totalSeconds%60);
+    } else if (!isActive && totalSeconds !== 0) {
+        clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+    }, [isActive, totalSeconds]);
+    //
+    //
+    //
+    //
+    //Logged in features.
+   //
+   //
+   const completionTime = () =>{
+    var send = {
+        "seconds": totalSeconds,
+        "level": 5
+    }
+    fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+    method: 'POST', //post
+    credentials: 'include', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(send), //body is the set data from earlier
+    })
+    .then(response => (response.json()))
+
+    .then(data => {
+        console.log(data);
 
 
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+}
+   const [loggedIn, setLoggedIn] = useState(false);
+
+   useEffect(()=>{
+       axios.get("http://localhost:3001/api/login", { withCredentials: true })
+       .then(response =>{
+         if (response.data.loggedIn == true){
+             setLoggedIn(true);
+            
+         }
+       })
+   },[]);
+   //
+   //THIS REDIRECTS IF IDLE (5mins_
+
+   if (props.idle == true){
+       return <Redirect to = '/'/>;
+   }
+
+   if(props.userLevel <5){
+        return <Redirect to = '/'/>;
+   }
+   //
+   //
+   //
+
+   
+
+
+
+   //if logged off then page makes use rlog in
+   if (loggedIn == false){
+       return(
+           <Box textAlign={'center'}>
+               <Link to = {"/Login"} style={{ textDecoration: 'none',color :'black' }}>
+                   <Button>
+                   
+                   <Typography variant='h3'>
+                       PLEASE LOGIN
+                   </Typography>
+                   </Button>
+               </Link>
+           </Box>
+       
+       );
+   }
+   else{
 
     return(
         <>
@@ -547,7 +643,8 @@ function LevelThree(props){
                     
                     <Stack id = 'nextLevel2Button' display = 'none'>
                         
-                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
+                        <Button  variant="contained" onClick={() => {changeLevel(0)
+                        completionTime()}}>
                             Back To HomePage
                         </Button>
                     
@@ -685,11 +782,12 @@ function LevelThree(props){
 
                
             </Box>
-            {/*<Timer/>*/}
+            {<Timer minutes = {minutes} seconds ={seconds}  />}
 
         </>
 
     );
+    }
 
 }
 

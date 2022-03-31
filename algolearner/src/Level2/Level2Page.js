@@ -5,7 +5,8 @@ import {useState, UseState,useEffect} from 'react';
 import VisNetwork from './treeLevel2.js'
 import Timer from '../components/Timer';
 import {dragNum1,dragNum2,setArray} from './solutions'
-import { Link, useHistory  } from "react-router-dom";
+import { Link, useHistory, Redirect  } from "react-router-dom";
+import axios from 'axios';
 
 
 //Drag Drop Imports
@@ -155,6 +156,8 @@ setArray2(numArr)
         setNewNumberList(ranArr2)
         setDontShow(false);
     }
+
+    
 
     const showBreakdown = () => {
         //If its a split step show this
@@ -310,9 +313,124 @@ setArray2(numArr)
         });
     }
 
+
+
+
+
+     /* TIMER VARIABLES*/
+     const [totalSeconds, setTotalSeconds] = useState(0);
+     const [minutes, setMinutes] = useState(0);
+     const [seconds, setSeconds] = useState(0);
+     const [isActive, setIsActive] = useState(true);
+ 
+     useEffect(() => {
+     let interval = null;
+     if (isActive) {
+         interval = setInterval(() => {
+         setTotalSeconds(totalSeconds => totalSeconds + 1);
+         }, 1000);
+         setMinutes(Math.floor(totalSeconds/60));
+         setSeconds(totalSeconds%60);
+     } else if (!isActive && totalSeconds !== 0) {
+         clearInterval(interval);
+     }
+     return () => clearInterval(interval);
+     }, [isActive, totalSeconds]);
+     //
+     //
+     //
+     //
+     //
     const nextLevel = () => {
         document.getElementById("nextLevel2Button").style.display = 'Block';
     }
+
+    //Logged in features.
+    //
+    //
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/login", { withCredentials: true })
+        .then(response =>{
+          if (response.data.loggedIn == true){
+              setLoggedIn(true);
+             
+          }
+        })
+    },[]);
+
+    // SENDS THE COMPLETED TIME LEVEL
+    const completionTime = () =>{
+        console.log(totalSeconds);
+        var send = {
+            "seconds": totalSeconds,
+            "level": 2
+        }
+        fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+        method: 'POST', //post
+        credentials: 'include', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(send), //body is the set data from earlier
+        })
+        .then(response => (response.json()))
+
+        .then(data => {
+            console.log(data);
+
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    }
+
+    //sets current userLevel
+     const [userLevel, setUserLevel] = useState('1');
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/userLevel", { withCredentials: true })
+        .then(response =>{
+            setUserLevel(response.data[0].currentLevel);
+        })
+    },[]);
+
+    //
+    //THIS REDIRECTS IF IDLE (5mins_
+
+    if (props.idle == true){
+        return <Redirect to = '/'/>;
+    }
+    if (props.userLevel < 2){
+        alert("Not high enough")
+        return <Redirect to = '/'/>;
+
+    }
+    //
+    //
+    //
+
+
+
+    //if logged off then page makes use rlog in
+    if (loggedIn == false){
+        return(
+            <Box textAlign={'center'}>
+                <Link to = {"/Login"} style={{ textDecoration: 'none',color :'black' }}>
+                    <Button>
+                    
+                    <Typography variant='h3'>
+                        PLEASE LOGIN
+                    </Typography>
+                    </Button>
+                </Link>
+            </Box>
+        
+        );
+    }
+    else{
     return(
         <>
             <Header level = "Level Two"/>
@@ -427,7 +545,7 @@ setArray2(numArr)
                     </Stack>
                     <Stack id = 'nextLevel2Button' display = 'none'>
                         <Link to = {"/LevelThree"}>
-                            <Button  variant="contained">
+                            <Button  variant="contained" onClick = {() =>{console.log("lol"); completionTime()}}>
                                 Next Level
                             </Button>
                         </Link>
@@ -616,7 +734,7 @@ setArray2(numArr)
                 }}>
 
                 </Box>
-                {/*<Timer/>*/}
+                {<Timer minutes = {minutes} seconds ={seconds}  />}
 
                 
                 
@@ -627,6 +745,7 @@ setArray2(numArr)
         </>
 
     );
+            }
 
 }
 

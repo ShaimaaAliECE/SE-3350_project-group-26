@@ -5,21 +5,54 @@ import {useEffect, useState, UseState} from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
-
+function setPath(level){
+    if(level == 1){
+        return '/LevelOne';
+    }
+    else if(level == 2){
+        return '/LevelTwo';
+    }
+    else if(level == 3){
+        return '/LevelThree';
+    }
+    else if(level == 4){
+        return '/LevelFour';
+    }
+    else if(level == 5){
+        return '/LevelFive';
+    }
+    else
+        return '/Login';
+}
 
 function HomePage(props){
     const [but, setButton] = useState('Please Login');
-    const [p, setPath] = useState('/login');
+    const [userLevel, setUserLevel] = useState(0);
+
+
     useEffect(()=>{
         axios.get("http://localhost:3001/api/login", { withCredentials: true })
         .then(response =>{
           if (response.data.loggedIn == true){
             setButton('Start');
-            setPath('/LevelOne');
+            
+
           }
         })
     },[]);
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/userLevel", { withCredentials: true })
+        .then(response =>{
+            setUserLevel(response.data[0].currentLevel);
+        })
+    },[]);
+
     
+   
+    
+
+
+
     return(
         <Box>
             
@@ -52,7 +85,7 @@ function HomePage(props){
                     </Typography>
 
                     <Box  marginTop = '5vh' >
-                        <Link to = {p}>
+                        <Link to = {setPath(userLevel)}>
                             <Button  variant="contained">
                                 {but}
                             </Button>
