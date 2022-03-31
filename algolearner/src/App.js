@@ -105,11 +105,11 @@ function App() {
         <Switch>
           <Route exact path="/"><HomePage/></Route>
           <Route path="/LevelOne"><LevelOne idle = {isIdle}/></Route>
-          <Route path="/LevelTwo"><LevelTwo/></Route>
-          <Route path="/LevelThree"><LevelThree/></Route>
-          <Route path="/LevelFour"><LevelFour/></Route>
+          <Route path="/LevelTwo"><LevelTwo idle = {isIdle}/></Route>
+          <Route path="/LevelThree"><LevelThree idle = {isIdle}/></Route>
+          <Route path="/LevelFour"><LevelFour idle = {isIdle}/></Route>
           <Route path = "/Login"><Login/></Route>
-          <Route path="/LevelFive"><LevelFive/></Route>
+          <Route path="/LevelFive"><LevelFive idle = {isIdle}/></Route>
           <Route path ="/AccountInfo"><AccInfo/></Route>
 
         </Switch>
