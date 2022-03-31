@@ -80,8 +80,8 @@ function LevelThree(props){
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
 
-    let nodeNum1Array=[2,4,6,8,4,10,12,14,17,14,12,18,13,3,1]
-    let nodeNum2Array=[3,5,7,9,'',11,'',13,15,16,'','',19,'','','']
+    let nodeNum1Array=[2,4,6,8,10,12, 10, 15,11, 8,16, 18,16, 9, 6, 20,  22, 24,22,20, 7, ]
+    let nodeNum2Array=[3,5,7,9, 11,13,'', 14,'', '',17, 19,'', '','', 21, 23,25,'', '','', ]
 
     const [levelText,setLevText] = useState('');
     const [boxvalL,setBoxLVal] = useState('');
