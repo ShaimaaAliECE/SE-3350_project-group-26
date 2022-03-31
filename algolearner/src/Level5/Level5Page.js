@@ -109,6 +109,9 @@ function LevelThree(props){
         return 'Node'+nodeNum1Array[count]
     }
 
+    const nextLevel = () => {
+        document.getElementById("nextLevel2Button").style.display = 'Block';
+    }
 
     //Change levels code
     const previousLevel = () => {
@@ -541,6 +544,15 @@ function LevelThree(props){
                     <Stack>
                          <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
                     </Stack>
+                    
+                    <Stack id = 'nextLevel2Button' display = 'none'>
+                        
+                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
+                            Back To HomePage
+                        </Button>
+                    
+                    </Stack>
+
 
                     <Stack id = 'previousLevelButton' display = 'None' >
                          <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(3)}}>
@@ -612,6 +624,11 @@ function LevelThree(props){
                                 document.getElementById('showSplitSteps').style.display = "None"
                                 document.getElementById('showJoinSteps').style.display = "None"
                                 setInsText('');
+                            }
+                            else{
+                                setInsText('You have completed AlgoLearner For MergeSort! Thank you for playing! Please click the button below to go back to the homepage.')
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                nextLevel();
                             }
                             
                             }}>

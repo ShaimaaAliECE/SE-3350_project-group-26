@@ -94,6 +94,10 @@ function LevelThree(props){
         return 'Node'+nodeNum1Array[count]
     }
 
+    const nextLevel = () => {
+        document.getElementById("nextLevel2Button").style.display = 'Block';
+    }
+
     //Change levels code
     const previousLevel = () => {
         document.getElementById("previousLevelButton").style.display = 'Block';
@@ -109,6 +113,8 @@ function LevelThree(props){
             history.push('./') // push to home page
         else if (lvl == 3)
             window.location.reload(false);
+        else if (lvl == 4)
+            history.push('./LevelFour')
     }
 
     const showBreakdown = () => {
@@ -315,18 +321,18 @@ function LevelThree(props){
                             
                                
                             const checkBreak = ()   => {
-                                /*//Delete two lines below
+                                //Delete two lines below
                                 document.getElementById('goToNextBtn').style.display = "Block"
-                                showBreakdown();*/
+                                showBreakdown();
                                 
-                                if (incorrectCount>=3){
+                                /*if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
                                     previousLevel();
-                                }
+                                }*/
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     console.log(data)
-                                    //setNumbers(data) //Delete this setNumbers line too
-                                    
+                                    setNumbers(data) //Delete this setNumbers line too
+                                    /*
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct, please review the breakdown below!");
                                         document.getElementById('goToNextBtn').style.display = "Block"
@@ -339,7 +345,7 @@ function LevelThree(props){
                                         if (incorrectCount < 4)
                                             setincorrectCount(incorrectCount+1);
                                         lose.play()
-                                     }
+                                     }*/
                                      
                          
                                  })
@@ -348,8 +354,8 @@ function LevelThree(props){
                              }
                              const checkFull = ()   => {
                                 //Delete two lines below, its for disabling check
-                                //document.getElementById('goToNextBtn').style.display = "Block"
-                                //showBreakdown();
+                                document.getElementById('goToNextBtn').style.display = "Block"
+                                showBreakdown();
 
 
 
@@ -364,16 +370,16 @@ function LevelThree(props){
 
                                 }
 
-                                
+                                /*
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
                                     previousLevel();
-                                }
+                                }*/
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
                                         console.log(data)
-                                        //setNumbers(data) //Delete this setNumbers line too
-                                        
+                                        setNumbers(data) //Delete this setNumbers line too
+                                        /*
                                         if(userArrL==data){
                                             setInsText("Correct, please review the breakdown below!");
                                             document.getElementById('goToNextBtn').style.display = "Block"
@@ -387,7 +393,7 @@ function LevelThree(props){
                                                 setincorrectCount(incorrectCount+1);
                                             setInsText("You are Incorrect. This was your " + incorrectCount + " /3 chance.");
                                             lose.play()
-                                        }
+                                        }*/
                                  })
                              }
                              if (arrayStepBreakArray[count]==-1){
@@ -420,7 +426,13 @@ function LevelThree(props){
                         
                     </Stack>
                     
-                    
+                    <Stack id = 'nextLevel2Button' display = 'none'>
+                        
+                            <Button  variant="contained" onClick={() => {changeLevel(4)}}>
+                                Next Level
+                            </Button>
+                        
+                    </Stack>
                     
                     
                     <Stack id = 'previousLevelButton' display = 'None' >
@@ -470,19 +482,27 @@ function LevelThree(props){
                 <Stack id='goToNextBtn' display = 'None'  sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center',m:5 }}>
                         <Button  sx={{justifyContent:'flex',mr:2,alignSelf:'center'}} variant="contained" onClick={() => {
                             
-                            
-                            //Change to next step
-                            setCount(count +1);
-                            //Reset incorrect count
-                            setincorrectCount(1);
-                            //Hide button again
-                            document.getElementById('goToNextBtn').style.display = "None"
-                            //Clear the text boxes and hide the breakdown for next step
-                            setBoxRVal('');
-                            setBoxLVal('');
-                            document.getElementById('showSplitSteps').style.display = "None"
-                            document.getElementById('showJoinSteps').style.display = "None"
-                            setInsText('');
+                            if(count < 15)
+                            {
+                                //Change to next step
+                                setCount(count +1);
+                                //Reset incorrect count
+                                setincorrectCount(1);
+                                //Hide button again
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                //Clear the text boxes and hide the breakdown for next step
+                                setBoxRVal('');
+                                setBoxLVal('');
+                                document.getElementById('showSplitSteps').style.display = "None"
+                                document.getElementById('showJoinSteps').style.display = "None"
+                                setInsText('');
+                            }
+                            else{
+                                setInsText('You have completed this level! Proceed to next level by clicking the button above.')
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                nextLevel();
+                            }
+
                             }}>
                                 Go To Next Step
                         </Button>
