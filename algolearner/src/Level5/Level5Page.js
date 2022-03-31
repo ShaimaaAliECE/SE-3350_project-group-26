@@ -243,7 +243,7 @@ function LevelThree(props){
 
             }
 
-            if(count!=15)
+            if(count<=89)
             {
                 getBreakArraySolution(dictF[count]).then((data)=>{
                     console.log(dataIndex[count])
@@ -253,7 +253,7 @@ function LevelThree(props){
             }
             else
             {
-                addsToDisplay(numArr)
+                addsToDisplay([numArr.toString()])
 
             }
          
