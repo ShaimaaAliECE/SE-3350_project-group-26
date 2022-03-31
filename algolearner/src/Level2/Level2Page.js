@@ -362,6 +362,7 @@ setArray2(numArr)
 
     // SENDS THE COMPLETED TIME LEVEL
     const completionTime = () =>{
+        console.log(totalSeconds);
         var send = {
             "seconds": totalSeconds,
             "level": 2
@@ -387,11 +388,25 @@ setArray2(numArr)
 
     }
 
+    //sets current userLevel
+     const [userLevel, setUserLevel] = useState('1');
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/userLevel", { withCredentials: true })
+        .then(response =>{
+            setUserLevel(response.data[0].currentLevel);
+        })
+    },[]);
+
     //
     //THIS REDIRECTS IF IDLE (5mins_
 
     if (props.idle == true){
         return <Redirect to = '/'/>;
+    }
+    if (props.userLevel < 2){
+        alert("Not high enough")
+        return <Redirect to = '/'/>;
+
     }
     //
     //
@@ -530,7 +545,7 @@ setArray2(numArr)
                     </Stack>
                     <Stack id = 'nextLevel2Button' display = 'none'>
                         <Link to = {"/LevelThree"}>
-                            <Button  variant="contained" onClick = {completionTime()}>
+                            <Button  variant="contained" onClick = {() =>{console.log("lol"); completionTime()}}>
                                 Next Level
                             </Button>
                         </Link>

@@ -132,6 +132,10 @@ function LevelOne(props){
         document.getElementById("nextLevelButton").style.display = 'Block';
     }
 
+
+    //Logged in features.
+    //
+    //
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(()=>{
@@ -155,6 +159,8 @@ function LevelOne(props){
     //
 
 
+
+    //if logged off then page makes use rlog in
     if (loggedIn == false){
         return(
             <Box textAlign={'center'}>

@@ -34,10 +34,10 @@ app.use(bodyParser.urlencoded({
 
 
 const db = mysql.createConnection({ //connection to the mysql database
-    host: 'localhost',
+    host: '34.122.225.135',
     user: 'root',
     password: 'root',
-    database: 'algolearner'
+    database: 'algo'
 });
 
 
@@ -127,7 +127,24 @@ app.post('/api/login', (req, res) =>{
     )
 });
 
+app.get('/api/userLevel', (req,res) =>{
+    if(req.session.user){
+        db.query(`SELECT * FROM userLevel WHERE username = '${req.session.user[0].username}';`,
+        (err, result) =>{
+            if (err){
+                res.send({err: err})
+            }
+            else{
+                res.send(result);
+            
+            }
+        })
+    }   
+})
+
 app.get('/api/login', (req, res) =>{
+
+
     if (req.session.user){
         res.send({loggedIn: true, user: req.session.user}); //sends the loggedIn as true
     }
@@ -166,6 +183,9 @@ app.get('/api/login', (req, res) =>{
                             console.log(err);
                         }
                         else{
+                            if (level == 5){
+                                level = 4;
+                            }
                             db.query(
                                     `UPDATE userLevel SET currentLevel = ${level + 1}  WHERE username = '${username}';`, 
                                     (err, result) =>{

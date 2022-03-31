@@ -97,6 +97,14 @@ function App() {
 
 
   /** */
+  const [userLevel, setUserLevel] = useState(1);
+    useEffect(()=>{
+        axios.get("http://localhost:3001/api/userLevel", { withCredentials: true })
+        .then(response =>{
+            setUserLevel(response.data[0].currentLevel);
+        })
+    },[]);
+
 
   return (
     <div className='Main'>
@@ -105,11 +113,11 @@ function App() {
         <Switch>
           <Route exact path="/"><HomePage/></Route>
           <Route path="/LevelOne"><LevelOne idle = {isIdle}/></Route>
-          <Route path="/LevelTwo"><LevelTwo idle = {isIdle}/></Route>
-          <Route path="/LevelThree"><LevelThree idle = {isIdle}/></Route>
-          <Route path="/LevelFour"><LevelFour idle = {isIdle}/></Route>
+          <Route path="/LevelTwo"><LevelTwo idle = {isIdle} userLevel = {userLevel}/></Route>
+          <Route path="/LevelThree"><LevelThree idle = {isIdle} userLevel = {userLevel}/></Route>
+          <Route path="/LevelFour"><LevelFour idle = {isIdle} userLevel = {userLevel}/></Route>
           <Route path = "/Login"><Login/></Route>
-          <Route path="/LevelFive"><LevelFive idle = {isIdle}/></Route>
+          <Route path="/LevelFive"><LevelFive idle = {isIdle} userLevel = {userLevel}/></Route>
           <Route path ="/AccountInfo"><AccInfo/></Route>
 
         </Switch>

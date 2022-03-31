@@ -6,6 +6,24 @@ import { Link } from "react-router-dom";
 import axios from 'axios'
 
 
+function setPath(level){
+    if(level == 1){
+        return '/LevelOne';
+    }
+    else if(level == 2){
+        return '/LevelTwo';
+    }
+    else if(level == 3){
+        return '/LevelThree';
+    }
+    else if(level == 4){
+        return '/LevelFour';
+    }
+    else if(level == 5){
+        return '/LevelFive';
+    }
+}
+
 function AccInfo(){
 
 
@@ -43,7 +61,7 @@ function AccInfo(){
             {info.map((v) =>{
                 return(
                     <Box marginTop = {3}>
-                        Level {v.level}:
+                        <Link to = {setPath(v.level)}>Level {v.level}:</Link>
                         <Box>
                             Time Spent: {v.timespent} seconds
                         </Box>

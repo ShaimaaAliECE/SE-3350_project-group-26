@@ -336,7 +336,34 @@ function LevelFour(props){
     //Logged in features.
    //
    //
+
+   const completionTime = () =>{
+    var send = {
+        "seconds": totalSeconds,
+        "level": 4
+    }
+    fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+    method: 'POST', //post
+    credentials: 'include', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(send), //body is the set data from earlier
+    })
+    .then(response => (response.json()))
+
+    .then(data => {
+        console.log(data);
+
+
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+}
    const [loggedIn, setLoggedIn] = useState(false);
+
 
    useEffect(()=>{
        axios.get("http://localhost:3001/api/login", { withCredentials: true })
@@ -348,6 +375,7 @@ function LevelFour(props){
        })
    },[]);
 
+
    //
    //THIS REDIRECTS IF IDLE (5mins_
 
@@ -357,6 +385,13 @@ function LevelFour(props){
    //
    //
    //
+    if (props.userLevel < 4){
+        alert("Not high enough")
+        return <Redirect to = '/'/>;
+    }
+    else{
+
+    }
 
 
 
@@ -547,7 +582,8 @@ function LevelFour(props){
                     
                     <Stack id = 'nextLevel2Button' display = 'none'>
                         
-                        <Button  variant="contained" onClick={() => {changeLevel(5)}}>
+                        <Button  variant="contained" onClick={() => {changeLevel(5)
+                        completionTime()}}>
                             Next Level
                         </Button>
                     

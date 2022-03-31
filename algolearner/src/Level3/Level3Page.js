@@ -294,9 +294,7 @@ function LevelThree(props){
     //
     //
     //
-   const nextLevel = () => {
-       document.getElementById("nextLevel3Button").style.display = 'Block';
-   }
+
    const completionTime = () =>{
     var send = {
         "seconds": totalSeconds,
@@ -338,12 +336,19 @@ function LevelThree(props){
        })
    },[]);
 
+  
+
    //
    //THIS REDIRECTS IF IDLE (5mins_
 
    if (props.idle == true){
        return <Redirect to = '/'/>;
    }
+    if (props.userLevel <3){
+        alert("Not high enough")
+        return <Redirect to = '/'/>;
+
+    }  
    //
    //
    //
@@ -526,7 +531,8 @@ function LevelThree(props){
                     
                     <Stack id = 'nextLevel2Button' display = 'none'>
                         
-                            <Button  variant="contained" onClick={() => {changeLevel(4)}}>
+                            <Button  variant="contained" onClick={() => {changeLevel(4)
+                            completionTime()}}>
                                 Next Level
                             </Button>
                         
@@ -576,13 +582,7 @@ function LevelThree(props){
                   
                     
                 </Stack>
-                <Stack id = 'nextLevel3Button' display = 'none'>
-                        <Link to = {"/LevelFour"}>
-                            <Button  variant="contained" onClick = {completionTime()}>
-                                Next Level
-                            </Button>
-                        </Link>
-                    </Stack>
+                
 
                 <Stack id='goToNextBtn' display = 'None'  sx={{ alignContent: 'center',textAlign:'center', justifyContent:'center',m:5 }}>
                         <Button  sx={{justifyContent:'flex',mr:2,alignSelf:'center'}} variant="contained" onClick={() => {

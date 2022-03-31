@@ -373,6 +373,31 @@ function LevelThree(props){
     //Logged in features.
    //
    //
+   const completionTime = () =>{
+    var send = {
+        "seconds": totalSeconds,
+        "level": 5
+    }
+    fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+    method: 'POST', //post
+    credentials: 'include', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(send), //body is the set data from earlier
+    })
+    .then(response => (response.json()))
+
+    .then(data => {
+        console.log(data);
+
+
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+}
    const [loggedIn, setLoggedIn] = useState(false);
 
    useEffect(()=>{
@@ -384,16 +409,21 @@ function LevelThree(props){
          }
        })
    },[]);
-
    //
    //THIS REDIRECTS IF IDLE (5mins_
 
    if (props.idle == true){
        return <Redirect to = '/'/>;
    }
+
+   if(props.userLevel <5){
+        return <Redirect to = '/'/>;
+   }
    //
    //
    //
+
+   
 
 
 
@@ -613,7 +643,8 @@ function LevelThree(props){
                     
                     <Stack id = 'nextLevel2Button' display = 'none'>
                         
-                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
+                        <Button  variant="contained" onClick={() => {changeLevel(0)
+                        completionTime()}}>
                             Back To HomePage
                         </Button>
                     
