@@ -360,21 +360,21 @@ function LevelFour(props){
                             const checkBreak = ()   => {
                                 //2 lines below is for debugging without checking solution, delete later and uncomment below
                                 //Also delete the setNumbers line just below console.log
-                                document.getElementById('goToNextBtn').style.display = "Block"
-                                showBreakdown();
+                                //document.getElementById('goToNextBtn').style.display = "Block"
+                                //showBreakdown();
                                 
-                                /*
+                                
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
                                     document.getElementById('goToNextBtn').style.display = "None"
                                     previousLevel();
-                                }*/
+                                }
                                 
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     console.log(data)
-                                    setNumbers(data) //Delete this setNumbers line too
+                                    //setNumbers(data) //Delete this setNumbers line too
 
-                                     /*if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
+                                     if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct, please review the breakdown below!");
                                         document.getElementById('goToNextBtn').style.display = "Block"
                                          setNumbers(data)
@@ -386,7 +386,7 @@ function LevelFour(props){
                                         if (incorrectCount < 4)
                                             setincorrectCount(incorrectCount+1);
                                         lose.play()
-                                     }*/
+                                     }
                                      
                          
                                  })
@@ -398,15 +398,15 @@ function LevelFour(props){
 
                                 //2 lines below is for debugging without checking solution, delete later and uncomment below
                                 //Also delete the setNumbers line just below console.log
-                                document.getElementById('goToNextBtn').style.display = "Block"
-                                showBreakdown();
+                                //document.getElementById('goToNextBtn').style.display = "Block"
+                                //showBreakdown();
 
-                                /*
+                                
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
                                     document.getElementById('goToNextBtn').style.display = "None"
                                     previousLevel();
-                                }*/
+                                }
 
 
                                 var dictF = {
@@ -432,8 +432,8 @@ function LevelFour(props){
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
                                         console.log(data)
-                                        setNumbers(data) //Delete this setNumbers line too
-                                        /*
+                                        //setNumbers(data) //Delete this setNumbers line too
+                                        
                                         if(userArrL==data){
                                             setInsText("Correct, please review the breakdown below!");
                                             document.getElementById('goToNextBtn').style.display = "Block"
@@ -446,7 +446,7 @@ function LevelFour(props){
                                                 setincorrectCount(incorrectCount+1);
                                             setInsText("You are Incorrect. This was your " + incorrectCount + " /3 chance.");
                                             lose.play()
-                                        }*/
+                                        }
                                  })
                              }
                              if (arrayStepBreakArray[count]==-1){

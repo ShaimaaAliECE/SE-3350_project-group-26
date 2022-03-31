@@ -322,17 +322,17 @@ function LevelThree(props){
                                
                             const checkBreak = ()   => {
                                 //Delete two lines below
-                                document.getElementById('goToNextBtn').style.display = "Block"
-                                showBreakdown();
+                                //document.getElementById('goToNextBtn').style.display = "Block"
+                                //showBreakdown();
                                 
-                                /*if (incorrectCount>=3){
+                                if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
                                     previousLevel();
-                                }*/
+                                }
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     console.log(data)
                                     setNumbers(data) //Delete this setNumbers line too
-                                    /*
+                                    
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct, please review the breakdown below!");
                                         document.getElementById('goToNextBtn').style.display = "Block"
@@ -345,7 +345,7 @@ function LevelThree(props){
                                         if (incorrectCount < 4)
                                             setincorrectCount(incorrectCount+1);
                                         lose.play()
-                                     }*/
+                                     }
                                      
                          
                                  })
@@ -354,8 +354,8 @@ function LevelThree(props){
                              }
                              const checkFull = ()   => {
                                 //Delete two lines below, its for disabling check
-                                document.getElementById('goToNextBtn').style.display = "Block"
-                                showBreakdown();
+                                //document.getElementById('goToNextBtn').style.display = "Block"
+                                //showBreakdown();
 
 
 
@@ -370,16 +370,16 @@ function LevelThree(props){
 
                                 }
 
-                                /*
+                                
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
                                     previousLevel();
-                                }*/
+                                }
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
                                         console.log(data)
-                                        setNumbers(data) //Delete this setNumbers line too
-                                        /*
+                                        //setNumbers(data) //Delete this setNumbers line too
+                                        
                                         if(userArrL==data){
                                             setInsText("Correct, please review the breakdown below!");
                                             document.getElementById('goToNextBtn').style.display = "Block"
@@ -393,7 +393,7 @@ function LevelThree(props){
                                                 setincorrectCount(incorrectCount+1);
                                             setInsText("You are Incorrect. This was your " + incorrectCount + " /3 chance.");
                                             lose.play()
-                                        }*/
+                                        }
                                  })
                              }
                              if (arrayStepBreakArray[count]==-1){
