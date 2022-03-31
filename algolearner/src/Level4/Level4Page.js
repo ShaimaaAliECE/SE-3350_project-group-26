@@ -523,18 +523,22 @@ function LevelFour(props){
                             
                             
                             //Change to next step
-                            setCount(count +1);
-                            //Reset incorrect count
-                            setincorrectCount(1);
-                            //Hide button again
-                            document.getElementById('goToNextBtn').style.display = "None"
-                            document.getElementById('previousLevelButton').style.display = "None"
-                            //Clear the text boxes and hide the breakdown for next step
-                            setBoxRVal('');
-                            setBoxLVal('');
-                            document.getElementById('showSplitSteps').style.display = "None"
-                            document.getElementById('showJoinSteps').style.display = "None"
-                            setInsText('');
+                            if(count < 35)
+                            {
+                                setCount(count +1);
+                                //Reset incorrect count
+                                setincorrectCount(1);
+                                //Hide button again
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                document.getElementById('previousLevelButton').style.display = "None"
+                                //Clear the text boxes and hide the breakdown for next step
+                                setBoxRVal('');
+                                setBoxLVal('');
+                                document.getElementById('showSplitSteps').style.display = "None"
+                                document.getElementById('showJoinSteps').style.display = "None"
+                                setInsText('');
+                            }
+                            
                             }}>
                                 Go To Next Step
                         </Button>
