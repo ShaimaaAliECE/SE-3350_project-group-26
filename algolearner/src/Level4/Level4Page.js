@@ -201,7 +201,7 @@ function LevelFour(props){
 
             }
 
-            if(count!=34)
+            if(count<=33)
             {
                 getBreakArraySolution(dictF[count]).then((data)=>{
                     console.log(dataIndex[count])
@@ -211,7 +211,8 @@ function LevelFour(props){
             }
             else
             {
-                addsToDisplay(numArr)
+                //console.log(numArr,'logging')
+                addsToDisplay([numArr.toString()])
 
             }
          
