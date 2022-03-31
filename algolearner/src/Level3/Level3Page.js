@@ -154,7 +154,7 @@ function LevelThree(props){
 
             }
 
-            if(count<=15)
+            if(count<=14)
             {
                 getBreakArraySolution(dictF[count]).then((data)=>{
                     console.log(dataIndex[count])
@@ -315,6 +315,9 @@ function LevelThree(props){
                             
                                
                             const checkBreak = ()   => {
+                                /*//Delete two lines below
+                                document.getElementById('goToNextBtn').style.display = "Block"
+                                showBreakdown();*/
                                 
                                 if (incorrectCount>=3){
                                     setLevText("Sorry out of tries. Please select an option below!");
@@ -322,6 +325,8 @@ function LevelThree(props){
                                 }
                                  getBreakArraySolution(arrayStepBreakArray[count]).then((data)=>{
                                     console.log(data)
+                                    //setNumbers(data) //Delete this setNumbers line too
+                                    
                                      if((data[0].toString()==userArrL)&&(data[1].toString()==userArrR)){
                                         setInsText("Correct, please review the breakdown below!");
                                         document.getElementById('goToNextBtn').style.display = "Block"
@@ -342,6 +347,12 @@ function LevelThree(props){
                         
                              }
                              const checkFull = ()   => {
+                                //Delete two lines below, its for disabling check
+                                //document.getElementById('goToNextBtn').style.display = "Block"
+                                //showBreakdown();
+
+
+
                                 var dictF = {
                                     4:1,
                                     6:3,
@@ -353,9 +364,16 @@ function LevelThree(props){
 
                                 }
 
+                                
+                                if (incorrectCount>=3){
+                                    setLevText("Sorry out of tries. Please select an option below!");
+                                    previousLevel();
+                                }
                             
                                  getFullArraySolution(dictF[count]).then((data)=>{
                                         console.log(data)
+                                        //setNumbers(data) //Delete this setNumbers line too
+                                        
                                         if(userArrL==data){
                                             setInsText("Correct, please review the breakdown below!");
                                             document.getElementById('goToNextBtn').style.display = "Block"
