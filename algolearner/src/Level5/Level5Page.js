@@ -146,99 +146,99 @@ function LevelThree(props){
             const arrayStepBreakArray=[1,2,3,4,-1,5,-1,6,7,8,-1,-1,9,-1,-1,-1]// calling which step in the solution to call using 'count' as the index
 
             var dictF = {//temp
-                6:1,  
-                8:1, 
-                9:1, 
-                12:1, 
-                13:1, 
-                14:1, 
-                18:1, 
-                19:1, 
-                20:1, 
-                21:1, 
-                26:1,
-                27:1, 
-                30:1, 
-                31:1, 
-                32:1, 
-                36:1, 
-                37:1, 
-                40:1, 
-                41:1,
-                42:1, 
-                43:1, 
-                44:1,
-                50:1, 
-                52:1, 
-                53:1, 
-                56:1, 
-                57:1, 
-                58:1, 
-                62:1, 
-                63:1, 
-                66:1, 
-                67:1, 
-                68:1,
-                69:1, 
-                74:1, 
-                75:1, 
-                76:1, 
-                80:1, 
-                81:1,
-                84:1, 
-                85:1, 
-                86:1, 
-                87:1, 
+                6:5,  //y
+                8:5, //y
+                9:4, //y
+                12:8, //y
+                13:4, //y
+                14:3, //y
+                18:11, //y
+                19:10, //y
+                20:3, //y
+                21:2, //y
+                26:17,//y
+                27:16,//y
+                30:19, //y
+                31:16, //y
+                32:15, //y
+                36:22, //y
+                37:21, //y
+                40:24, //y
+                41:21, //y
+                42:17, 
+                43:2, //y
+                44:1,//y
+                50:29, //y
+                52:29, //y
+                53:28, //y
+                56:32, //y
+                57:28, //y
+                58:27, //y
+                62:35, //y
+                63:34, //y
+                66:37, //y
+                67:34, //y
+                68:33,
+                69:29, 
+                74:38, 
+                75:37, 
+                76:36, 
+                80:41, 
+                81:40,
+                84:43, 
+                85:42, 
+                86:41, 
+                87:40, 
                 88:1,
                 89:numArr//calls somethin else, cuz need whole array
 
             }
 
             var dataIndex = {//temp
-                6:1,  
+                6:0,  
                 8:1, 
-                9:1, 
-                12:1, 
+                9:0, 
+                12:0, 
                 13:1, 
-                14:1, 
-                18:1, 
-                19:1, 
+                14:0, 
+                18:0, 
+                19:0, 
                 20:1, 
-                21:1, 
-                26:1,
-                27:1, 
-                30:1, 
+                21:0, 
+                26:0,
+                27:0, 
+                30:0, 
                 31:1, 
-                32:1, 
-                36:1, 
-                37:1, 
-                40:1, 
+                32:0, 
+                36:0, 
+                37:0, 
+                40:0, 
                 41:1,
                 42:1, 
                 43:1, 
-                44:1,
-                50:1, 
+                44:0,
+                50:0, 
                 52:1, 
-                53:1, 
-                56:1, 
+                53:0, 
+                56:0, 
                 57:1, 
-                58:1, 
-                62:1, 
-                63:1, 
-                66:1, 
+                58:0, 
+                62:0, 
+                63:0, 
+                66:0, 
                 67:1, 
                 68:1,
-                69:1, 
-                74:1, 
-                75:1, 
-                76:1, 
-                80:1, 
-                81:1,
-                84:1, 
-                85:1, 
-                86:1, 
-                87:1, 
-                88:1,
+                69:0, 
+                74:0, 
+                75:0, 
+                76:0, 
+                80:0, 
+                81:0,
+                84:0, 
+                85:0, 
+                86:0, 
+                87:0, 
+                88:0,
                 89:0
 
             }
@@ -598,18 +598,22 @@ function LevelThree(props){
                             
                             
                             //Change to next step
-                            setCount(count +1);
-                            //Reset incorrect count
-                            setincorrectCount(1);
-                            //Hide button again
-                            document.getElementById('goToNextBtn').style.display = "None"
-                            document.getElementById('previousLevelButton').style.display = "None"
-                            //Clear the text boxes and hide the breakdown for next step
-                            setBoxRVal('');
-                            setBoxLVal('');
-                            document.getElementById('showSplitSteps').style.display = "None"
-                            document.getElementById('showJoinSteps').style.display = "None"
-                            setInsText('');
+                            if(count < 90)
+                            {
+                                setCount(count +1);
+                                //Reset incorrect count
+                                setincorrectCount(1);
+                                //Hide button again
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                document.getElementById('previousLevelButton').style.display = "None"
+                                //Clear the text boxes and hide the breakdown for next step
+                                setBoxRVal('');
+                                setBoxLVal('');
+                                document.getElementById('showSplitSteps').style.display = "None"
+                                document.getElementById('showJoinSteps').style.display = "None"
+                                setInsText('');
+                            }
+                            
                             }}>
                                 Go To Next Step
                         </Button>
