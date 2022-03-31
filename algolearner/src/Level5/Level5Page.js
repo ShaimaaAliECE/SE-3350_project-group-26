@@ -80,8 +80,8 @@ function LevelThree(props){
     let win = new Audio("/win.mp3")
     let lose = new Audio("/lose.mp3")
 
-    let nodeNum1Array=[2,4,6,8,4,10,12,14,17,14,12,18,13,3,1]
-    let nodeNum2Array=[3,5,7,9,'',11,'',13,15,16,'','',19,'','','']
+    let nodeNum1Array=[2,4,6,8,10,12, 10, 15,11, 8,16, 18,16, 9, 6, 20,  22, 24,22,20, 7, ]
+    let nodeNum2Array=[3,5,7,9, 11,13,'', 14,'', '',17, 19,'', '','', 21, 23,25,'', '','', ]
 
     const [levelText,setLevText] = useState('');
     const [boxvalL,setBoxLVal] = useState('');
@@ -109,6 +109,9 @@ function LevelThree(props){
         return 'Node'+nodeNum1Array[count]
     }
 
+    const nextLevel = () => {
+        document.getElementById("nextLevel2Button").style.display = 'Block';
+    }
 
     //Change levels code
     const previousLevel = () => {
@@ -243,7 +246,7 @@ function LevelThree(props){
 
             }
 
-            if(count!=15)
+            if(count<=89)
             {
                 getBreakArraySolution(dictF[count]).then((data)=>{
                     console.log(dataIndex[count])
@@ -253,7 +256,7 @@ function LevelThree(props){
             }
             else
             {
-                addsToDisplay(numArr)
+                addsToDisplay([numArr.toString()])
 
             }
          
@@ -541,6 +544,15 @@ function LevelThree(props){
                     <Stack>
                          <Typography color='#a61113' variant='h4'>{instructionText}</Typography>
                     </Stack>
+                    
+                    <Stack id = 'nextLevel2Button' display = 'none'>
+                        
+                        <Button  variant="contained" onClick={() => {changeLevel(0)}}>
+                            Back To HomePage
+                        </Button>
+                    
+                    </Stack>
+
 
                     <Stack id = 'previousLevelButton' display = 'None' >
                          <Button  sx={{justifyContent:'flex',mr:2}} variant="contained" onClick={() => {changeLevel(3)}}>
@@ -598,18 +610,27 @@ function LevelThree(props){
                             
                             
                             //Change to next step
-                            setCount(count +1);
-                            //Reset incorrect count
-                            setincorrectCount(1);
-                            //Hide button again
-                            document.getElementById('goToNextBtn').style.display = "None"
-                            document.getElementById('previousLevelButton').style.display = "None"
-                            //Clear the text boxes and hide the breakdown for next step
-                            setBoxRVal('');
-                            setBoxLVal('');
-                            document.getElementById('showSplitSteps').style.display = "None"
-                            document.getElementById('showJoinSteps').style.display = "None"
-                            setInsText('');
+                            if(count < 90)
+                            {
+                                setCount(count +1);
+                                //Reset incorrect count
+                                setincorrectCount(1);
+                                //Hide button again
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                document.getElementById('previousLevelButton').style.display = "None"
+                                //Clear the text boxes and hide the breakdown for next step
+                                setBoxRVal('');
+                                setBoxLVal('');
+                                document.getElementById('showSplitSteps').style.display = "None"
+                                document.getElementById('showJoinSteps').style.display = "None"
+                                setInsText('');
+                            }
+                            else{
+                                setInsText('You have completed AlgoLearner For MergeSort! Thank you for playing! Please click the button below to go back to the homepage.')
+                                document.getElementById('goToNextBtn').style.display = "None"
+                                nextLevel();
+                            }
+                            
                             }}>
                                 Go To Next Step
                         </Button>

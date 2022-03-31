@@ -409,8 +409,8 @@ const full_array = [];
                 nodes9[9]['label']=nodes8[9]['label']
                // nodes9[10]['label']=nodes6[10]['label']
 
-                nodes9[11]['label']= break_array[0][0].toString()
-                nodes9[12]['label']= break_array[0][1].toString()
+                nodes9[12]['label']= break_array[0][0].toString()
+                nodes9[11]['label']= break_array[0][1].toString()
             }
           )
           return nodes9
