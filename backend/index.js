@@ -19,8 +19,9 @@ app.use(express.urlencoded({extended: true}));
 
 //WHEN DEPLOYING CHANGE THE ORIGIN TO "http://34.70.157.84" before deploying on GCP
 //Note also need to change frontend --> components --> api and change the fetch ip there
+// http://localhost:3000
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://35.225.166.73"],
     methods: ["GET", "POST", "DELETE"],
     credentials: true
     

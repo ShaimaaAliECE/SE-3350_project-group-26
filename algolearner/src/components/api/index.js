@@ -9,7 +9,7 @@ export const getStep = async (depth,arr) => {
 
         //use for GCP backend server http://34.70.157.84:3001/api/getStep
         //Note also need to change backend origin ip in the index.js file before deploying
-        const response = await fetch('http://localhost:3001/api/getStep', {method : 'POST', headers: { 'Content-Type': 'application/json' 
+        const response = await fetch('http://35.225.166.73:3001/api/getStep', {method : 'POST', headers: { 'Content-Type': 'application/json' 
           }, body: JSON.stringify(body_data) })
            
         const data = await response.json();
