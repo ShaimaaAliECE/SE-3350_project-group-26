@@ -28,7 +28,7 @@ function Header(props){
     const [sDisplay, setDisplay] = useState('none');
   
     useEffect(()=>{
-      axios.get("http://localhost:3001/api/login", { withCredentials: true })
+      axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
       .then(response =>{
         if (response.data.loggedIn == true){
             

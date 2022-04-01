@@ -13,7 +13,7 @@ import axios from 'axios'
 function AccHeader(props){
 
     const signout = () =>{
-        axios.get("http://localhost:3001/api/signout", { withCredentials: true })
+        axios.get("http://35.225.166.73:3001/api/signout", { withCredentials: true })
         .then(response =>{
            alert(response.data)
         })

@@ -287,7 +287,7 @@ function LevelFour(props){
             "depth": count,
             "arr": numArr
         }
-        fetch('http://localhost:3001/api/getStep', {  //connect to backend
+        fetch('http://35.225.166.73:3001/api/getStep', {  //connect to backend
         method: 'POST', //post
         credentials: 'include', 
         headers: {
@@ -342,7 +342,7 @@ function LevelFour(props){
         "seconds": totalSeconds,
         "level": 4
     }
-    fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+    fetch('http://35.225.166.73:3001/api/sendTime', {  //connect to backend
     method: 'POST', //post
     credentials: 'include', 
     headers: {
@@ -366,7 +366,7 @@ function LevelFour(props){
 
 
    useEffect(()=>{
-       axios.get("http://localhost:3001/api/login", { withCredentials: true })
+       axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
        .then(response =>{
          if (response.data.loggedIn == true){
              setLoggedIn(true);
@@ -385,13 +385,14 @@ function LevelFour(props){
    //
    //
    //
+   /*
     if (props.userLevel < 4){
         alert("Not high enough")
         return <Redirect to = '/'/>;
     }
     else{
 
-    }
+    }*/
 
 
 

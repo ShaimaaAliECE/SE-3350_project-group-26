@@ -13,7 +13,7 @@ function SignUpForm(){
             username: username,
             password: password
         };      
-        fetch('http://localhost:3001/api/register', {  //connect to backend
+        fetch('http://35.225.166.73:3001/api/register', {  //connect to backend
             method: 'POST', //post
             headers: {
                 'Content-Type': 'application/json',

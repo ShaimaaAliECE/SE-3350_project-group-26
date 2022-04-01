@@ -327,7 +327,7 @@ function LevelThree(props){
             "depth": count,
             "arr": numArr
         }
-        fetch('http://localhost:3001/api/getStep', {  //connect to backend
+        fetch('http://35.225.166.73:3001/api/getStep', {  //connect to backend
         method: 'POST', //post
         credentials: 'include', 
         headers: {
@@ -378,7 +378,7 @@ function LevelThree(props){
         "seconds": totalSeconds,
         "level": 5
     }
-    fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+    fetch('http://35.225.166.73:3001/api/sendTime', {  //connect to backend
     method: 'POST', //post
     credentials: 'include', 
     headers: {
@@ -401,7 +401,7 @@ function LevelThree(props){
    const [loggedIn, setLoggedIn] = useState(false);
 
    useEffect(()=>{
-       axios.get("http://localhost:3001/api/login", { withCredentials: true })
+       axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
        .then(response =>{
          if (response.data.loggedIn == true){
              setLoggedIn(true);
@@ -415,10 +415,10 @@ function LevelThree(props){
    if (props.idle == true){
        return <Redirect to = '/'/>;
    }
-
+   /*
    if(props.userLevel <5){
         return <Redirect to = '/'/>;
-   }
+   }*/
    //
    //
    //

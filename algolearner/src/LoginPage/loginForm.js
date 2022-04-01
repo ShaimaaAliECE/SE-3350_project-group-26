@@ -11,7 +11,7 @@ function LoginForm(){
             username: username,
             password: password
         };      
-        fetch('http://localhost:3001/api/login', {  //connect to backend
+        fetch('http://35.225.166.73:3001/api/login', {  //connect to backend
             method: 'POST', //post
             credentials: 'include', 
             headers: {

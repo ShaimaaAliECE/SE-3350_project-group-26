@@ -292,7 +292,7 @@ setArray2(numArr)
                 "depth": count,
                 "arr": numArr
             }
-            fetch('http://localhost:3001/api/getStep', {  //connect to backend
+            fetch('http://35.225.166.73:3001/api/getStep', {  //connect to backend
             method: 'POST', //post
             credentials: 'include', 
             headers: {
@@ -351,7 +351,7 @@ setArray2(numArr)
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(()=>{
-        axios.get("http://localhost:3001/api/login", { withCredentials: true })
+        axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
         .then(response =>{
           if (response.data.loggedIn == true){
               setLoggedIn(true);
@@ -367,7 +367,7 @@ setArray2(numArr)
             "seconds": totalSeconds,
             "level": 2
         }
-        fetch('http://localhost:3001/api/sendTime', {  //connect to backend
+        fetch('http://35.225.166.73:3001/api/sendTime', {  //connect to backend
         method: 'POST', //post
         credentials: 'include', 
         headers: {
@@ -391,7 +391,7 @@ setArray2(numArr)
     //sets current userLevel
      const [userLevel, setUserLevel] = useState('1');
     useEffect(()=>{
-        axios.get("http://localhost:3001/api/userLevel", { withCredentials: true })
+        axios.get("http://35.225.166.73:3001/api/userLevel", { withCredentials: true })
         .then(response =>{
             setUserLevel(response.data[0].currentLevel);
         })
@@ -403,11 +403,12 @@ setArray2(numArr)
     if (props.idle == true){
         return <Redirect to = '/'/>;
     }
+    /*
     if (props.userLevel < 2){
         alert("Not high enough")
         return <Redirect to = '/'/>;
 
-    }
+    }*/
     //
     //
     //

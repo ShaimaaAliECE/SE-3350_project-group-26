@@ -31,7 +31,7 @@ function HomePage(props){
 
 
     useEffect(()=>{
-        axios.get("http://localhost:3001/api/login", { withCredentials: true })
+        axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
         .then(response =>{
           if (response.data.loggedIn == true){
             setButton('Start');
@@ -41,7 +41,7 @@ function HomePage(props){
         })
     },[]);
     useEffect(()=>{
-        axios.get("http://localhost:3001/api/userLevel", { withCredentials: true })
+        axios.get("http://35.225.166.73:3001/api/userLevel", { withCredentials: true })
         .then(response =>{
             setUserLevel(response.data[0].currentLevel);
         })
