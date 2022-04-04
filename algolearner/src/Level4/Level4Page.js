@@ -7,6 +7,8 @@ import Timer from '../components/Timer';
 import {getFullArraySolution,getBreakArraySolution,setArray} from './SolutionPerStepLevel4'
 import { useHistory, Redirect, Link } from "react-router-dom";
 import axios from 'axios';
+const URL = '104.197.238.91';
+
 
 //TODO
 //We need to create a textbox for the user to enter the answer, 1 or 2 depending on the step, then a checking function that compares the answer for each step
@@ -287,7 +289,7 @@ function LevelFour(props){
             "depth": count,
             "arr": numArr
         }
-        fetch('http://35.225.166.73:3001/api/getStep', {  //connect to backend
+        fetch(`http://${URL}:3001/api/getStep`, {  //connect to backend
         method: 'POST', //post
         credentials: 'include', 
         headers: {
@@ -342,7 +344,7 @@ function LevelFour(props){
         "seconds": totalSeconds,
         "level": 4
     }
-    fetch('http://35.225.166.73:3001/api/sendTime', {  //connect to backend
+    fetch(`http://${URL}:3001/api/sendTime`, {  //connect to backend
     method: 'POST', //post
     credentials: 'include', 
     headers: {
@@ -366,7 +368,7 @@ function LevelFour(props){
 
 
    useEffect(()=>{
-       axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
+       axios.get(`http://${URL}:3001/api/login`, { withCredentials: true })
        .then(response =>{
          if (response.data.loggedIn == true){
              setLoggedIn(true);

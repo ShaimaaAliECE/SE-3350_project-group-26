@@ -9,6 +9,7 @@ import { fontSize } from '@mui/system';
 import './Bar.css'
 import * as React from 'react';
 import AccHeader from './accHeader';
+const URL = '104.197.238.91';
 
 
 
@@ -28,7 +29,7 @@ function Header(props){
     const [sDisplay, setDisplay] = useState('none');
   
     useEffect(()=>{
-      axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
+      axios.get(`http://${URL}:3001/api/login`, { withCredentials: true })
       .then(response =>{
         if (response.data.loggedIn == true){
             

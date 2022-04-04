@@ -5,6 +5,18 @@ const mysql = require('mysql'); //mysql
 var axios = require("axios").default;
 
 
+//
+//
+//
+//
+
+
+const URL = '104.197.238.91'
+
+//
+//
+//
+
 const bcrypt = require('bcrypt');
 const saltrounds = 10;
 
@@ -21,7 +33,7 @@ app.use(express.urlencoded({extended: true}));
 //Note also need to change frontend --> components --> api and change the fetch ip there
 // http://localhost:3000
 app.use(cors({
-    origin: ["http://35.225.166.73"],
+    origin: [`http://${URL}`],
     methods: ["GET", "POST", "DELETE"],
     credentials: true
     

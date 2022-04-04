@@ -1,6 +1,8 @@
 import {Box,TextField, Button} from '@mui/material'
 import {useState} from 'react';
 
+const URL = '104.197.238.91';
+
 function LoginForm(){
     const [username, setUser] = useState("");
     const [password, setPass] = useState("");
@@ -11,7 +13,7 @@ function LoginForm(){
             username: username,
             password: password
         };      
-        fetch('http://35.225.166.73:3001/api/login', {  //connect to backend
+        fetch(`http://${URL}:3001/api/login`, {  //connect to backend
             method: 'POST', //post
             credentials: 'include', 
             headers: {

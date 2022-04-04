@@ -23,6 +23,8 @@ import AccInfo from './AccountInfo/accountInfo';
 
 import axios from 'axios';
 import { useEffect,useState } from 'react';
+const URL = '104.197.238.91';
+
 
 
 function App() {
@@ -99,7 +101,7 @@ function App() {
   /** */
   const [userLevel, setUserLevel] = useState(1);
     useEffect(()=>{
-        axios.get("http://35.225.166.73:3001/api/userLevel", { withCredentials: true })
+        axios.get(`http://${URL}:3001/api/userLevel`, { withCredentials: true })
         .then(response =>{
             setUserLevel(response.data[0].currentLevel);
         })

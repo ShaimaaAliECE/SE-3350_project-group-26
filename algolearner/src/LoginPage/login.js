@@ -12,6 +12,8 @@ import SignUpForm from './signupForm';
 
 
 import Header from "../components/Header";
+const URL = '104.197.238.91';
+
 
 //TAB PANELS 
 function TabPanel(props) {

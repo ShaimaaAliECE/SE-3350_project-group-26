@@ -14,6 +14,8 @@ import {DndProvider} from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import DragDrop from '../components/DragDrop/DragDrop'
 import {getFullArraySolution,getBreakArraySolution,setArray2} from './SolutionPerStep'
+const URL = '104.197.238.91';
+
 
 
 
@@ -292,7 +294,7 @@ setArray2(numArr)
                 "depth": count,
                 "arr": numArr
             }
-            fetch('http://35.225.166.73:3001/api/getStep', {  //connect to backend
+            fetch(`http://${URL}:3001/api/getStep`, {  //connect to backend
             method: 'POST', //post
             credentials: 'include', 
             headers: {
@@ -351,7 +353,7 @@ setArray2(numArr)
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(()=>{
-        axios.get("http://35.225.166.73:3001/api/login", { withCredentials: true })
+        axios.get(`http://${URL}:3001/api/login`, { withCredentials: true })
         .then(response =>{
           if (response.data.loggedIn == true){
               setLoggedIn(true);
@@ -367,7 +369,7 @@ setArray2(numArr)
             "seconds": totalSeconds,
             "level": 2
         }
-        fetch('http://35.225.166.73:3001/api/sendTime', {  //connect to backend
+        fetch(`http://${URL}:3001/api/sendTime`, {  //connect to backend
         method: 'POST', //post
         credentials: 'include', 
         headers: {
@@ -391,7 +393,7 @@ setArray2(numArr)
     //sets current userLevel
      const [userLevel, setUserLevel] = useState('1');
     useEffect(()=>{
-        axios.get("http://35.225.166.73:3001/api/userLevel", { withCredentials: true })
+        axios.get(`http://${URL}:3001/api/userLevel`, { withCredentials: true })
         .then(response =>{
             setUserLevel(response.data[0].currentLevel);
         })

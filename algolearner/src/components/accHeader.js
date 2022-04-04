@@ -10,10 +10,13 @@ import { fontSize } from '@mui/system';
 import './Bar.css'
 import * as React from 'react';
 import axios from 'axios'
+
+const URL = '104.197.238.91';
+
 function AccHeader(props){
 
     const signout = () =>{
-        axios.get("http://35.225.166.73:3001/api/signout", { withCredentials: true })
+        axios.get(`http://${URL}:3001/api/signout`, { withCredentials: true })
         .then(response =>{
            alert(response.data)
         })

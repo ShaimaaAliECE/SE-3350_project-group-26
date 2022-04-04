@@ -5,6 +5,9 @@ import {useEffect, useState, UseState} from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
+const URL = '104.197.238.91';
+
+
 
 function setPath(level){
     if(level == 1){
@@ -31,11 +34,11 @@ function AccInfo(){
     const [info, setInfo] = useState([]);
 
     useEffect(()=>{
-        axios.get("http://35.225.166.73:3001/api/getTime", { withCredentials: true })
+        axios.get(`http://${URL}:3001/api/getTime`, { withCredentials: true })
         .then(response =>{
             setInfo(response.data);        
         })
-        axios.get("http://35.225.166.73:3001/api/getLevel", { withCredentials: true })
+        axios.get(`http://${URL}:3001/api/getLevel`, { withCredentials: true })
         .then(response =>{
             setUserLevel(response.data[0].currentLevel);
 
