@@ -33,7 +33,7 @@ app.use(express.urlencoded({extended: true}));
 //Note also need to change frontend --> components --> api and change the fetch ip there
 // http://localhost:3000
 app.use(cors({
-    origin: [`http://${URL}`],
+    origin: ["http://104.197.238.91"],
     methods: ["GET", "POST", "DELETE"],
     credentials: true
     
